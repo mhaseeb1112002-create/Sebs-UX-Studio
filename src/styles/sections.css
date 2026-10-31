@@ -148,7 +148,7 @@ body.menu-open{overflow:hidden}
 .leak-head .il{font-weight:400;letter-spacing:0;line-height:1.5}
 .leak-row{display:flex;align-items:center;gap:12px}
 .ln{flex:none;width:92px;font:500 13px/20px var(--font-body);color:#fff}
-.lt{position:relative;flex:0 1 220px;min-width:0;height:22px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
+.lt{position:relative;flex:0 0 220px;min-width:0;height:22px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
 .lt i{position:absolute;inset:0;border-radius:6px;background:var(--primitive-green-400);transform:scaleX(var(--w,1));transform-origin:left;transition:transform 700ms var(--ease-out)}
 .is-hot .lt i{background:var(--support-sun)}
 .leak-row b{font:600 12px/18px var(--font-body);color:var(--primitive-slate-300);white-space:pre}

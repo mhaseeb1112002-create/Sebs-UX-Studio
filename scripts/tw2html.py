@@ -207,7 +207,7 @@ def convert(jsx, img_svg=None, drop_names=(), asset_prefix='/assets/art/'):
             if tag == 'img' and img_svg:
                 svg = img_svg(nid)
                 if svg:
-                    out.append(re.sub(r'<svg\b[^>]*?(viewBox="[^"]*")[^>]*>', lambda mm: f'<svg {mm.group(1)} preserveAspectRatio="none" aria-hidden="true" style="{st}">', svg, count=1))
+                    out.append(re.sub(r'<svg\b[^>]*?(viewBox="[^"]*")[^>]*>', lambda mm: f'<svg {mm.group(1)} fill="none" preserveAspectRatio="none" aria-hidden="true" style="{st}">', svg, count=1))
                     continue
             void = tag == 'img'
             out.append(f'<{tag_out}{attr_s}' + (f' style="{st}"' if st else '') + '>' + ('</' + tag_out + '>' if (selfclose and not void) else ''))

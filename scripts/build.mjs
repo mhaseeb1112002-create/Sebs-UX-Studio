@@ -33,7 +33,7 @@ for (const pg of pages) {
   const bodySrc = pg.body.startsWith('<<') ? read(`pages/${pg.body.slice(2, -2)}.html`) : pg.body;
   const body = subst(include(bodySrc), pg.vars || {});
   const canonical = SITE + pg.route;
-  const html = subst(shell, {
+  let html = subst(shell, {
     title: pg.title, description: pg.description, canonical, ogimage: SITE + '/assets/og.png',
     jsonld: pg.jsonld ? `<script type="application/ld+json">${JSON.stringify(pg.jsonld)}</script>` : '',
     pageclass: pg.pageClass || '', body,

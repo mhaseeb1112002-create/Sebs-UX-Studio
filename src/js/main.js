@@ -113,7 +113,7 @@
     once(el, () => bars.forEach((b, i) => { b.style.transitionDelay = i * 80 + 'ms'; b.style.setProperty('--w', b.dataset.w); }));
   });
   $$('[data-score]').forEach(el => {
-    const target = +el.dataset.score, fill = $('.ring-fill', el), num = $('.ring-num', el), C = 377;
+    const target = +el.dataset.score, fill = $('.ring-fill', el), num = $('.ring-num', el), C = 383.3;
     const set = v => { fill.style.strokeDashoffset = C * (1 - v / 100); num.textContent = Math.round(v); };
     if (reduce) { fill.style.transition = 'none'; return set(target); }
     once(el, () => {
