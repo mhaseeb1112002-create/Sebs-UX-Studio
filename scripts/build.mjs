@@ -6,6 +6,7 @@ const src = p => path.join(root, 'src', p);
 const dist = path.join(root, 'dist');
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
+const BASE = (process.env.BASE_PATH || '').replace(/\/$/, ''); // '' for a domain root, '/repo' for github.io/repo
 const SITE = (process.env.SITE_URL || 'https://sebs.studio').replace(/\/$/, '');
 
 const read = p => fs.readFileSync(src(p), 'utf8');
@@ -41,13 +42,14 @@ for (const pg of pages) {
   const out = path.join(dist, pg.route === '/' ? '' : pg.route, pg.route.endsWith('.html') ? '' : 'index.html');
   const file = pg.route === '/404' ? path.join(dist, '404.html') : out;
   fs.mkdirSync(path.dirname(file), { recursive: true });
+  if (BASE) html = html.replace(/\b(href|src)="\/(?!\/)/g, `$1="${BASE}/`);
   fs.writeFileSync(file, html);
 }
 // assets + css + js
 fs.cpSync(src('assets'), path.join(dist, 'assets'), { recursive: true });
 const css = ['tokens', 'base', 'components', 'sections', 'work'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
-fs.writeFileSync(path.join(dist, 'styles.css'), css);
-fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js'));
+fs.writeFileSync(path.join(dist, 'styles.css'), BASE ? css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE}/`) : css);
+fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js').replace("const BASE = '';", `const BASE = ${JSON.stringify(BASE)};`));
 if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).host + '\n');
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404').map(p => `  <url><loc>${SITE}${p.route}</loc></url>`).join('\n')}\n</urlset>\n`);

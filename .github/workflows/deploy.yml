@@ -1,11 +1,12 @@
 name: Deploy site
 
-# Publishes dist/ to GitHub Pages on every push to main.
+# Publishes dist/ to GitHub Pages on every push to main (and the working branch).
+# No domain yet: served at https://<owner>.github.io/<repo>/ (BASE_PATH handled automatically).
 # Custom domain: set repository variable SITE_URL (Settings > Secrets and variables > Actions > Variables),
-# e.g. https://yourdomain.com  - canonical URLs, sitemap, robots and the CNAME file all follow it.
+# e.g. https://yourdomain.com - canonical URLs, sitemap, robots, CNAME and root paths all follow it.
 on:
   push:
-    branches: [main]
+    branches: [main, claude/confident-cori-8siyea]
   workflow_dispatch:
 
 permissions:
@@ -27,9 +28,16 @@ jobs:
           node-version: 20
       - name: Build
         env:
-          SITE_URL: ${{ vars.SITE_URL }}
-          CNAME: ${{ vars.SITE_URL != '' && '1' || '' }}
-        run: npm run build
+          CUSTOM_URL: ${{ vars.SITE_URL }}
+        run: |
+          if [ -n "$CUSTOM_URL" ]; then
+            export SITE_URL="$CUSTOM_URL" CNAME=1 BASE_PATH=""
+          else
+            REPO="${GITHUB_REPOSITORY#*/}"
+            export SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPO}" BASE_PATH="/${REPO}"
+          fi
+          echo "SITE_URL=$SITE_URL BASE_PATH=$BASE_PATH"
+          npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

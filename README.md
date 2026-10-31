@@ -55,16 +55,14 @@ switches the placeholder to a real `<img>` automatically:
 
 `<slug>` is one of the five case-study slugs above.
 
-## Going live
+## Going live (GitHub Pages)
 
-The site is plain static files, so any host works (`npm run build`, publish `dist/`). `.github/workflows/deploy.yml`
-deploys to GitHub Pages from `main`:
+`.github/workflows/deploy.yml` builds and deploys `dist/` to GitHub Pages on every push to `main` (and the working branch).
 
-1. Repo **Settings → Pages → Source: GitHub Actions**.
-2. **Settings → Secrets and variables → Actions → Variables**: add `SITE_URL` = `https://yourdomain.com`.
-3. At your DNS provider point the domain at GitHub Pages (apex: A records `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`;
-   `www`: CNAME to `<user>.github.io`), then tick **Enforce HTTPS** in Pages settings.
+1. **Settings → Pages → Source: GitHub Actions** (one-time).
+2. Push. The site appears at `https://<owner>.github.io/<repo>/`. The workflow sets `BASE_PATH` so all asset/link paths work under that sub-path.
+3. **Custom domain later:** add repository variable `SITE_URL` = `https://yourdomain.com` (Settings → Secrets and variables → Actions → Variables) and re-run the workflow. Paths switch to the domain root and a `CNAME` file is written.
+   DNS: apex → A records `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`; `www` → CNAME `<owner>.github.io`. Then tick **Enforce HTTPS**.
 
-`SITE_URL` drives canonical/OG URLs, JSON-LD, `sitemap.xml`, `robots.txt` and the `CNAME` file. For other hosts
-(Netlify, Vercel, Cloudflare Pages): build command `npm run build`, output `dist`, env `SITE_URL`.
-Locally: `SITE_URL=https://yourdomain.com npm run build`.
+Build env: `SITE_URL` (canonical/OG/sitemap/JSON-LD), `BASE_PATH` (sub-path hosting), `CNAME=1` (write CNAME file).
+Other hosts (Netlify/Vercel/Cloudflare Pages): build `npm run build`, output `dist`, env `SITE_URL`.

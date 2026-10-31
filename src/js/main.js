@@ -1,4 +1,5 @@
 (() => {
+  const BASE = ''; // replaced at build time (BASE_PATH) for sub-path hosting
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -150,7 +151,7 @@
         items.forEach(c => c.hidden = !(f === 'all' || c.dataset.cat === f));
         grid.classList.remove('is-fading');
       };
-      if (push) history.pushState({ f }, '', f === 'all' ? '/work/' : `/work/${f}/`);
+      if (push) history.pushState({ f }, '', BASE + (f === 'all' ? '/work/' : `/work/${f}/`));
       if (reduce) run(); else { grid.classList.add('is-fading'); setTimeout(run, 250); }
     };
     tabs.forEach(t => t.addEventListener('click', e => { e.preventDefault(); apply(t.dataset.filter, true); }));
@@ -158,7 +159,7 @@
       const i = tabs.indexOf(document.activeElement); if (i < 0 || !['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
       const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); apply(n.dataset.filter, true);
     });
-    addEventListener('popstate', () => { const m = location.pathname.match(/^\/work\/([\w-]+)\/?$/); apply(m && tabs.some(t => t.dataset.filter === m[1]) ? m[1] : 'all', false); });
+    addEventListener('popstate', () => { const m = location.pathname.slice(BASE.length).match(/^\/work\/([\w-]+)\/?$/); apply(m && tabs.some(t => t.dataset.filter === m[1]) ? m[1] : 'all', false); });
   });
 
   /* Case-study key screens: lightbox (Esc closes, focus returns) */
