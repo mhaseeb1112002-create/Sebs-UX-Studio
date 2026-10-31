@@ -54,3 +54,17 @@ switches the placeholder to a real `<img>` automatically:
 - also needed: `src/assets/og.png` (1200×630) and the founder photo (About, 4:5 / 960×1200)
 
 `<slug>` is one of the five case-study slugs above.
+
+## Going live
+
+The site is plain static files, so any host works (`npm run build`, publish `dist/`). `.github/workflows/deploy.yml`
+deploys to GitHub Pages from `main`:
+
+1. Repo **Settings → Pages → Source: GitHub Actions**.
+2. **Settings → Secrets and variables → Actions → Variables**: add `SITE_URL` = `https://yourdomain.com`.
+3. At your DNS provider point the domain at GitHub Pages (apex: A records `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`;
+   `www`: CNAME to `<user>.github.io`), then tick **Enforce HTTPS** in Pages settings.
+
+`SITE_URL` drives canonical/OG URLs, JSON-LD, `sitemap.xml`, `robots.txt` and the `CNAME` file. For other hosts
+(Netlify, Vercel, Cloudflare Pages): build command `npm run build`, output `dist`, env `SITE_URL`.
+Locally: `SITE_URL=https://yourdomain.com npm run build`.
