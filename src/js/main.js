@@ -141,15 +141,37 @@
     c.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next?.click(); if (e.key === 'ArrowLeft') prev?.click(); });
   });
 
-  /* Work filter tabs */
-  $$('[role="tablist"].filters').forEach(tl => {
-    const tabs = $$('[role="tab"]', tl), cards = $$('[data-cat]');
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(o => { o.setAttribute('aria-selected', String(o === t)); o.tabIndex = o === t ? 0 : -1; });
-      const f = t.dataset.filter;
-      cards.forEach(c => c.hidden = !(f === 'all' || c.dataset.cat === f));
-    }));
+  /* Work filter tabs: tablist, arrow keys, URL deep-links (/work/[industry]) with 250ms fade */
+  $$('.filters').forEach(tl => {
+    const tabs = $$('[role="tab"]', tl), grid = $('.work-grid'), items = $$('.work-grid>li');
+    const apply = (f, push) => {
+      const run = () => {
+        tabs.forEach(o => { const on = o.dataset.filter === f; o.setAttribute('aria-selected', String(on)); o.tabIndex = on ? 0 : -1; });
+        items.forEach(c => c.hidden = !(f === 'all' || c.dataset.cat === f));
+        grid.classList.remove('is-fading');
+      };
+      if (push) history.pushState({ f }, '', f === 'all' ? '/work/' : `/work/${f}/`);
+      if (reduce) run(); else { grid.classList.add('is-fading'); setTimeout(run, 250); }
+    };
+    tabs.forEach(t => t.addEventListener('click', e => { e.preventDefault(); apply(t.dataset.filter, true); }));
+    tl.addEventListener('keydown', e => {
+      const i = tabs.indexOf(document.activeElement); if (i < 0 || !['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
+      const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); apply(n.dataset.filter, true);
+    });
+    addEventListener('popstate', () => { const m = location.pathname.match(/^\/work\/([\w-]+)\/?$/); apply(m && tabs.some(t => t.dataset.filter === m[1]) ? m[1] : 'all', false); });
   });
+
+  /* Case-study key screens: lightbox (Esc closes, focus returns) */
+  $$('[data-lightbox]').forEach(b => b.addEventListener('click', () => {
+    const im = $('img', b); if (!im) return;
+    const box = document.createElement('div'); box.className = 'lightbox'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', im.alt);
+    const big = new Image(); big.src = im.src; big.alt = im.alt;
+    const close = document.createElement('button'); close.type = 'button'; close.setAttribute('aria-label', 'Close'); close.textContent = '✕';
+    const done = () => { box.remove(); document.removeEventListener('keydown', onKey); b.focus(); };
+    const onKey = e => { if (e.key === 'Escape') done(); };
+    close.addEventListener('click', done); box.addEventListener('click', e => { if (e.target === box) done(); });
+    box.append(big, close); document.body.append(box); close.focus(); document.addEventListener('keydown', onKey);
+  }));
 
   /* smooth in-page anchors with reduced-motion fallback handled by CSS */
 })();
