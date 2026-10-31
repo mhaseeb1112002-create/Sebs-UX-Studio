@@ -1,0 +1,12 @@
+{
+  "name": "sebs-ux-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sebs UX Studio website, built from the Figma brand system (static HTML/CSS/JS).",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "npm run build && node scripts/serve.mjs",
+    "audit": "npm run build && node scripts/audit.mjs"
+  }
+}

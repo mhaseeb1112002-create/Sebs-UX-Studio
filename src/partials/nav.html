@@ -1,0 +1,23 @@
+<header class="nav" id="top">
+  <div class="wrap"><div class="nav-inner">
+    <a class="nav-logo" href="{{home}}" aria-label="Sebs UX Studio, home"><img src="/assets/logo-wordmark-ink.svg" alt="" width="88" height="28"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link" href="{{home}}#services">Services</a>
+      <a class="nav-link" href="{{home}}#process">Process</a>
+      <a class="nav-link" href="/work/" {{workcurrent}}>Work</a>
+      <a class="nav-link" href="{{home}}#about">About</a>
+      <a class="nav-link" href="{{home}}#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-inverse nav-cta" href="mailto:hello@sebs.studio?subject=UX%20audit">Book a UX audit</a>
+    <button class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">{{icon:burger}}</button>
+  </div></div>
+</header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mm-head"><a class="mm-logo" href="{{home}}" aria-label="Sebs UX Studio, home"><img src="/assets/logo-wordmark-ink.svg" alt="" width="75" height="24"></a><button class="mm-close" type="button" aria-label="Close menu">{{icon:close}}</button></div>
+  <a class="mm-item" href="{{home}}#services"><span>Services</span><span class="mm-arr" aria-hidden="true">→</span></a>
+  <a class="mm-item" href="{{home}}#audit"><span>Sample audit</span><span class="mm-arr" aria-hidden="true">→</span></a>
+  <a class="mm-item" href="{{home}}#about"><span>About</span><span class="mm-arr" aria-hidden="true">→</span></a>
+  <a class="mm-item" href="{{home}}#process"><span>Process</span><span class="mm-arr" aria-hidden="true">→</span></a>
+  <a class="mm-item" href="{{home}}#faq"><span>FAQ</span><span class="mm-arr" aria-hidden="true">→</span></a>
+  <a class="btn btn-primary mm-cta" href="mailto:hello@sebs.studio?subject=UX%20audit">Book a UX audit <span aria-hidden="true">→</span></a>
+</div>

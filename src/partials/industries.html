@@ -1,0 +1,19 @@
+<section class="industries" id="industries" aria-labelledby="ind-title">
+  <div class="ind-header wrap"><div class="ind-header-in">
+    <div class="ind-copy">
+      <p class="t-label eyebrow-g">Industries</p>
+      <h2 class="t-h1" id="ind-title">Fluent in your <span class="hl">industry</span></h2>
+      <p class="t-lg ind-sub">We design for regulated, data-heavy products, so we speak your users' language and your compliance team's too.</p>
+    </div>
+    <div class="ind-arrows">
+      <button class="arrow arrow-prev" type="button" aria-label="Previous industries"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 10H4M9 5L4 10L9 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="arrow arrow-next" type="button" aria-label="Next industries"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10H16M11 5L16 10L11 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div></div>
+  <p class="swipe-hint wrap">Swipe to see more <span aria-hidden="true">→</span></p>
+  <div class="ind-carousel" tabindex="0" aria-label="Industries carousel">
+    <ul class="ind-track">
+{{> industries-cards}}
+    </ul>
+  </div>
+</section>

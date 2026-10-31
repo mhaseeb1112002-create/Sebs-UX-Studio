@@ -1,0 +1,26 @@
+@font-face{font-family:"Manrope";src:url("/assets/fonts/manrope-latin-wght-normal.woff2") format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Inter";src:url("/assets/fonts/inter-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  /* colour — Figma primitives */
+  --primitive-ink-900:#0f1a15; --primitive-ink-700:#22302a; --primitive-ink-600:#2e3d36;
+  --primitive-green-400:#2bd98c; --primitive-green-500:#20c47d; --primitive-green-600:#0e9f5e;
+  --primitive-green-700:#0b7a48; --primitive-green-100:#ddf5e9;
+  --primitive-gray-100:#eef3f0; --primitive-gray-150:#e3ebe6; --primitive-gray-200:#dce5e0;
+  --primitive-slate-500:#55625c; --primitive-slate-300:#a9b5af; --primitive-white:#fff;
+  --support-sun:#ffd84d; --support-sky:#7db4ff; --support-lilac:#c9b8ff;
+  --color-text-primary:var(--primitive-ink-900); --color-text-secondary:var(--primitive-slate-500);
+  --color-accent-default:var(--primitive-green-400); --color-link:var(--primitive-green-700);
+  /* spacing 2xs→3xl */
+  --spacing-2xs:4px; --spacing-xs:8px; --spacing-sm:12px; --spacing-md:16px;
+  --spacing-lg:24px; --spacing-xl:32px; --spacing-2xl:48px; --spacing-3xl:64px;
+  /* radius */
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-full:999px;
+  /* motion tokens (handoff spec) */
+  --motion-fast:150ms; --motion-press:100ms; --motion-base:250ms; --motion-chart:450ms; --motion-scroll:600ms;
+  --ease-out:cubic-bezier(0,0,.2,1); --ease-in-out:cubic-bezier(.4,0,.2,1);
+  /* layout */
+  --content-max:1200px; --pad-x:120px; --section-top:128px; --nav-h:76px;
+  --font-head:"Manrope",system-ui,sans-serif; --font-body:"Inter",system-ui,sans-serif;
+}
+@media (max-width:1279px){:root{--pad-x:40px}}
+@media (max-width:767px){:root{--pad-x:20px;--section-top:80px}}
