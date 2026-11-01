@@ -135,16 +135,6 @@ export const pages = [
         ['Fix one thing, then measure', 'Track completion rate, retries per capture and time to verify, before and after each change.'],
       ] },
       { type: 'prose', title: 'Fewer drop-offs, same controls', html: '<p>Reducing friction must not weaken your checks. Some steps have to stay. Ask your compliance team which ones before you change a flow, then make those steps as clear as they can be.</p>' },
-      { type: 'links', title: 'Further reading', items: [
-
-
-
-        ['Markswebb: UX vs KYC, why 60% abandon onboarding', 'https://markswebb.com/insights/ux-vs-kyc-why-60-abandon-onboarding/'],
-        ['Flat Studio: fintech onboarding UX and KYC drop-off', 'https://www.flatstudio.co/blog/fintech-onboarding-ux-kyc-drop-off'],
-        ['KYCAID: reducing user drop-off during verification', 'https://kycaid.com/blog/reduce-user-drop-off-kyc-verification-ux/'],
-        ['Shufti Pro: KYC drop-off UX fixes', 'https://shuftipro.com/blog/reduce-kyc-drop-off-ux-fixes/'],
-        ['Youverify: reducing onboarding drop-off with identity verification', 'https://youverify.co/blog/how-to-reduce-customer-onboarding-drop-off-using-identity-verification'],
-      ] },
     ],
     related: [['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['How to explain an AI rejection to users', '/guides/explain-ai-rejections/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
   },
@@ -199,12 +189,6 @@ export const pages = [
         ['Try again.', 'Retake photo. Your other answers are saved.'],
       ], note: 'The same rules as any error message: plain language, a specific problem, no blame and a way to fix it.' },
       { type: 'prose', title: 'What you may not be able to say', html: '<p>Some reasons cannot be shown, for example when saying them would help a fraudster. In that case, use a general reason such as "We could not verify your details", and still give a next step and a way to reach a person.</p><p>Ask your compliance or legal team which rules about automated decisions apply where you operate. Some rules expect an explanation or a human review. This guide is design advice, not legal advice.</p>' },
-      { type: 'links', title: 'Further reading', items: [
-
-        ['Misfitting with AI: how blind people verify and contest AI errors (arXiv, 26 participants)', 'https://arxiv.org/pdf/2408.06546'],
-        ['Parallel HQ: UX for AI products guide', 'https://www.parallelhq.com/blog/ux-for-ai-products-guide'],
-        ['Ipsos: Trust as UX, 2026 wireframe (PDF)', 'https://www.ipsos.com/sites/default/files/Trust%20as%20UX%20Wireframe-2026.pdf'],
-      ] },
     ],
     related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
   },
