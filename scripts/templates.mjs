@@ -125,3 +125,28 @@ export const startBody = `{{> nav}}
 </section>
 </main>
 {{> footer}}`;
+
+
+export const privacyBody = `{{> nav}}
+<main id="main">
+<section class="work-head"><div class="wrap">
+  <p class="t-label eyebrow-g">Privacy</p>
+  <h1 class="work-title t-display">Privacy, in plain words</h1>
+  <p class="t-lg work-sub">Last updated 1 November 2026.</p>
+</div></section>
+<section class="legal"><div class="wrap"><div class="prose">
+  <h2>What I collect</h2>
+  <p>Only what you send me: your name, work email, product or website, the service you need and any notes. You send it through the request form or by email, WhatsApp or LinkedIn.</p>
+  <h2>How I use it</h2>
+  <p>To reply to you about your request. I do not sell your details or add you to a mailing list.</p>
+  <h2>How the request form works</h2>
+  <p>When you press "Send request", your email app opens with your answers filled in. Nothing is sent until you press send in your email app. This website does not store your answers.</p>
+  <h2>Cookies and tracking</h2>
+  <p>This website does not use cookies or analytics. It is hosted on GitHub Pages, which may keep basic server logs such as your IP address, as any web host does.</p>
+  <h2>Other services</h2>
+  <p>Links to WhatsApp, LinkedIn, Behance, Dribbble, Instagram and Google Calendar open on those services, which have their own privacy policies.</p>
+  <h2>Your choices</h2>
+  <p>Ask me at any time to see or delete the messages you have sent me. Write to <a href="mailto:hello@sebsuxstudio.com">hello@sebsuxstudio.com</a>.</p>
+</div></div></section>
+</main>
+{{> footer}}`;

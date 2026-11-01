@@ -48,3 +48,11 @@ fieldset.field{border:0;padding:0;margin-inline:0;min-width:0}
 .contact-card a:hover{background:var(--primitive-green-100)}
 .contact-card span{font:400 14px/20px var(--font-body);color:var(--primitive-slate-500)}
 .contact-card strong{font:600 14px/20px var(--font-body);text-align:right;overflow-wrap:anywhere}
+
+.prose{max-width:720px}
+.prose h2{margin-top:32px;font:700 22px/29px var(--font-head);letter-spacing:-.01em}
+.prose p{margin-top:10px;font:400 17px/28px var(--font-body);color:var(--primitive-slate-500)}
+.prose a{color:var(--primitive-ink-900);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.f-legal a{text-decoration:underline;text-underline-offset:3px}
+
+.legal{padding-block:16px 120px}
