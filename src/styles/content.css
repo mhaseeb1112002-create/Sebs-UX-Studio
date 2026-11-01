@@ -80,3 +80,10 @@
   .work-head .wrap.cp-hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center}
   .cp-hero-img{display:block}
 }
+
+/* five items: 3 + 2 rows that fill the width, instead of 4 + 1 left alone */
+@media (min-width:1024px){
+  .cp-cards[data-n="5"],.cp-steps[data-n="5"]{grid-template-columns:repeat(6,1fr)}
+  .cp-cards[data-n="5"] li,.cp-steps[data-n="5"] li{grid-column:span 2}
+  .cp-cards[data-n="5"] li:nth-child(n+4),.cp-steps[data-n="5"] li:nth-child(n+4){grid-column:span 3}
+}

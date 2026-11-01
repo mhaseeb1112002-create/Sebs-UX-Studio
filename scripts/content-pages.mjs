@@ -208,11 +208,11 @@ const ext = u => /^https?:/.test(u);
 
 function block(b, idx) {
   switch (b.type) {
-    case 'cards': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ul class="cp-cards">${b.items.map(([t, x]) => `<li><h3>${t}</h3><p>${x}</p></li>`).join('')}</ul></div></section>`;
+    case 'cards': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ul class="cp-cards" data-n="${b.items.length}">${b.items.map(([t, x]) => `<li><h3>${t}</h3><p>${x}</p></li>`).join('')}</ul></div></section>`;
     case 'prose': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2>${b.html}</div></div></section>`;
     case 'list': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><ul class="cp-list">${b.items.map(i => `<li>{{icon:check}}<span>${i}</span></li>`).join('')}</ul></div></div></section>`;
     case 'check': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2>${b.nng ? `<p class="cp-nng"><b>Principle:</b> ${b.nng}</p>` : ''}<ul class="cp-check">${b.items.map(i => `<li><span class="box" aria-hidden="true"></span><span>${i}</span></li>`).join('')}</ul></div></div></section>`;
-    case 'steps': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ol class="cp-steps">${b.items.map(([t, x], n) => `<li><span class="sn">0${n + 1}</span><h3>${t}</h3><p>${x}</p></li>`).join('')}</ol></div></section>`;
+    case 'steps': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ol class="cp-steps" data-n="${b.items.length}">${b.items.map(([t, x], n) => `<li><span class="sn">0${n + 1}</span><h3>${t}</h3><p>${x}</p></li>`).join('')}</ol></div></section>`;
     case 'figure': return `<section class="cp-sec cp-fig"><div class="wrap"><figure><img src="${b.src}" alt="${esc(b.alt)}" width="${b.w}" height="${b.h}" loading="lazy"><figcaption>${b.caption}</figcaption></figure></div></section>`;
     case 'cause': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose cp-cause"><h2 class="cp-h2"><span class="cn">${b.n}</span>${b.title}</h2><p>${b.text}</p><p class="cp-fix"><b>Fix:</b> ${b.fix}</p>${b.nng ? `<p class="cp-nng"><b>Principle:</b> ${b.nng}</p>` : ''}</div></div></section>`;
     case 'table': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><div class="cp-tbl"><table><thead><tr>${b.head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${b.note ? `<p>${b.note}</p>` : ''}</div></div></section>`;
