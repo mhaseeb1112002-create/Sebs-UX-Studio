@@ -329,7 +329,8 @@ body.menu-open{overflow:hidden}
 .includes.sm .ic{width:18px;height:18px;color:var(--primitive-green-400)}
 .cta-offer .btn{width:100%}
 .offer-link{display:block;font:500 13px/20px var(--font-body);color:var(--primitive-gray-200)}
-.offer-link:hover{text-decoration:underline}
+.offer-link .ol-a{color:#fff;font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:color 150ms var(--ease-out)}
+.offer-link:hover .ol-a{color:var(--primitive-green-400)}
 .footer .wrap{display:flex;flex-direction:column;gap:14px}
 .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;padding-bottom:48px}
 .f-brand{display:flex;flex-direction:column;gap:12px}
