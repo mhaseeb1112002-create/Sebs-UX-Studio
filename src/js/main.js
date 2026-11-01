@@ -187,25 +187,25 @@
       name: f => f.value.trim().length > 1,
       email: f => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim()),
       site: f => f.value.trim().length > 2,
-      flow: () => !!intake.querySelector('input[name=flow]:checked'),
+      service: () => !!intake.querySelector('input[name=service]:checked'),
     };
-    const field = k => k === 'flow' ? intake.querySelector('fieldset.field') : intake.elements[k].closest('.field');
+    const field = k => k === 'service' ? intake.querySelector('fieldset.field') : intake.elements[k].closest('.field');
     const check = k => {
-      const ok = val[k](k === 'flow' ? null : intake.elements[k]), box = field(k);
+      const ok = val[k](k === 'service' ? null : intake.elements[k]), box = field(k);
       box.toggleAttribute('data-invalid', !ok);
-      if (k !== 'flow') intake.elements[k].setAttribute('aria-invalid', String(!ok));
+      if (k !== 'service') intake.elements[k].setAttribute('aria-invalid', String(!ok));
       return ok;
     };
-    Object.keys(val).filter(k => k !== 'flow').forEach(k => intake.elements[k].addEventListener('blur', () => { if (intake.elements[k].value) check(k); }));
-    intake.querySelectorAll('input[name=flow]').forEach(r => r.addEventListener('change', () => check('flow')));
+    Object.keys(val).filter(k => k !== 'service').forEach(k => intake.elements[k].addEventListener('blur', () => { if (intake.elements[k].value) check(k); }));
+    intake.querySelectorAll('input[name=service]').forEach(r => r.addEventListener('change', () => check('service')));
     intake.addEventListener('submit', e => {
       e.preventDefault();
       const bad = Object.keys(val).filter(k => !check(k));
-      if (bad.length) { const f = bad[0] === 'flow' ? intake.querySelector('input[name=flow]') : intake.elements[bad[0]]; f.focus(); return; }
+      if (bad.length) { const f = bad[0] === 'service' ? intake.querySelector('input[name=service]') : intake.elements[bad[0]]; f.focus(); return; }
       const d = Object.fromEntries(new FormData(intake));
-      const body = `Name: ${d.name}\nEmail: ${d.email}\nProduct / site: ${d.site}\nFlow to audit: ${d.flow}\n\nWhat's going wrong:\n${d.msg || '-'}`;
+      const body = `Name: ${d.name}\nEmail: ${d.email}\nProduct / site: ${d.site}\nService: ${d.service}\n\nDetails:\n${d.msg || '-'}`;
       card.classList.add('is-done'); $('.form-done', card).focus();
-      location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent('UX audit request: ' + d.site)}&body=${encodeURIComponent(body)}`;
+      location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent(d.service + ' request: ' + d.site)}&body=${encodeURIComponent(body)}`;
     });
   }
 

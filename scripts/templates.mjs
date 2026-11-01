@@ -80,32 +80,32 @@ export const startBody = `{{> nav}}
 <main id="main">
 <section class="start-wrap wrap" aria-labelledby="start-title">
   <div class="start-copy">
-    <p class="t-label eyebrow-g">UX audit request</p>
-    <h1 class="t-h1" id="start-title">Tell me where your users drop off.</h1>
-    <p class="t-lg">Four quick questions. I read every request myself and reply by email with next steps and a fixed price.</p>
+    <p class="t-label eyebrow-g">Start a project</p>
+    <h1 class="t-h1" id="start-title">Tell me what you need.</h1>
+    <p class="t-lg">A UX audit, a redesign, a new product or something else. Answer a few quick questions. I read every request myself and reply by email with next steps.</p>
     <ul class="start-list">
-      <li>{{icon:check}}Fixed price from $500</li>
-      <li>{{icon:check}}Prioritized fix list in 5 days</li>
-      <li>{{icon:check}}30-minute walkthrough call</li>
+      <li>{{icon:check}}Pricing scoped to your project</li>
+      <li>{{icon:check}}Free 20-minute intro call</li>
+      <li>{{icon:check}}Reply from me, not a bot</li>
     </ul>
-    <p class="start-alt">Prefer to talk first? <a href="https://wa.me/923372186894?text=Hi%20Haseeb%2C%20I'm%20interested%20in%20a%20UX%20audit." target="_blank" rel="noopener">Message me on WhatsApp</a> or <a href="mailto:hello@sebsuxstudio.com">email hello@sebsuxstudio.com</a>.</p>
+    <p class="start-alt">Prefer to talk first? <a href="https://wa.me/923372186894?text=Hi%20Haseeb%2C%20I'd%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Message me on WhatsApp</a> or <a href="mailto:hello@sebsuxstudio.com">email hello@sebsuxstudio.com</a>.</p>
   </div>
   <div class="form-card" id="intake-card">
     <form id="intake" novalidate>
-      <h2>Request your UX audit</h2>
+      <h2>Start your request</h2>
       <p class="req-note">Fields marked * are required.</p>
       <div class="field"><label for="f-name">Your name *</label><input id="f-name" name="name" type="text" autocomplete="name" required><p class="err" id="e-name">Please enter your name.</p></div>
       <div class="field"><label for="f-email">Work email *</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required><p class="err" id="e-email">Please enter a valid email address.</p></div>
       <div class="field"><label for="f-site">Product or website *</label><input id="f-site" name="site" type="text" inputmode="url" autocomplete="url" placeholder="yourproduct.com" required><p class="err" id="e-site">Please add your product name or website.</p></div>
-      <fieldset class="field"><legend>Which flow needs the audit? *</legend>
+      <fieldset class="field"><legend>What do you need? *</legend>
         <div class="chips">
-          <label><input type="radio" name="flow" value="Signup" required><span>Signup</span></label>
-          <label><input type="radio" name="flow" value="Onboarding"><span>Onboarding</span></label>
-          <label><input type="radio" name="flow" value="KYC / identity checks"><span>KYC / identity</span></label>
-          <label><input type="radio" name="flow" value="Checkout"><span>Checkout</span></label>
-          <label><input type="radio" name="flow" value="Something else"><span>Something else</span></label>
-        </div><p class="err" id="e-flow">Please choose one.</p></fieldset>
-      <div class="field"><label for="f-msg">What's going wrong? <span class="opt">(optional)</span></label><textarea id="f-msg" name="msg" rows="3" placeholder="For example: 40% of people leave at the ID upload step."></textarea></div>
+          <label><input type="radio" name="service" value="UX audit" required><span>UX audit</span></label>
+          <label><input type="radio" name="service" value="Conversion redesign sprint"><span>Redesign sprint</span></label>
+          <label><input type="radio" name="service" value="Product design (new product)"><span>New product design</span></label>
+          <label><input type="radio" name="service" value="AI-built product polish"><span>AI product polish</span></label>
+          <label><input type="radio" name="service" value="Something else"><span>Something else</span></label>
+        </div><p class="err" id="e-service">Please choose one.</p></fieldset>
+      <div class="field"><label for="f-msg">Tell me about it <span class="opt">(optional)</span></label><textarea id="f-msg" name="msg" rows="3" placeholder="For example: 40% of people leave at the ID upload step. Or: we need a dashboard designed from scratch."></textarea></div>
       <button class="btn btn-primary" type="submit">Send request</button>
       <p class="form-fine">Your details are only used to reply to you.</p>
     </form>

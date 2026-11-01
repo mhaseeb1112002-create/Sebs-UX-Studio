@@ -10,7 +10,8 @@
 .form-card{background:#fff;border:1px solid var(--primitive-gray-200);border-radius:24px;padding:40px;box-shadow:0 24px 60px -32px rgba(15,26,21,.25)}
 .form-card h2{font:700 22px/28px var(--font-head);letter-spacing:-.01em}
 .form-card .req-note{margin-top:6px;font:400 13px/20px var(--font-body);color:var(--color-text-secondary)}
-.field{margin-top:22px}
+.field{margin-top:6px}
+.field:not(:has(.err)){margin-top:24px}
 .field>label,.field>legend{display:block;margin-bottom:8px;padding:0;font:600 14px/20px var(--font-body)}
 .field .opt{font-weight:400;color:var(--color-text-secondary)}
 .field input[type=text],.field input[type=email],.field input[type=url],.field textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid var(--primitive-slate-300);border-radius:var(--radius-md);background:#fff;font:400 16px/24px var(--font-body);color:var(--color-text-primary);transition:border-color var(--motion-fast) var(--ease-out),box-shadow var(--motion-fast) var(--ease-out)}
@@ -18,8 +19,8 @@
 .field input:hover,.field textarea:hover{border-color:var(--primitive-slate-500)}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--primitive-green-700);box-shadow:0 0 0 4px rgba(11,122,72,.18)}
 .field[data-invalid] input,.field[data-invalid] textarea{border-color:#c0392b}
-.field .err{display:none;margin-top:6px;font:500 13px/18px var(--font-body);color:#b3321f}
-.field[data-invalid] .err{display:block}
+.field .err{display:block;visibility:hidden;height:18px;margin-top:4px;font:500 13px/18px var(--font-body);color:#b3321f}
+.field[data-invalid] .err{visibility:visible}
 fieldset.field{border:0;padding:0;margin-inline:0;min-width:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{position:relative}
