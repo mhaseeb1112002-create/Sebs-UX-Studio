@@ -7,6 +7,9 @@
 .mm-logo .logo-name{top:2px;margin-left:10px;padding-left:10px;font-size:13px;line-height:18px}
 .mm-close{width:44px;height:44px;color:var(--primitive-ink-900)}
 .mm-item{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--primitive-gray-200);font:700 26px/31px var(--font-head);letter-spacing:-.02em}
+.mm-sub{display:flex;flex-direction:column;padding:4px 0 8px 14px;border-bottom:1px solid var(--primitive-gray-200);margin-top:-8px}
+.mm-sub a{padding:10px 0;font:600 18px/24px var(--font-head);letter-spacing:-.01em;color:var(--primitive-slate-500)}
+.mm-sub a:hover{color:var(--primitive-ink-900)}
 .mm-arr{font:700 20px/26px var(--font-head);color:var(--primitive-green-700);letter-spacing:-.005em}
 .mm-cta{margin-top:24px;width:100%}
 body.menu-open{overflow:hidden}

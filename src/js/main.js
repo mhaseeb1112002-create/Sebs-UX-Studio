@@ -20,6 +20,14 @@
   };
   if (targets.length) { addEventListener('scroll', spy, { passive: true }); spy(); }
 
+  /* services dropdown */
+  const dd = $('.nav-dd'), ddBtn = $('.dd-toggle');
+  const setDd = open => { if (!dd) return; dd.classList.toggle('is-open', open); ddBtn.setAttribute('aria-expanded', String(open)); };
+  ddBtn?.addEventListener('click', e => { e.stopPropagation(); setDd(!dd.classList.contains('is-open')); });
+  document.addEventListener('click', e => { if (dd && !dd.contains(e.target)) setDd(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && dd?.classList.contains('is-open')) { setDd(false); ddBtn.focus(); } });
+  dd?.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) setDd(false); });
+
   /* mobile menu */
   const menu = $('#mobile-menu'), burger = $('.nav-burger');
   const setMenu = open => {
@@ -30,7 +38,7 @@
   };
   burger?.addEventListener('click', () => setMenu(true));
   $('.mm-close', menu || document)?.addEventListener('click', () => setMenu(false));
-  $$('.mm-item,.mm-cta', menu || document).forEach(a => a.addEventListener('click', () => setMenu(false)));
+  $$('.mm-item,.mm-cta,.mm-sub a', menu || document).forEach(a => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', e => { if (e.key === 'Escape' && menu && !menu.hidden) setMenu(false); });
   addEventListener('resize', () => { if (innerWidth > 899 && menu && !menu.hidden) setMenu(false); });
 
