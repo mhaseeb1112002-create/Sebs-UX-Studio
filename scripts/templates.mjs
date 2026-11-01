@@ -88,7 +88,13 @@ export const startBody = `{{> nav}}
       <li>{{icon:check}}Free 20-minute intro call</li>
       <li>{{icon:check}}Reply from me, not a bot</li>
     </ul>
-    <p class="start-alt">Prefer to talk first? <a href="https://wa.me/923372186894?text=Hi%20Haseeb%2C%20I'd%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Message me on WhatsApp</a> or <a href="mailto:hello@sebsuxstudio.com">email hello@sebsuxstudio.com</a>.</p>
+    <div class="contact-card">
+      <h2>Or reach me directly</h2>
+      <a href="mailto:hello@sebsuxstudio.com"><span>Email</span><strong>hello@sebsuxstudio.com</strong></a>
+      <a href="https://wa.me/923372186894?text=Hi%20Haseeb%2C%20I'd%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener"><span>WhatsApp</span><strong>+92 337 2186894</strong></a>
+      <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ32INOt4NQ-jlcI16lQGxmhzbZtDGwv-fZxmy0i0vkRTPTd_fSq0ubC-Y2jnK8IqYn7hVKk2KGv" target="_blank" rel="noopener"><span>Free 20-minute call</span><strong>Pick a time</strong></a>
+      <a href="https://www.linkedin.com/in/muhammad-haseeb-ux/" target="_blank" rel="noopener"><span>LinkedIn</span><strong>Muhammad Haseeb</strong></a>
+    </div>
   </div>
   <div class="form-card" id="intake-card">
     <form id="intake" novalidate>

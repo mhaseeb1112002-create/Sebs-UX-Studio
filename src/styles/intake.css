@@ -41,3 +41,10 @@ fieldset.field{border:0;padding:0;margin-inline:0;min-width:0}
 @media (max-width:1279px){.start-wrap{grid-template-columns:1fr 480px;gap:48px}.start-copy .t-h1{font-size:44px;line-height:48px}}
 @media (max-width:1023px){.start-wrap{grid-template-columns:1fr;gap:40px;padding-top:40px}.form-card{max-width:640px}}
 @media (max-width:767px){.start-wrap{padding-top:28px}.start-copy .t-h1{font-size:36px;line-height:40px}.form-card{padding:24px 20px;border-radius:20px}}
+
+.contact-card{margin-top:32px;display:flex;flex-direction:column;border:1px solid var(--primitive-gray-200);border-radius:var(--radius-lg);background:#fff;overflow:hidden}
+.contact-card h2{padding:16px 20px;font:700 16px/22px var(--font-head);background:var(--primitive-gray-100)}
+.contact-card a{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:52px;padding:12px 20px;border-top:1px solid var(--primitive-gray-200);transition:background-color var(--motion-fast) var(--ease-out)}
+.contact-card a:hover{background:var(--primitive-green-100)}
+.contact-card span{font:400 14px/20px var(--font-body);color:var(--primitive-slate-500)}
+.contact-card strong{font:600 14px/20px var(--font-body);text-align:right;overflow-wrap:anywhere}
