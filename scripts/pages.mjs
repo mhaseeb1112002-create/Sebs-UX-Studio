@@ -29,7 +29,7 @@ for (const [k, label] of filters) {
 const caseSeo = c => [{ '@context': 'https://schema.org', '@type': 'Article', headline: c.title, description: c.desc_seo, image: `${SITE}/assets/work/${c.slug}-cover.webp`, author: { '@type': 'Person', name: 'Muhammad Haseeb' } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], ['Work', '/work/'], [c.catLabel, `/work/${c.cat}/`], [c.title, `/work/${c.slug}/`]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) }];
 const caseTpl = cases.map(c => ({ route: `/work/${c.slug}/`, title: c.title_seo, description: c.desc_seo, body: caseBody(c), vars: sub, jsonld: caseSeo(c) }));
-const nf = { route: '/404', title: 'Page not found | Sebs UX Studio', description: 'This page could not be found. Go home, browse the work or book a UX audit.', body: notFoundBody, vars: sub };
+const nf = { route: '/404', title: 'Page not found | Sebs UX Studio', description: 'This page could not be found. Go home, browse the work or request a UX audit.', body: notFoundBody, vars: sub };
 const start = { route: '/start/', title: 'Start a Project | Sebs UX Studio', description: 'Request a UX audit, redesign or new product design. Tell me what you need and I reply by email with next steps and pricing.', body: startBody, vars: { home: '/', workcurrent: '' } };
 const privacy = { route: '/privacy/', title: 'Privacy | Sebs UX Studio', description: 'What Sebs UX Studio collects, why, and how to ask for your messages to be deleted.', body: privacyBody, vars: { home: '/', workcurrent: '' } };
 export default [home, ...work, ...caseTpl, start, privacy, nf];
