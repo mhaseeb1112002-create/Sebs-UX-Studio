@@ -71,5 +71,5 @@ if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).
 fs.mkdirSync(path.join(dist, '.well-known'), { recursive: true });
 fs.writeFileSync(path.join(dist, '.well-known', 'security.txt'), `Contact: mailto:hello@sebsuxstudio.com\nExpires: 2027-11-01T00:00:00.000Z\nPreferred-Languages: en\nCanonical: ${SITE}/.well-known/security.txt\n`);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
-fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404').map(p => `  <url><loc>${SITE}${p.route}</loc></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404').map(p => `  <url><loc>${SITE}${p.route}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 console.log('built', pages.length, 'pages');
