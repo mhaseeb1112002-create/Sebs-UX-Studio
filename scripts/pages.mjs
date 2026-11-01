@@ -5,7 +5,7 @@ const faqitems = faq.map(([q, a], i) => `<div class="faq-item${i === 0 ? ' is-op
 const home = {
   route: '/',
   title: 'UX Audits & Redesigns for SaaS and Fintech | Sebs UX Studio',
-  description: 'Find where users drop off in signup, onboarding and KYC. Fixed-price UX audits from $500, redesign sprints and AI-built product polish.',
+  description: 'Find where users drop off in signup, onboarding and KYC. UX audits, redesign sprints and AI-built product polish.',
   body: '<<home>>',
   vars: { home: '/', workcurrent: '', faqitems },
   jsonld: { '@context': 'https://schema.org', '@graph': [

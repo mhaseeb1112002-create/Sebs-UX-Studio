@@ -176,7 +176,7 @@ body.menu-open{overflow:hidden}
 .includes li{display:flex;align-items:center;gap:10px;color:var(--primitive-ink-700)}
 .includes .ic{flex:none;color:var(--primitive-green-700)}
 .price-row{display:flex;align-items:baseline;justify-content:space-between;width:100%;margin-top:auto;padding-top:20px;border-top:1px solid var(--primitive-gray-200)}
-.price-row strong{font:700 24px/29px var(--font-head);letter-spacing:-.01em}
+.price-row strong{font:700 20px/26px var(--font-head);letter-spacing:-.01em;white-space:nowrap}
 .price-row span{font:500 14px/21px var(--font-body);color:var(--primitive-slate-500)}
 .svc-card.is-featured{background:var(--primitive-ink-900);border-color:var(--primitive-ink-900)}
 .svc-card.is-featured .svc-icon{background:var(--primitive-green-400);color:var(--primitive-ink-900)}
