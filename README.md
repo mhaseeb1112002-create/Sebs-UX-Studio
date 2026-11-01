@@ -41,19 +41,11 @@ From the handoff sheet: **≥1280** 1200px max content + 120px side padding, **7
 cards (hero stacks below 1024), **≤767** 20px padding / 1 col. Between 1024 and 1439 the hero composition scales
 to its column; 1280–1439 trims a few fixed Figma widths so nothing wraps awkwardly.
 
-## Images still needed (Figma raster assets)
+## Images
 
-Raster project imagery could not be exported in the build environment (see `AUDIT.md`). Image slots render a
-labelled placeholder until a file exists. Export from Figma and drop the files in `src/assets/work/`; the build
-switches the placeholder to a real `<img>` automatically:
-
-- `<slug>-card.webp` — Work card, 1176×800
-- `<slug>-cover.webp` — case cover, 2400×1280
-- `<slug>-screen-1.webp`, `<slug>-screen-2.webp` — key screens, 1176×840
-- `<slug>-flow.webp` — wide image, 2400×1040
-- also needed: `src/assets/og.png` (1200×630) and the founder photo as `src/assets/founder.webp` (or .jpg/.png, 4:5, e.g. 960×1200) — the build swaps the About placeholder automatically
-
-`<slug>` is one of the five case-study slugs above.
+Project art lives in `src/assets/work/` as `<slug>-card|cover|screen-1|screen-2|flow.webp` (exported from the Figma file).
+Still missing: the OG link-preview image `src/assets/og.png` (1200×630). The founder photo is `src/assets/founder.webp`.
+If a file is missing the build falls back to a labelled placeholder, so nothing breaks.
 
 ## Going live (GitHub Pages)
 

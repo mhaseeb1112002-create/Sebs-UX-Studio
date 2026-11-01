@@ -58,7 +58,7 @@ Other exact matches: hero button 181 px wide vs Figma 181; industry cards at x =
 
 | # | Page / section | Viewport | Expected (Figma) | Actual | Correction | Status |
 |---|---|---|---|---|---|---|
-| 1 | All pages — **raster images** (Work card covers, case covers, key screens, founder photo, OG image) | all | Project screenshots from Figma | `www.figma.com` asset downloads are denied (HTTP 403) by the sandbox network policy, so the PNGs could not be fetched. Slots render a labelled placeholder with exact target size/filename. | Allow `www.figma.com` (or export the images), put files in `src/assets/work/` (README lists names/sizes); build swaps placeholders for `<img>` automatically. | **Failed – blocked** |
+| 1 | Work cards, case covers, key screens, flow images, founder photo | all | Project art from Figma | Exported from Figma (raw source images), converted to webp, wired in; Iris page compared to its Figma frame and matches | – | Fixed ✔ (OG image still missing) |
 | 2 | Hero, nav spy | 1440 | No link highlighted at top | "FAQ" stayed highlighted after scrolling back up | Spy now computes the section under the reading line on scroll | Fixed ✔ |
 | 3 | Buttons | 1440 | Primary 181×44, secondary 188×46 | Chrome snaps 1.5px borders to 1px at 1× DPR → 45px tall | Secondary ring drawn with `box-shadow: inset` + padding | Fixed ✔ |
 | 4 | Hero stats | 1440 | 22px gap + 1px divider + 22px gap (45px pitch) | Dividers were overlays, row 70px narrow | Real 45px pitch, divider 40px tall | Fixed ✔ |
