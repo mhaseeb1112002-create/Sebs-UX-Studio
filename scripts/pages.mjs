@@ -5,13 +5,13 @@ const faqitems = faq.map(([q, a], i) => `<div class="faq-item${i === 0 ? ' is-op
 const home = {
   route: '/',
   title: 'UX Audits & Redesigns for SaaS and Fintech | Sebs UX Studio',
-  description: 'Find where users drop off in signup, onboarding and KYC. UX audits, redesign sprints and AI-built product polish.',
+  description: 'Find where users drop off in signup, onboarding and KYC. UX audits, redesign sprints, new product builds and AI-built product polish.',
   body: '<<home>>',
   vars: { home: '/', workcurrent: '', faqitems },
   jsonld: { '@context': 'https://schema.org', '@graph': [
     { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE, logo: SITE + '/assets/favicon.svg', email: 'hello@sebsuxstudio.com', telephone: '+92 337 2186894', address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' }, areaServed: 'Worldwide', founder: { '@type': 'Person', name: 'Muhammad Haseeb' },
       sameAs: ['https://www.linkedin.com/in/muhammad-haseeb-ux/', 'https://www.behance.net/muhammadhaseeb194', 'https://dribbble.com/m-haseeb1112002', 'https://www.instagram.com/sebs.studio_ux/'],
-      makesOffer: ['Onboarding & KYC audit', 'Conversion redesign sprint', 'AI-built product polish'].map(n => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })) },
+      makesOffer: ['Onboarding & KYC audit', 'Conversion redesign sprint', 'Product build & polish'].map(n => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })) },
     { '@type': 'WebSite', name: 'Sebs UX Studio', url: SITE },
     { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
   ] },
