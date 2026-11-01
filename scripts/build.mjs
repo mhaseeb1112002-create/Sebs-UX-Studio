@@ -15,6 +15,7 @@ const include = html => html.replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, n) => inclu
 
 // shared inline icons (Figma exports, currentColor so they inherit)
 export const icons = {
+  star: '<svg class="ic-star" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.55 5.36 5.85.8-4.27 4.1 1.07 5.82L10 15.1l-5.2 2.78 1.07-5.82-4.27-4.1 5.85-.8L10 1.8z" fill="currentColor"/></svg>',
   arrow: '<svg class="ic-arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11.25 5.25 16 10l-4.75 4.75" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   ext: '<svg class="ic-arrow ic-ext" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 14 14 6M7.5 5.75H14.25V12.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   check: '<svg class="ic ic-check" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7.875 13.0835L15.4376 5.521C15.5626 5.396 15.7119 5.3335 15.8855 5.3335C16.0591 5.3335 16.2084 5.396 16.3334 5.521C16.4584 5.646 16.5209 5.7953 16.5209 5.96891C16.5209 6.14252 16.4584 6.29183 16.3334 6.41683L8.31256 14.4377C8.18756 14.5627 8.04173 14.6252 7.87506 14.6252C7.70839 14.6252 7.56256 14.5627 7.43756 14.4377L3.64589 10.646C3.52089 10.521 3.46187 10.3717 3.46881 10.1981C3.47575 10.0245 3.54173 9.87516 3.66673 9.75016C3.79173 9.62516 3.94103 9.56266 4.11464 9.56266C4.28825 9.56266 4.43756 9.62516 4.56256 9.75016L7.87506 13.0835Z" fill="currentColor"/></svg>',
@@ -51,7 +52,7 @@ for (const pg of pages) {
 }
 // assets + css + js
 fs.cpSync(src('assets'), path.join(dist, 'assets'), { recursive: true });
-const css = ['tokens', 'base', 'components', 'sections', 'work'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
+const css = ['tokens', 'base', 'components', 'sections', 'work', 'proof', 'intake'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
 fs.writeFileSync(path.join(dist, 'styles.css'), BASE ? css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE}/`) : css);
 fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js').replace("const BASE = '';", `const BASE = ${JSON.stringify(BASE)};`));
 if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).host + '\n');

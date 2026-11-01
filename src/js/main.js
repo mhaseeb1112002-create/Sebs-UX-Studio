@@ -175,5 +175,36 @@
     box.append(big, close); document.body.append(box); close.focus(); document.addEventListener('keydown', onKey);
   }));
 
+
+  /* short intake form: validate inline, then hand the answers to the visitor's email app */
+  const intake = $('#intake');
+  if (intake) {
+    const card = $('#intake-card');
+    const val = {
+      name: f => f.value.trim().length > 1,
+      email: f => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.value.trim()),
+      site: f => f.value.trim().length > 2,
+      flow: () => !!intake.querySelector('input[name=flow]:checked'),
+    };
+    const field = k => k === 'flow' ? intake.querySelector('fieldset.field') : intake.elements[k].closest('.field');
+    const check = k => {
+      const ok = val[k](k === 'flow' ? null : intake.elements[k]), box = field(k);
+      box.toggleAttribute('data-invalid', !ok);
+      if (k !== 'flow') intake.elements[k].setAttribute('aria-invalid', String(!ok));
+      return ok;
+    };
+    Object.keys(val).filter(k => k !== 'flow').forEach(k => intake.elements[k].addEventListener('blur', () => { if (intake.elements[k].value) check(k); }));
+    intake.querySelectorAll('input[name=flow]').forEach(r => r.addEventListener('change', () => check('flow')));
+    intake.addEventListener('submit', e => {
+      e.preventDefault();
+      const bad = Object.keys(val).filter(k => !check(k));
+      if (bad.length) { const f = bad[0] === 'flow' ? intake.querySelector('input[name=flow]') : intake.elements[bad[0]]; f.focus(); return; }
+      const d = Object.fromEntries(new FormData(intake));
+      const body = `Name: ${d.name}\nEmail: ${d.email}\nProduct / site: ${d.site}\nFlow to audit: ${d.flow}\n\nWhat's going wrong:\n${d.msg || '-'}`;
+      card.classList.add('is-done'); $('.form-done', card).focus();
+      location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent('UX audit request: ' + d.site)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+
   /* smooth in-page anchors with reduced-motion fallback handled by CSS */
 })();

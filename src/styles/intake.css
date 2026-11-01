@@ -1,0 +1,42 @@
+/* UX audit request (short intake) */
+.start-wrap{padding-top:64px;padding-bottom:var(--section-top);display:grid;grid-template-columns:1fr 560px;gap:80px;align-items:start}
+.start-copy .t-h1{margin-top:12px;font-size:56px;line-height:60px}
+.start-copy .t-lg{margin-top:20px;max-width:480px;color:var(--color-text-secondary)}
+.start-list{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:14px}
+.start-list li{display:flex;gap:12px;align-items:flex-start;font:500 16px/24px var(--font-body)}
+.start-list .ic-check{flex:none;margin-top:2px;color:var(--primitive-green-700)}
+.start-alt{margin-top:32px;font:400 14px/22px var(--font-body);color:var(--color-text-secondary)}
+.start-alt a{color:var(--color-text-primary);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.form-card{background:#fff;border:1px solid var(--primitive-gray-200);border-radius:24px;padding:40px;box-shadow:0 24px 60px -32px rgba(15,26,21,.25)}
+.form-card h2{font:700 22px/28px var(--font-head);letter-spacing:-.01em}
+.form-card .req-note{margin-top:6px;font:400 13px/20px var(--font-body);color:var(--color-text-secondary)}
+.field{margin-top:22px}
+.field>label,.field>legend{display:block;margin-bottom:8px;padding:0;font:600 14px/20px var(--font-body)}
+.field .opt{font-weight:400;color:var(--color-text-secondary)}
+.field input[type=text],.field input[type=email],.field input[type=url],.field textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid var(--primitive-slate-300);border-radius:var(--radius-md);background:#fff;font:400 16px/24px var(--font-body);color:var(--color-text-primary);transition:border-color var(--motion-fast) var(--ease-out),box-shadow var(--motion-fast) var(--ease-out)}
+.field textarea{min-height:104px;resize:vertical}
+.field input:hover,.field textarea:hover{border-color:var(--primitive-slate-500)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--primitive-green-700);box-shadow:0 0 0 4px rgba(11,122,72,.18)}
+.field[data-invalid] input,.field[data-invalid] textarea{border-color:#c0392b}
+.field .err{display:none;margin-top:6px;font:500 13px/18px var(--font-body);color:#b3321f}
+.field[data-invalid] .err{display:block}
+fieldset.field{border:0;padding:0;margin-inline:0;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid var(--primitive-slate-300);border-radius:var(--radius-full);font:500 15px/1 var(--font-body);transition:background-color var(--motion-fast) var(--ease-out),border-color var(--motion-fast) var(--ease-out),color var(--motion-fast) var(--ease-out)}
+.chips input:hover+span{border-color:var(--primitive-slate-500)}
+.chips input:checked+span{background:var(--primitive-ink-900);border-color:var(--primitive-ink-900);color:#fff}
+.chips input:focus-visible+span{box-shadow:0 0 0 4px rgba(11,122,72,.28)}
+.form-card .btn{width:100%;margin-top:28px;min-height:52px}
+.form-fine{margin-top:14px;font:400 13px/20px var(--font-body);color:var(--color-text-secondary);text-align:center}
+.form-done{display:none;text-align:left}
+.form-card.is-done form{display:none}.form-card.is-done .form-done{display:block}
+.form-done .ok{display:flex;width:52px;height:52px;border-radius:50%;background:var(--primitive-green-100);color:var(--primitive-green-700);align-items:center;justify-content:center;margin-bottom:20px}
+.form-done .ok svg{width:26px;height:26px}
+.form-done h2{margin-bottom:10px}
+.form-done p{font:400 16px/26px var(--font-body);color:var(--color-text-secondary)}
+.form-done .btn{margin-top:20px}
+@media (max-width:1279px){.start-wrap{grid-template-columns:1fr 480px;gap:48px}.start-copy .t-h1{font-size:44px;line-height:48px}}
+@media (max-width:1023px){.start-wrap{grid-template-columns:1fr;gap:40px;padding-top:40px}.form-card{max-width:640px}}
+@media (max-width:767px){.start-wrap{padding-top:28px}.start-copy .t-h1{font-size:36px;line-height:40px}.form-card{padding:24px 20px;border-radius:20px}}

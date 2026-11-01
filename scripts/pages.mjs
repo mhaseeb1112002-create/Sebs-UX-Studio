@@ -17,7 +17,7 @@ const home = {
   ] },
 };
 import { cases, filters, order } from './cases-data.mjs';
-import { workBody, caseBody, notFoundBody } from './templates.mjs';
+import { workBody, caseBody, notFoundBody, startBody } from './templates.mjs';
 const sub = { home: '/', workcurrent: 'aria-current="page"' };
 const work = [];
 for (const [k, label] of filters) {
@@ -30,4 +30,5 @@ const caseSeo = c => [{ '@context': 'https://schema.org', '@type': 'Article', he
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], ['Work', '/work/'], [c.catLabel, `/work/${c.cat}/`], [c.title, `/work/${c.slug}/`]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) }];
 const caseTpl = cases.map(c => ({ route: `/work/${c.slug}/`, title: c.title_seo, description: c.desc_seo, body: caseBody(c), vars: sub, jsonld: caseSeo(c) }));
 const nf = { route: '/404', title: 'Page not found | Sebs UX Studio', description: 'This page could not be found. Go home, browse the work or book a UX audit.', body: notFoundBody, vars: sub };
-export default [home, ...work, ...caseTpl, nf];
+const start = { route: '/start/', title: 'Request a UX Audit | Sebs UX Studio', description: 'Tell me where your users drop off. A short request for a fixed-price UX audit of your signup, onboarding or KYC flow.', body: startBody, vars: { home: '/', workcurrent: '' } };
+export default [home, ...work, ...caseTpl, start, nf];
