@@ -1,5 +1,5 @@
 import faq from './faq-data.mjs';
-const SITE = (process.env.SITE_URL || 'https://sebs.studio').replace(/\/$/, '');
+const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/, '');
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const faqitems = faq.map(([q, a], i) => `<div class="faq-item${i === 0 ? ' is-open' : ''}"><h3><button class="faq-q" type="button" aria-expanded="${i === 0}" aria-controls="faq-a${i}" id="faq-q${i}"><span>${esc(q)}</span><span class="faq-ic" aria-hidden="true"></span></button></h3><div class="faq-a" id="faq-a${i}" role="region" aria-labelledby="faq-q${i}"><div><p>${esc(a)}</p></div></div></div>`).join('\n      ');
 const home = {

@@ -7,7 +7,7 @@ const dist = path.join(root, 'dist');
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 const BASE = (process.env.BASE_PATH || '').replace(/\/$/, ''); // '' for a domain root, '/repo' for github.io/repo
-const SITE = (process.env.SITE_URL || 'https://sebs.studio').replace(/\/$/, '');
+const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/, '');
 
 const read = p => fs.readFileSync(src(p), 'utf8');
 const partial = n => read(`partials/${n}.html`);

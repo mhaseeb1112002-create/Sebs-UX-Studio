@@ -28,7 +28,7 @@ jobs:
           node-version: 20
       - name: Build
         env:
-          CUSTOM_URL: ${{ vars.SITE_URL }}
+          CUSTOM_URL: ${{ vars.SITE_URL || 'https://sebsuxstudio.com' }}
         run: |
           if [ -n "$CUSTOM_URL" ]; then
             export SITE_URL="$CUSTOM_URL" CNAME=1 BASE_PATH=""

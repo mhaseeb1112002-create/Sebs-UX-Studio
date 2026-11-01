@@ -61,7 +61,7 @@ switches the placeholder to a real `<img>` automatically:
 
 1. **Settings → Pages → Source: GitHub Actions** (one-time).
 2. Push. The site appears at `https://<owner>.github.io/<repo>/`. The workflow sets `BASE_PATH` so all asset/link paths work under that sub-path.
-3. **Custom domain later:** add repository variable `SITE_URL` = `https://yourdomain.com` (Settings → Secrets and variables → Actions → Variables) and re-run the workflow. Paths switch to the domain root and a `CNAME` file is written.
+3. **Custom domain:** defaults to `https://sebsuxstudio.com`; override with repository variable `SITE_URL` (Settings → Secrets and variables → Actions → Variables) and re-run the workflow. Paths switch to the domain root and a `CNAME` file is written.
    DNS: apex → A records `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`; `www` → CNAME `<owner>.github.io`. Then tick **Enforce HTTPS**.
 
 Build env: `SITE_URL` (canonical/OG/sitemap/JSON-LD), `BASE_PATH` (sub-path hosting), `CNAME=1` (write CNAME file).
