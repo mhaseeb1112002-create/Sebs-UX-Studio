@@ -48,6 +48,8 @@ body.menu-open{overflow:hidden}
 .fc-head{display:flex;align-items:center;justify-content:space-between}
 .toggle{display:flex;gap:2px;padding:3px;border-radius:var(--radius-full);background:var(--primitive-green-100)}
 .toggle button{padding:4px 10px;border-radius:var(--radius-full);font:600 11px/14px var(--font-body);color:var(--primitive-green-700);transition:all var(--motion-fast) var(--ease-out)}
+.toggle button{position:relative}
+.toggle button::after{content:"";position:absolute;left:0;right:0;top:-11px;bottom:-11px}
 .toggle button[aria-checked="true"]{background:var(--primitive-ink-900);color:#fff}
 .fc-row{display:flex;align-items:center;gap:10px}
 .fc-name{width:62px;flex:none;font:500 12px/18px var(--font-body);color:var(--primitive-ink-900);white-space:nowrap}
