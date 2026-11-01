@@ -3,7 +3,7 @@
 .cp-actions{display:flex;gap:12px;flex-wrap:wrap;padding-top:8px}
 .crumbs .back{font:600 15px/1 var(--font-body);color:var(--primitive-slate-500)}
 .cp-sec{padding-top:56px}
-.cp-sec:last-of-type{padding-bottom:8px}
+.cp-last{padding-bottom:72px}
 .cp-h2{font:700 32px/40px var(--font-head);letter-spacing:-.02em;margin-bottom:20px;max-width:760px}
 .cp-prose{max-width:720px}
 .cp-prose .cp-h2{margin-bottom:12px}
@@ -54,6 +54,7 @@
 @media (max-width:767px){
   .cp-head{padding-block:40px 24px}
   .cp-sec{padding-top:40px}
+  .cp-last{padding-bottom:48px}
   .cp-h2{font-size:26px;line-height:32px}
   .cp-actions .btn{width:100%}
 }

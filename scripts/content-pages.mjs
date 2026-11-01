@@ -222,7 +222,7 @@ function block(b, idx) {
 }
 
 export function contentBody(p) {
-  const rel = p.related ? `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">Related</h2><ul class="cp-related">${p.related.map(([t, u]) => `<li><a href="${u}"><span>${t}</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>`).join('')}</ul></div></section>` : '';
+  const rel = p.related ? `<section class="cp-sec cp-last"><div class="wrap"><h2 class="cp-h2">Related</h2><ul class="cp-related">${p.related.map(([t, u]) => `<li><a href="${u}"><span>${t}</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>`).join('')}</ul></div></section>` : '';
   const sec = p.secondary ? `<a class="btn btn-secondary" href="${p.secondary[1]}">${p.secondary[0]}</a>` : '';
   return `{{> nav}}
 <main id="main">
