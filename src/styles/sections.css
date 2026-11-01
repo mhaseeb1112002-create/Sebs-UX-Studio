@@ -140,7 +140,7 @@ body.menu-open{overflow:hidden}
 .arrow-next:hover{background:var(--primitive-ink-700)}
 .arrow[disabled]{opacity:.35;cursor:default}
 .swipe-hint{display:none;font:500 14px/20px var(--font-body);color:var(--primitive-slate-500)}
-.ind-carousel{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-inline:max(var(--pad-x),calc((100vw - var(--content-max))/2));scroll-padding-inline:max(var(--pad-x),calc((100vw - var(--content-max))/2))}
+.ind-carousel{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block:12px;margin-block:-12px;padding-inline:max(var(--pad-x),calc((100vw - var(--content-max))/2));scroll-padding-inline:max(var(--pad-x),calc((100vw - var(--content-max))/2))}
 .ind-carousel::-webkit-scrollbar{display:none}
 .ind-track{display:flex;gap:24px;width:max-content}
 .ind-track>li{scroll-snap-align:start;flex:none}
