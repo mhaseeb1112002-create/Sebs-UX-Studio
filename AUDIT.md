@@ -52,7 +52,7 @@ Heights are rendered px vs Figma frame px.
 | Work page | 322 / 1879 / 598 / 320 = exact | – (no Figma frame) | Pass @1440 |
 | Case study (Apply One) | hero 559, cover 640, body 2293 (Figma 2292), next 228 | – (no Figma frame) | Pass (+1px) |
 
-Other exact matches: hero button 181 px wide vs Figma 181; industry cards at x = 120/604/1088/…; hero visual at x 736, y 159.
+Other exact matches: industry cards at x = 120/604/1088/…; hero visual at x 736, y 159.
 
 ## 4. Issue log
 
@@ -79,6 +79,7 @@ Other exact matches: hero button 181 px wide vs Figma 181; industry cards at x =
 | 19 | Hover / pressed / focus states | all | Button, nav, card, tab states per Components page | Implemented from spec values (e.g. green-500 hover, 4px green-700 focus ring); not visually diffed against the state variants | – | **Not verified** |
 | 20 | Tablet 768–1279 | 834/768/1024 | No Figma frame | Adapted from 1440/390 (2-col cards, stacked hero <1024, 40px padding) | – | **Not verified** (nothing to compare to) |
 | 21 | Work + case pages, mobile | ≤767 | Handoff sheet lists these as *open* (follow home mobile patterns) | Built from home mobile patterns (44px display, 1-col, 20px padding) | – | **Not verified** (nothing to compare to) |
+| 22 | Primary buttons, mobile menu rows | all | Trailing → glyph (hero button 181×44) | Arrow removed on owner's request: label already states the action, three identical arrows in one box was noise. Hero primary is now 163×44; section heights unchanged | Kept arrows only where they carry meaning (Next project, Read case study, swipe hint, external-link icon on Behance) | **Needs improvement** (intentional deviation, −18px button width) |
 
 ## 5. Content that is **not** from Figma (please confirm)
 
