@@ -38,6 +38,9 @@
   $$('[data-accordion]').forEach(acc => {
     const items = $$('.faq-item', acc);
     items.forEach(it => $('.faq-q', it).addEventListener('click', () => {
+      const q = $('.faq-q', it), before = q.getBoundingClientRect().top;
+      /* keep the tapped question where the finger is while the item above collapses (iOS has no scroll anchoring) */
+      if (!reduce) { const t0 = performance.now(); const hold = () => { scrollBy(0, q.getBoundingClientRect().top - before); if (performance.now() - t0 < 420) requestAnimationFrame(hold); }; requestAnimationFrame(hold); }
       const open = !it.classList.contains('is-open');
       items.forEach(o => { o.classList.remove('is-open'); $('.faq-q', o).setAttribute('aria-expanded', 'false'); });
       if (open) { it.classList.add('is-open'); $('.faq-q', it).setAttribute('aria-expanded', 'true'); }
