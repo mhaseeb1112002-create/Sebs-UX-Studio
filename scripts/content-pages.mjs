@@ -9,6 +9,7 @@ const FAQ = {
   nda: ['Do you sign an NDA?', 'Yes. Send yours over before we start, or I can share a simple one.'],
   checks: ['Will you ask us to remove verification checks?', 'No. I work inside your compliance rules. Some steps have to stay, and I do not suggest dropping them. I make those steps clearer: what is asked, why, and what to do when something fails. Ask your compliance team which steps are fixed before we start, and I will mark them in the audit.'],
   sdk: ['What if our verification runs on a vendor SDK or a hosted page?', 'I review what you control: the screens before and after the vendor step, the wording, the error, waiting and rejection states, and the way back into the flow. If a screen belongs to the vendor and cannot be changed, I mark it and list what to ask the vendor to change. If you cannot see what happens inside that step, I tell you which events to track so you can.'],
+  scope: ['How long does it take, and what does it cost?', 'It depends on what your team needs. A single workshop is short. A team assessment or a design system takes longer. I scope it after a short intro call, so you know the time and the price before we begin. Contact me for pricing.'],
   ai: ['How do you use AI in your process?', 'AI tools speed up research synthesis and first drafts. Every finding, decision and design is reviewed and owned by me.'],
 };
 const wk = f => `/assets/work/${f}`, gd = f => `/assets/guides/${f}`;
@@ -33,6 +34,7 @@ export const pages = [
       { type: 'prose', title: 'Why an audit before a redesign', html: '<p>Analytics shows where users leave. It does not show why. A drop at the ID upload step could mean a blurry camera view, a vague error, a long wait or a rejection that nobody explained.</p><p>The audit connects the two. I go through your flow screen by screen, line up what I find with your numbers, and rank the problems by how much they cost you. Then you know what to fix first, and what to leave alone.</p><p>I never ask you to remove a verification check. Compliance sets the floor. I make the steps around it clear, so people get through them.</p>' },
       { type: 'prose', title: 'How I review and rate the flow', html: `<p>I review every screen against established usability principles, for example visibility of system status, error prevention, and helping users recognize, diagnose and recover from errors. Each finding names the principle it breaks.</p><p>I rate each finding High, Medium or Low by how often the problem happens, how much it hurts and how long it lasts. That is how the fix list gets its order.</p>` },
       { type: 'list', title: 'What I review', items: ['Signup and account creation', 'Identity verification: document choice, ID upload, selfie or liveness check', 'Error messages and how users recover from them', 'Waiting and pending states', 'Rejections, and how they are explained'] },
+      { type: 'prose', title: 'When you need more than a review', html: '<p>If the audit raises questions only users can answer, I can add usability tests with real people, or discovery research such as interviews before design starts. I scope these separately after the audit.</p>' },
       { type: 'partial', name: 'audit' },
       { type: 'steps', title: 'How the 5 days run', items: [
         ['Day 1 · Discover', 'A short call to understand your product, users and goals.'],
@@ -42,7 +44,7 @@ export const pages = [
       { type: 'prose', title: 'Who it is for', html: '<p>Seed to Series A B2B SaaS and fintech teams, especially those without an in-house designer. It also suits identity and KYC products, digital banks and lenders, and AI products where users must trust an automated decision.</p>' },
       { type: 'faq', items: [FAQ.audit, FAQ.checks, FAQ.sdk, FAQ.price, FAQ.access, FAQ.nda] },
     ],
-    related: [['Conversion redesign sprint', '/services/redesign-sprint/'], ['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/']],
+    related: [['Conversion redesign sprint', '/services/redesign-sprint/'], ['UX consultancy', '/services/ux-consultancy/'], ['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/']],
   },
   {
     route: '/services/redesign-sprint/', kind: 'service', crumb: ['Services', '/#services'], name: 'Conversion redesign sprint',
@@ -83,6 +85,7 @@ export const pages = [
         ['Design and code a new product', 'I design the product end to end, from the first flow to the final UI, and I build it in code. If you have developers, I hand over specs and components they can build right away.'],
         ['Polish an AI-built product', 'I clean up the UX and UI of what already exists, so it looks and works like one product.'],
       ] },
+      { type: 'list', title: 'What I build', items: ['An MVP, from the first idea to a working first version', 'Front-end and back-end', 'DevOps and delivery: hosting and deployment'] },
       { type: 'table', title: 'Signs an AI-built product needs polish', head: ['What you see', 'Usability principle'], rows: [
         ['Screens are styled differently from each other', 'Consistency and standards'],
         ['Buttons and actions give no visible feedback', 'Visibility of system status'],
@@ -96,6 +99,32 @@ export const pages = [
       { type: 'faq', items: [FAQ.design, FAQ.price, FAQ.ai, FAQ.nda] },
     ],
     related: [['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Conversion redesign sprint', '/services/redesign-sprint/'], ['Meemi Art: pattern store & design system', '/work/meemi-art-design-system/']],
+  },
+  {
+    route: '/services/ux-consultancy/', kind: 'service', crumb: ['Services', '/#services'], name: 'UX consultancy',
+    title: 'UX Consultancy: Workshops & Team Assessment | Sebs UX Studio',
+    description: 'Stronger UX skills for your product team: hands-on workshops and training, a review of how your team works, and a design system you can keep using.',
+    eyebrow: 'UX consultancy',
+    h1: 'Give your team <span class="hl">stronger UX skills</span>',
+    lede: 'Workshops and training, a review of how your team finds and fixes UX problems, and a design system your developers can keep using. For product teams that want better UX without hiring a full design team first.',
+    secondary: ['Talk about your team', '/start/'],
+    heroImg: [gd('ux-consultancy-board.webp'), 1176, 840, 'A design system board with colours, type, buttons and a team assessment checklist'],
+    blocks: [
+      { type: 'cards', title: 'What I offer', items: [
+        ['Workshops & training', 'Hands-on sessions for your team, built around your own product. For example: reading a funnel, reviewing a flow, and writing clear error messages.'],
+        ['Team UX assessment', 'I look at how your team finds UX problems, tests ideas, hands work to developers and measures the result. You get a short list of what to change first.'],
+        ['Design system', 'A light set of components, colours and type rules, so screens look and behave the same, and developers stop rebuilding the same button.'],
+      ] },
+      { type: 'prose', title: 'When this fits', html: '<p>You have developers and a product manager, but UX decisions are made on the side. Or you shipped a product built with AI tools and each screen looks different. Or you ran an audit and now want your team to keep the gains.</p><p>It also suits teams that want one expert to check their way of working before they hire a designer.</p>' },
+      { type: 'steps', title: 'How it works', items: [
+        ['Intro call', 'We talk about your product, your team and what is not working.'],
+        ['Plan', 'We agree what you will receive, who takes part and what you need to prepare.'],
+        ['Deliver', 'I run the sessions or the review. You get a short written summary of what we found and what to do next.'],
+      ] },
+      { type: 'prose', title: 'Start with the audit if you can', html: '<p>If your problem is a specific flow, such as signup or ID verification, the <a href="/services/onboarding-kyc-audit/">onboarding and KYC audit</a> is the faster first step. Consultancy suits the wider question of how your team works.</p>' },
+      { type: 'faq', items: [FAQ.scope, FAQ.access, FAQ.nda] },
+    ],
+    related: [['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Product build & polish', '/services/build-and-polish/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/']],
   },
   /* ------------------------------------------------------------------ guides */
   {
