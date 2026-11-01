@@ -31,3 +31,15 @@
 
 .btn>span[aria-hidden]{margin-left:4px}
 .btn-secondary:focus-visible{box-shadow:inset 0 0 0 1.5px var(--primitive-ink-900),0 0 0 2px #fff,0 0 0 6px var(--primitive-green-700)}
+
+/* directional arrow icon (replaces the → glyph): same stroke as the Figma icon set, optically centred */
+.ic-arrow{flex:none;display:inline-block;vertical-align:-3px;margin-left:8px;transition:transform var(--motion-fast) var(--ease-out)}
+.btn:hover .ic-arrow,.next-card:hover .ic-arrow,.mm-item:hover .ic-arrow,a:hover>.arr .ic-arrow{transform:translateX(3px)}
+.btn:hover .ic-ext{transform:translate(2px,-2px)}
+.mm-arr .ic-arrow,.nx-arr .ic-arrow,.arr .ic-arrow{margin-left:0;vertical-align:middle}
+.mm-arr .ic-arrow{width:22px;height:22px}
+.nx-arr .ic-arrow{width:26px;height:26px}
+.swipe-hint .ic-arrow{width:16px;height:16px;margin-left:4px;vertical-align:-3px}
+@media (prefers-reduced-motion:reduce){.ic-arrow{transition:none}.btn:hover .ic-arrow,.btn:hover .ic-ext,.next-card:hover .ic-arrow,.mm-item:hover .ic-arrow,a:hover>.arr .ic-arrow{transform:none}}
+.btn .ic-arrow{width:16px;height:16px;margin:-1px 0 -1px 2px}
+.btn .ic-ext{margin:-1px 0 -1px 2px}

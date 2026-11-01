@@ -16,7 +16,7 @@ export function workBody(active) {
   const tabs = filters.map(([k, label, n]) => `<a class="tab" role="tab" data-filter="${k}" href="${k === 'all' ? '/work/' : '/work/' + k + '/'}" aria-selected="${k === active}" tabindex="${k === active ? 0 : -1}"><span>${label}</span><small>${n}</small></a>`).join('');
   const cards = order.map(s => bySlug[s]).map(c => `<li data-cat="${c.cat}"${active !== 'all' && active !== c.cat ? ' hidden' : ''}><a class="case-card" href="${route(c)}" aria-label="Read the ${esc(c.card.title.split(':')[0])} case study">
       <div class="cc-cover">${img(`${c.slug}-card.webp`, `${c.card.title} cover`, 1176, 800, 'cc-img')}<span class="cc-tag">${c.card.tag}</span></div>
-      <div class="cc-meta"><h3>${esc(c.card.title)}</h3><p>${esc(c.card.text)}</p><span class="cc-link"><span>Read case study</span><span class="arr" aria-hidden="true">→</span></span></div></a></li>`).join('\n');
+      <div class="cc-meta"><h3>${esc(c.card.title)}</h3><p>${esc(c.card.text)}</p><span class="cc-link"><span>Read case study</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></span></div></a></li>`).join('\n');
   return `{{> nav}}
 <main id="main">
 <section class="work-head"><div class="wrap">
@@ -46,7 +46,7 @@ export function caseBody(c) {
   <h1 class="case-title t-display">${esc(c.title)}</h1>
   <p class="t-xl case-summary">${esc(c.summary)}</p>
   <dl class="case-facts">${c.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-  ${c.behance ? `<div class="case-actions"><a class="btn btn-secondary" href="${c.behance}" target="_blank" rel="noopener">View full visuals on Behance <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></div>` : ''}
+  ${c.behance ? `<div class="case-actions"><a class="btn btn-secondary" href="${c.behance}" target="_blank" rel="noopener">View full visuals on Behance {{icon:ext}}<span class="sr-only"> (opens in a new tab)</span></a></div>` : ''}
 </div></section>
 <div class="case-cover"><div class="wrap">${img(`${c.slug}-cover.webp`, c.coverAlt, 2400, 1280, 'cover-img', false)}</div></div>
 <div class="case-body"><div class="wrap">
@@ -59,7 +59,7 @@ export function caseBody(c) {
   <section class="cs-results" aria-labelledby="rs"><h2 class="t-label eyebrow-g" id="rs">Results</h2><p class="t-h2c">${esc(reH)}</p>
     <ul class="metrics">${metrics.map(([v, l]) => `<li><strong>${esc(v)}</strong><h3>${esc(l)}</h3></li>`).join('')}</ul><p class="res-note">${esc(note)}</p></section>
 </div></div>
-<div class="case-next"><div class="wrap"><a class="next-card" href="${route(next)}" aria-label="Next project: ${esc(next.title)}"><span class="nx-text"><span class="nx-label">NEXT PROJECT</span><span class="nx-title">${esc(next.title)}</span></span><span class="nx-arr" aria-hidden="true">→</span></a></div></div>
+<div class="case-next"><div class="wrap"><a class="next-card" href="${route(next)}" aria-label="Next project: ${esc(next.title)}"><span class="nx-text"><span class="nx-label">NEXT PROJECT</span><span class="nx-title">${esc(next.title)}</span></span><span class="nx-arr" aria-hidden="true">{{icon:arrow}}</span></a></div></div>
 {{> cta-flush}}
 </main>
 {{> footer}}`;
@@ -71,7 +71,7 @@ export const notFoundBody = `{{> nav}}
   <p class="t-label eyebrow-g">404</p>
   <h1 class="work-title t-display">This page took a wrong <span class="hl">turn</span></h1>
   <p class="t-lg work-sub">The page you're looking for isn't here. Head back to the start, browse the work, or book a UX audit.</p>
-  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="mailto:hello@sebsuxstudio.com?subject=UX%20audit">Book a UX audit <span aria-hidden="true">→</span></a></div>
+  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="mailto:hello@sebsuxstudio.com?subject=UX%20audit">Book a UX audit {{icon:arrow}}</a></div>
 </div></section>
 </main>
 {{> footer}}`;
