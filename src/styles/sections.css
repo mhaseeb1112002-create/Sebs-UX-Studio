@@ -502,19 +502,8 @@ body.menu-open{overflow:hidden}
 .avatar{overflow:hidden;padding:0}
 .avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 
-/* ===== services: four cards (title, situation, three tags, picture) ===== */
-.svc-cards.svc4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.svc4 .svc-card{padding:28px 24px;gap:14px;flex:none;width:auto}
-.svc4 .svc-card h3{font:700 22px/28px var(--font-head);letter-spacing:-.015em;text-wrap:balance}
-.svc-when{font:400 16px/24px var(--font-body);color:var(--primitive-slate-500);min-height:72px}
-.svc-tags{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;width:100%}
-.svc-tags li{padding:9px 12px;border-radius:var(--radius-full);background:var(--primitive-green-100);color:var(--primitive-green-700);font:600 14px/20px var(--font-body);text-align:center}
-.svc-img{width:100%;aspect-ratio:1176/840;border-radius:16px;overflow:hidden;background:var(--primitive-gray-100);margin-top:4px}
-.svc-img img{display:block;width:100%;height:100%;object-fit:cover}
-.svc4 .svc-link{margin-top:auto}
-@media (max-width:1279px){.svc-cards.svc4{grid-template-columns:repeat(2,minmax(0,1fr))}.svc-when{min-height:0}}
-@media (max-width:639px){.svc-cards.svc4{grid-template-columns:1fr;padding-top:28px}}
-/* rows line up across cards (title, situation, tags, picture, link) even when a title wraps */
-.svc4 .svc-card{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:14px;align-items:start;justify-items:stretch}
-.svc4 .svc-card .svc-when{min-height:0}
-.svc4 .svc-link{align-self:end;justify-self:start;margin-top:0}
+/* ===== services: four cards in a 2 x 2 grid ===== */
+.svc-cards.svc4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.svc4 .svc-card{flex:none;width:auto}
+.svc-top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+@media (max-width:767px){.svc-cards.svc4{grid-template-columns:1fr;padding-top:28px}}

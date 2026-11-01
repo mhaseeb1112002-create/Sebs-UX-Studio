@@ -11,7 +11,7 @@ const home = {
   jsonld: { '@context': 'https://schema.org', '@graph': [
     { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE, logo: SITE + '/assets/favicon.svg', email: 'hello@sebsuxstudio.com', telephone: '+92 337 2186894', address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' }, areaServed: 'Worldwide', founder: { '@type': 'Person', name: 'Muhammad Haseeb' },
       sameAs: ['https://www.linkedin.com/in/muhammad-haseeb-ux/', 'https://www.behance.net/muhammadhaseeb194', 'https://dribbble.com/m-haseeb1112002', 'https://www.instagram.com/sebs.studio_ux/'],
-      makesOffer: ['Onboarding & KYC audit', 'Conversion redesign sprint', 'UX consultancy', 'Product build & polish'].map(n => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })) },
+      makesOffer: ['Onboarding & KYC audit', 'Conversion redesign sprint', 'Team coaching & design system', 'Product build & polish'].map(n => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })) },
     { '@type': 'WebSite', name: 'Sebs UX Studio', url: SITE },
     { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
   ] },
