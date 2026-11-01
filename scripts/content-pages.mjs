@@ -22,7 +22,7 @@ export const pages = [
     description: 'Find the exact screen where users leave your signup or ID verification flow. Drop-off map, prioritized fixes and a walkthrough call in 5 days.',
     eyebrow: 'Onboarding & KYC audit',
     h1: 'A UX audit for fintech <span class="hl">onboarding and KYC</span>',
-    lede: 'I find the exact screen where users leave your signup or identity verification flow, and tell you what to fix first. You get a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days.',
+    lede: 'Every user who leaves your signup or identity verification is a customer you paid to reach and never get. I find the exact screen where it happens, and tell you what to fix first. You get a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days.',
     secondary: ['See a sample audit', '/#audit'],
     heroImg: [wk('kyc-id-upload-redesign-screen-1.webp'), 1176, 840, 'An ID upload screen with three numbered issues next to the ranked list of findings'],
     blocks: [
@@ -52,7 +52,7 @@ export const pages = [
     description: 'I redesign the signup or KYC step that loses the most users, then give your developers specs and components they can build right away. 2–3 weeks.',
     eyebrow: 'Conversion redesign sprint',
     h1: 'Redesign the step that <span class="hl">loses the most users</span>',
-    lede: 'Once you know where users leave, I redesign that flow and hand your developers specs and components they can build right away. A sprint takes 2 to 3 weeks.',
+    lede: 'Once you know where customers leave, I redesign that flow and hand your developers specs and components they can build right away. A sprint takes 2 to 3 weeks.',
     secondary: ['See a concept project', '/work/kyc-id-upload-redesign/'],
     heroImg: [wk('kyc-id-upload-redesign-screen-2.webp'), 1176, 840, 'A redesigned guided ID scan screen and selfie screen'],
     blocks: [
