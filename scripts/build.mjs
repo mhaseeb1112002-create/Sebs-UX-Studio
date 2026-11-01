@@ -55,6 +55,18 @@ fs.cpSync(src('assets'), path.join(dist, 'assets'), { recursive: true });
 const css = ['tokens', 'base', 'components', 'sections', 'work', 'proof', 'intake'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
 fs.writeFileSync(path.join(dist, 'styles.css'), BASE ? css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE}/`) : css);
 fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js').replace("const BASE = '';", `const BASE = ${JSON.stringify(BASE)};`));
+// cache-busting: version the css/js URLs so browsers never pair a new page with an old stylesheet
+import('node:crypto').then(({ createHash }) => {
+  const h = f => createHash('sha1').update(fs.readFileSync(path.join(dist, f))).digest('hex').slice(0, 8);
+  const v = { 'styles.css': h('styles.css'), 'main.js': h('main.js') };
+  const walk = d => fs.readdirSync(d, { withFileTypes: true }).forEach(e => {
+    const f = path.join(d, e.name);
+    if (e.isDirectory()) return e.name !== 'assets' && walk(f);
+    if (!f.endsWith('.html')) return;
+    fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace(/(styles\.css|main\.js)"/g, (m, n) => `${n}?v=${v[n]}"`));
+  });
+  walk(dist);
+});
 if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).host + '\n');
 fs.mkdirSync(path.join(dist, '.well-known'), { recursive: true });
 fs.writeFileSync(path.join(dist, '.well-known', 'security.txt'), `Contact: mailto:hello@sebsuxstudio.com\nExpires: 2027-11-01T00:00:00.000Z\nPreferred-Languages: en\nCanonical: ${SITE}/.well-known/security.txt\n`);

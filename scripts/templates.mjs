@@ -71,7 +71,7 @@ export const notFoundBody = `{{> nav}}
   <p class="t-label eyebrow-g">404</p>
   <h1 class="work-title t-display">This page took a wrong <span class="hl">turn</span></h1>
   <p class="t-lg work-sub">The page you're looking for isn't here. Head back to the start, browse the work, or book a UX audit.</p>
-  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="/start/">Book a UX audit</a></div>
+  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="/start/">Request a UX audit</a></div>
 </div></section>
 </main>
 {{> footer}}`;
@@ -80,7 +80,7 @@ export const startBody = `{{> nav}}
 <main id="main">
 <section class="start-wrap wrap" aria-labelledby="start-title">
   <div class="start-copy">
-    <p class="t-label eyebrow-g">Start a project</p>
+    <p class="t-label eyebrow-g">Request a UX audit or project</p>
     <h1 class="t-h1" id="start-title">Tell me what you need.</h1>
     <p class="t-lg">A UX audit, a redesign, a new product or something else. Answer a few quick questions. I read every request myself and reply by email with next steps.</p>
     <ul class="start-list">
