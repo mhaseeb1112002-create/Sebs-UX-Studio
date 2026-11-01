@@ -53,6 +53,8 @@ const css = ['tokens', 'base', 'components', 'sections', 'work'].map(n => fs.exi
 fs.writeFileSync(path.join(dist, 'styles.css'), BASE ? css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE}/`) : css);
 fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js').replace("const BASE = '';", `const BASE = ${JSON.stringify(BASE)};`));
 if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).host + '\n');
+fs.mkdirSync(path.join(dist, '.well-known'), { recursive: true });
+fs.writeFileSync(path.join(dist, '.well-known', 'security.txt'), `Contact: mailto:hello@sebsuxstudio.com\nExpires: 2027-11-01T00:00:00.000Z\nPreferred-Languages: en\nCanonical: ${SITE}/.well-known/security.txt\n`);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404').map(p => `  <url><loc>${SITE}${p.route}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log('built', pages.length, 'pages');

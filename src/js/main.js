@@ -1,5 +1,6 @@
 (() => {
   const BASE = ''; // replaced at build time (BASE_PATH) for sub-path hosting
+  if (window.top !== window.self) { try { window.top.location = window.self.location; } catch (e) { document.documentElement.style.display = 'none'; } } // clickjacking: never render inside a frame
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
