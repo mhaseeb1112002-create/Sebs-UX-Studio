@@ -462,7 +462,7 @@ body.menu-open{overflow:hidden}
   .stat dt{line-height:13px}
 }
 @media (max-width:359px){.eyebrow{white-space:normal}}
-@media (max-width:359px){.hero-stats{display:grid;grid-template-columns:1fr 1fr;justify-items:center;column-gap:16px;row-gap:16px;width:100%}.hero-stats .stat+.stat{margin-left:0}.hero-stats .stat+.stat::before{display:none}.stat{align-items:center}}
+@media (max-width:359px){.hero-stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;column-gap:18px;width:100%}.hero-stats .stat+.stat{margin-left:0}.hero-stats .stat+.stat::before{display:none}.stat{align-items:center}}
 
 .yg{min-height:32px}
 
