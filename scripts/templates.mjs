@@ -22,7 +22,7 @@ export function workBody(active) {
 <section class="work-head"><div class="wrap">
   <p class="t-label eyebrow-g">Work</p>
   <h1 class="work-title t-display">Work that removes <span class="hl">friction</span></h1>
-  <p class="t-lg work-sub">Selected projects across e-commerce, ed-tech and public services. Each one starts with where users get stuck.</p>
+  <p class="t-lg work-sub">Selected projects across fintech, e-commerce, ed-tech and public services. Each one starts with where users get stuck.</p>
 </div></section>
 <section class="work-list" aria-label="Projects"><div class="wrap">
   <div class="tabs filters" role="tablist" aria-label="Filter by industry">${tabs}</div>

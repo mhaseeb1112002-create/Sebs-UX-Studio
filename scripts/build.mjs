@@ -54,7 +54,7 @@ for (const pg of pages) {
 // assets + css + js
 fs.cpSync(src('assets'), path.join(dist, 'assets'), { recursive: true });
 fs.copyFileSync(src('assets/favicon.ico'), path.join(dist, 'favicon.ico'));
-const css = ['tokens', 'base', 'components', 'sections', 'work', 'proof', 'intake'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
+const css = ['tokens', 'base', 'components', 'sections', 'work', 'proof', 'intake', 'content'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
 fs.writeFileSync(path.join(dist, 'styles.css'), BASE ? css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE}/`) : css);
 fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js').replace("const BASE = '';", `const BASE = ${JSON.stringify(BASE)};`));
 // cache-busting: version the css/js URLs so browsers never pair a new page with an old stylesheet

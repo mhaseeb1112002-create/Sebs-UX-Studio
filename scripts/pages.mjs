@@ -18,12 +18,13 @@ const home = {
 };
 import { cases, filters, order } from './cases-data.mjs';
 import { workBody, caseBody, notFoundBody, startBody, privacyBody } from './templates.mjs';
+import { pages as cpages, guidesIndex, contentBody, guidesIndexBody, jsonld as cpJsonld } from './content-pages.mjs';
 const sub = { home: '/', workcurrent: 'aria-current="page"' };
 const work = [];
 for (const [k, label] of filters) {
   const all = k === 'all';
   work.push({ route: all ? '/work/' : `/work/${k}/`, title: all ? 'UX Case Studies: Redesigns & Design Systems | Sebs UX Studio' : `${label} UX Case Studies | Sebs UX Studio`,
-    description: all ? 'Selected UX case studies across e-commerce, ed-tech and gov-tech: redesigned flows and a design system, each starting with where users got stuck.' : `UX case studies for ${label.toLowerCase()} products: research, redesigned flows and outcomes.`,
+    description: all ? 'Selected UX case studies in fintech, e-commerce, ed-tech and gov-tech: redesigned flows and a design system, each starting with where users got stuck.' : `UX case studies for ${label.toLowerCase()} products: research, redesigned flows and outcomes.`,
     body: workBody(k), vars: sub, ...(all ? {} : { canonical: '/work/' }) });
 }
 const caseSeo = c => [{ '@context': 'https://schema.org', '@type': 'Article', headline: c.title, description: c.desc_seo, image: `${SITE}/assets/work/${c.slug}-cover.webp`, author: { '@type': 'Person', name: 'Muhammad Haseeb' } },
@@ -32,4 +33,6 @@ const caseTpl = cases.map(c => ({ route: `/work/${c.slug}/`, title: c.title_seo,
 const nf = { route: '/404', title: 'Page not found | Sebs UX Studio', description: 'This page could not be found. Go home, browse the work or request a UX audit.', body: notFoundBody, vars: sub };
 const start = { route: '/start/', title: 'Start a Project | Sebs UX Studio', description: 'Request a UX audit, redesign or new product design. Tell me what you need and I reply by email with next steps and pricing.', body: startBody, vars: { home: '/', workcurrent: '' } };
 const privacy = { route: '/privacy/', title: 'Privacy | Sebs UX Studio', description: 'What Sebs UX Studio collects, why, and how to ask for your messages to be deleted.', body: privacyBody, vars: { home: '/', workcurrent: '' } };
-export default [home, ...work, ...caseTpl, start, privacy, nf];
+const contentTpl = cpages.map(p => ({ route: p.route, title: p.title, description: p.description, body: contentBody(p), vars: { home: '/', workcurrent: '' }, jsonld: cpJsonld(p) }));
+const guidesTpl = { route: guidesIndex.route, title: guidesIndex.title, description: guidesIndex.description, body: guidesIndexBody(), vars: { home: '/', workcurrent: '' } };
+export default [home, ...work, ...caseTpl, ...contentTpl, guidesTpl, start, privacy, nf];

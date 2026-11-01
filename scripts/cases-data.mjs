@@ -1,6 +1,17 @@
 // Case-study content, copied from the Figma frames (Work page cards + five case-study frames).
 const BEHANCE = 'https://www.behance.net/muhammadhaseeb194';
 export const cases = [
+  { slug: 'kyc-id-upload-redesign', cat: 'fintech', catLabel: 'Fintech', card: { tag: 'FINTECH · CONCEPT', title: 'KYC ID upload: audit and redesign', text: 'A concept redesign of an ID upload step, from audit to guided scan and selfie.' },
+    tag: 'FINTECH · KYC · CONCEPT', title: 'KYC ID upload: audit and redesign',
+    summary: 'A concept redesign of an ID upload step. I audited the screen, ranked three issues, then designed a guided scan, a selfie step and a clear finish.',
+    facts: [['Industry', 'Fintech / KYC'], ['My role', 'UX audit and UI design'], ['Type', 'Concept project, not client work'], ['Platform', 'Mobile']],
+    behance: null, coverAlt: 'Before and after screens of an ID upload flow: a weak upload screen, then redesigned scan, selfie and verified screens',
+    challenge: ['An ID upload that gives users no help', 'Most ID upload screens ask for a photo and little else. There is no example of a good photo, a vague error appears when it fails, and nothing shows how many steps are left. Users cannot tell what to fix, so they leave. Industry estimates put drop-off at the identity step between 25% and 60%, so one unclear screen can cost a lot.'],
+    approach: ['Audit first, then redesign', 'I started with the audit: I reviewed the screen against usability rules and ranked each issue by impact. Then I redesigned the flow around the three issues that mattered most.',
+      [['Audit', 'Three ranked issues: no photo guidance (high), a vague error (medium) and no progress shown (medium).'], ['Guide', 'A framing guide, light and glare hints and a visible step count on the scan screen.'], ['Explain', 'Errors say what went wrong and how to fix it. The selfie step asks for one action, not a list of liveness tasks.'], ['Finish', 'A clear done screen that shows what was checked and what happens next.']]],
+    screens: ['Before: the ID upload screen with three numbered issues', 'After: the guided scan and selfie screens', 'The full flow: upload, scan, selfie and verified'],
+    results: ['What this concept shows', [['3', 'Issues found and ranked in the audit'], ['3', 'Screens redesigned: scan, selfie and done'], ['4', 'Known pain points addressed']], 'This is a concept project, so there are no conversion numbers. In a real project I would measure KYC completion rate, retries per capture and time to verify, before and after the change.'],
+    title_seo: 'KYC ID Upload Redesign (Concept) | Sebs UX Studio', desc_seo: 'A concept redesign of an ID upload step: three audit findings, a guided scan screen and a selfie step, plus how to measure the result.' },
   { slug: 'meemi-art-design-system', cat: 'e-commerce', catLabel: 'E-commerce', card: { tag: 'E-COMMERCE', title: 'Meemi Art: pattern store & design system', text: 'A design system and storefront where shoppers find and buy a pattern in minutes.' },
     tag: 'E-COMMERCE · DESIGN SYSTEM', title: 'Meemi Art: pattern store & design system',
     summary: 'The Plum Studio design system and key screens for meemiart.com, a crochet pattern store: storefront, product, cart, Learn and admin, on desktop and mobile.',
@@ -58,5 +69,5 @@ export const cases = [
     title_seo: 'Discover Pakistan Tourism Website Redesign | Sebs UX Studio', desc_seo: "Redesigning Pakistan's national tourism website with clear navigation, Explore highlights and bookings that work on every device." },
 ];
 // Work-page order (Figma "Work grid") and next-project loop (Meemi → Iris → Apply One → STR → Discover → Meemi)
-export const order = ['meemi-art-design-system', 'iris-tax-filing-redesign', 'apply-one-admissions-app', 'str-academy-landing-page', 'discover-pakistan-tourism-redesign'];
-export const filters = [['all', 'All', 5], ['e-commerce', 'E-commerce', 1], ['gov-tech', 'Gov-tech', 2], ['ed-tech', 'Ed-tech', 2]];
+export const order = ['kyc-id-upload-redesign', 'meemi-art-design-system', 'iris-tax-filing-redesign', 'apply-one-admissions-app', 'str-academy-landing-page', 'discover-pakistan-tourism-redesign'];
+export const filters = [['all', 'All', 6], ['fintech', 'Fintech', 1], ['e-commerce', 'E-commerce', 1], ['gov-tech', 'Gov-tech', 2], ['ed-tech', 'Ed-tech', 2]];
