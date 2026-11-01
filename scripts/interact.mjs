@@ -29,7 +29,7 @@ const first = await p.evaluate(() => document.querySelector('.ind-carousel').scr
 await p.click('.arrow-next'); await p.waitForTimeout(900);
 ok('carousel next scrolls', await p.evaluate(() => document.querySelector('.ind-carousel').scrollLeft) > first + 100);
 ok('prev enabled after scroll', await p.evaluate(() => !document.querySelector('.arrow-prev').disabled));
-ok('hero primary CTA mailto', (await p.getAttribute('.hero-ctas .btn-primary', 'href')).startsWith('mailto:hello@sebs.studio'));
+ok('hero primary CTA mailto', (await p.getAttribute('.hero-ctas .btn-primary', 'href')).startsWith('mailto:hello@sebsuxstudio.com'));
 ok('WhatsApp link', (await p.$$eval('a[href^="https://wa.me/923372186894"]', a => a.length)) >= 2);
 ok('external links noopener', await p.$$eval('a[target="_blank"]', a => a.every(x => /noopener/.test(x.rel))));
 ok('single h1', (await p.$$eval('h1', e => e.length)) === 1);

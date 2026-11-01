@@ -9,7 +9,7 @@ const home = {
   body: '<<home>>',
   vars: { home: '/', workcurrent: '', faqitems },
   jsonld: { '@context': 'https://schema.org', '@graph': [
-    { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE, logo: SITE + '/assets/favicon.svg', email: 'hello@sebs.studio', telephone: '+92 337 2186894', address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' }, areaServed: 'Worldwide', founder: { '@type': 'Person', name: 'Muhammad Haseeb' },
+    { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE, logo: SITE + '/assets/favicon.svg', email: 'hello@sebsuxstudio.com', telephone: '+92 337 2186894', address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' }, areaServed: 'Worldwide', founder: { '@type': 'Person', name: 'Muhammad Haseeb' },
       sameAs: ['https://www.linkedin.com/in/muhammad-haseeb-ux/', 'https://www.behance.net/muhammadhaseeb194', 'https://dribbble.com/m-haseeb1112002', 'https://www.instagram.com/sebs.studio_ux/'],
       makesOffer: [['UX audit', 500], ['Redesign sprint', 3000], ['AI-built product polish', 1500]].map(([n, p]) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n }, priceSpecification: { '@type': 'PriceSpecification', price: p, priceCurrency: 'USD', minPrice: p } })) },
     { '@type': 'WebSite', name: 'Sebs UX Studio', url: SITE },

@@ -42,6 +42,8 @@ for (const pg of pages) {
   const out = path.join(dist, pg.route === '/' ? '' : pg.route, pg.route.endsWith('.html') ? '' : 'index.html');
   const file = pg.route === '/404' ? path.join(dist, '404.html') : out;
   fs.mkdirSync(path.dirname(file), { recursive: true });
+  const founder = ['webp','jpg','jpeg','png'].find(e => fs.existsSync(src(`assets/founder.${e}`)));
+  if (founder) html = html.replace(/<div class="photo-ph"[^>]*><span>[^<]*<\/span><\/div>/, `<img class="photo-ph photo-img" src="/assets/founder.${founder}" alt="Muhammad Haseeb, founder of Sebs UX Studio" width="440" height="500" loading="lazy" decoding="async">`);
   if (BASE) html = html.replace(/\b(href|src)="\/(?!\/)/g, `$1="${BASE}/`);
   fs.writeFileSync(file, html);
 }

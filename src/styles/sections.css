@@ -477,3 +477,5 @@ body.menu-open{overflow:hidden}
 
 .hv-inner{position:absolute;left:0;top:0;width:584px;height:520px;transform-origin:0 0;transform:scale(var(--k,1))}
 @media (max-width:1023px){.hv-inner{position:static;width:auto;height:auto;transform:none}}
+
+.photo-img{object-fit:cover;object-position:center top;border:0;background:none;display:block}
