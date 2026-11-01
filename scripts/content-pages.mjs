@@ -31,6 +31,7 @@ export const pages = [
     h1: 'A UX audit for fintech <span class="hl">onboarding and KYC</span>',
     lede: 'I find the exact screen where users leave your signup or identity verification flow, and tell you what to fix first. You get a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days.',
     secondary: ['See a sample audit', '/#audit'],
+    heroImg: [wk('kyc-id-upload-redesign-screen-1.webp'), 1176, 840, 'An ID upload screen with three numbered issues next to the ranked list of findings'],
     blocks: [
       { type: 'cards', title: 'What you get', items: [
         ['Drop-off map', 'Every step of your flow, with where people leave and the likely reasons why.'],
@@ -59,6 +60,7 @@ export const pages = [
     h1: 'Redesign the step that <span class="hl">loses the most users</span>',
     lede: 'Once you know where users leave, I redesign that flow and hand your developers specs and components they can build right away. A sprint takes 2 to 3 weeks.',
     secondary: ['See a concept project', '/work/kyc-id-upload-redesign/'],
+    heroImg: [wk('kyc-id-upload-redesign-screen-2.webp'), 1176, 840, 'A redesigned guided ID scan screen and selfie screen'],
     blocks: [
       { type: 'cards', title: 'What you get', items: [
         ['Wireframes to high-fidelity UI', 'From the first sketch of the flow to finished screens in your brand.'],
@@ -83,6 +85,7 @@ export const pages = [
     h1: 'Build a new product, or <span class="hl">polish one built with AI</span>',
     lede: 'A new product, or one built with Lovable, Cursor or v0? I design and code it, or turn it into a clean, consistent product users trust.',
     secondary: ['Talk about your product', '/start/'],
+    heroImg: [gd('new-product-screens.webp'), 1176, 840, 'A fintech dashboard screen and an ID scan screen designed as one consistent product'],
     blocks: [
       { type: 'cards', title: 'Two ways to work together', items: [
         ['Design and code a new product', 'I design the product end to end, from the first flow to the final UI, and I build it in code. If you have developers, I hand over specs and components they can build right away.'],
@@ -259,12 +262,15 @@ export function contentBody(p) {
   const sec = p.secondary ? `<a class="btn btn-secondary" href="${p.secondary[1]}">${p.secondary[0]}</a>` : '';
   return `{{> nav}}
 <main id="main">
-<section class="work-head cp-head"><div class="wrap">
+<section class="work-head cp-head"><div class="wrap${p.heroImg ? ' cp-hero' : ''}">
+  <div class="cp-hero-copy">
   <nav class="crumbs" aria-label="Breadcrumb"><a class="back" href="${p.crumb[1]}">← ${p.crumb[0]}</a></nav>
   <p class="t-label eyebrow-g">${p.eyebrow}</p>
   <h1 class="work-title t-display">${p.h1}</h1>
   <p class="t-xl work-sub">${p.lede}</p>
   <div class="cp-actions"><a class="btn btn-primary" href="/start/">Request a UX audit</a>${sec}</div>
+  </div>
+  ${p.heroImg ? `<img class="cp-hero-img" src="${p.heroImg[0]}" alt="${esc(p.heroImg[3])}" width="${p.heroImg[1]}" height="${p.heroImg[2]}" fetchpriority="high">` : ''}
 </div></section>
 ${p.blocks.map(block).join('\n')}
 ${rel}
