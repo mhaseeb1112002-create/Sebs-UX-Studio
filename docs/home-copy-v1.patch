@@ -1,0 +1,291 @@
+diff --git a/scripts/faq-data.mjs b/scripts/faq-data.mjs
+index 7ac1d2d..3afc3c8 100644
+--- a/scripts/faq-data.mjs
++++ b/scripts/faq-data.mjs
+@@ -2,9 +2,10 @@
+ // designed in Figma and are drafted from facts stated elsewhere in the file (pricing, process, booking hours).
+ export default [
+   ['Who do you work with?', 'Seed to Series A B2B SaaS and fintech teams, especially those without an in-house designer.'],
+-  ['What do I get from an audit?', 'A flow-by-flow UX review, a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days. Contact me for pricing.'],
+-  ['Do you design the product too?', 'Yes. I design products end to end, from the first flow to the final UI, and I can build them in code too. I also fix existing ones. If you have developers, they get specs and components they can build right away. For AI-built products (Lovable, Cursor, v0), I clean up the UX and UI of what already exists.'],
+-  ['How do you use AI in your process?', 'AI tools speed up research synthesis and first drafts. Every finding, decision and design is reviewed and owned by me.'],
++  ['What do I get from an audit?', 'A flow-by-flow review, a drop-off map, a ranked fix list and a 30-minute walkthrough call. It takes about 5 days. Contact me for pricing.'],
++  ['Do you design the product too?', 'Yes. I design products end to end, from the first flow to the final UI, and I can build them in code too. If you have developers, they get specs and components to build from. For products made with Lovable, Cursor or v0, I clean up the UX and UI of what already exists.'],
++  ['Can’t I just use AI for this?', 'AI is great at drawing screens fast, and I use it too, for research synthesis and first drafts. It can’t see your users, your funnel or your compliance rules, so it can’t tell you which screen is losing people or why. I check every finding and own every decision.'],
++  ['Do you guarantee more conversions?', 'No. Conversion also depends on your traffic, your price and how the fixes are built. I find and fix the reasons people quit, and we agree how to measure the change before we start.'],
+   ['Will our timezones work?', "Yes. I'm based in Lahore (PKT) and work with teams in Europe, the UK, the Gulf and the US. Calls are flexible: pick a time that suits you, or message me and we'll find one."],
+   ['Do you sign an NDA?', 'Yes. Send yours over before we start, or I can share a simple one.'],
+   ['What access do you need?', 'Usually a walkthrough of your product or staging access, plus analytics if you have them. Nothing more until the audit starts.'],
+diff --git a/scripts/pages.mjs b/scripts/pages.mjs
+index 5a24774..b4e9cf5 100644
+--- a/scripts/pages.mjs
++++ b/scripts/pages.mjs
+@@ -4,8 +4,8 @@ const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&
+ const faqitems = faq.map(([q, a], i) => `<div class="faq-item${i === 0 ? ' is-open' : ''}"><h3><button class="faq-q" type="button" aria-expanded="${i === 0}" aria-controls="faq-a${i}" id="faq-q${i}"><span>${esc(q)}</span><span class="faq-ic" aria-hidden="true"></span></button></h3><div class="faq-a" id="faq-a${i}" role="region" aria-labelledby="faq-q${i}"><div><p>${esc(a)}</p></div></div></div>`).join('\n      ');
+ const home = {
+   route: '/',
+-  title: 'UX Audits & Redesigns for SaaS and Fintech | Sebs UX Studio',
+-  description: 'Find where users drop off in signup, onboarding and KYC. UX audits, redesign sprints, new product builds and AI-built product polish. Request a UX audit.',
++  title: 'Fix Signup and KYC Drop-off | Sebs UX Studio',
++  description: 'A 5-day UX audit shows the exact screen where users quit your signup, onboarding or ID check, and what to fix first. For SaaS and fintech teams.',
+   body: '<<home>>',
+   vars: { home: '/', workcurrent: '', faqitems },
+   jsonld: { '@context': 'https://schema.org', '@graph': [
+diff --git a/src/pages/home.html b/src/pages/home.html
+index 1a7c5f2..12dc72b 100644
+--- a/src/pages/home.html
++++ b/src/pages/home.html
+@@ -3,6 +3,7 @@
+ {{> hero}}
+ {{> industries}}
+ {{> problem}}
++{{> judgment}}
+ {{> services}}
+ {{> testimonial}}
+ {{> audit}}
+diff --git a/src/partials/about.html b/src/partials/about.html
+index 18bc5bc..ea0a110 100644
+--- a/src/partials/about.html
++++ b/src/partials/about.html
+@@ -4,8 +4,8 @@
+     <div class="about-copy">
+       <p class="t-label eyebrow-g">About</p>
+       <h2 class="t-h1" id="about-title">Hi, I'm Haseeb. I design the moment users decide to stay.</h2>
+-      <p class="t-lg">I'm a UI/UX designer working on identity verification and onboarding at an AI-powered fintech company. Every day I make complex, compliance-heavy flows feel simple and trustworthy.</p>
+-      <p class="t-lg">With a background in finance, I design around business numbers, not just screens. Through Sebs UX Studio, I bring that focus to SaaS and fintech teams who need onboarding that converts.</p>
++      <p class="t-lg">I'm a product designer who specializes in identity verification and onboarding: flows that are compliance-heavy and easy to get wrong. I make them feel simple and trustworthy.</p>
++      <p class="t-lg">I started in finance, so I design around business numbers, not just screens. Through Sebs UX Studio, I help SaaS and fintech teams get more people through onboarding.</p>
+       <ul class="facts">
+         <li><strong>Fintech</strong><span>KYC &amp; identity UX</span></li>
+         <li><strong>BBA Finance</strong><span>Business-first design</span></li>
+diff --git a/src/partials/audit.html b/src/partials/audit.html
+index 6d821ad..33c757e 100644
+--- a/src/partials/audit.html
++++ b/src/partials/audit.html
+@@ -3,7 +3,7 @@
+     <div class="audit-copy">
+       <p class="t-label eyebrow-gg">Sample audit</p>
+       <h2 class="t-h1" id="audit-title">See exactly what you'll get</h2>
+-      <p class="t-lg">Every audit scores your flow against proven usability rules, ranks issues by impact and marks the exact screens to fix.</p>
++      <p class="t-lg">Every audit scores your flow against proven usability rules, marks the exact screens to fix and ranks each issue by impact.</p>
+       <div class="score" data-score="62">
+         <div class="ring" role="img" aria-label="Usability score 62 out of 100, illustrative">
+           <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true"><circle cx="66" cy="66" r="61" fill="none" stroke="#22302a" stroke-width="10"/><circle class="ring-fill" cx="66" cy="66" r="61" fill="none" stroke="#2bd98c" stroke-width="10" stroke-linecap="round" stroke-dasharray="383.3" stroke-dashoffset="383.3" transform="rotate(-90 66 66)"/></svg>
+@@ -25,9 +25,9 @@
+       </div>
+       <div class="issues">
+         <h3 class="t-h4">3 issues found on this screen</h3>
+-        <div class="issue"><span class="inum" style="background:var(--support-sun)">1</span><div><h4>No photo guidance</h4><p>Users don’t know what a valid ID photo looks like.</p></div><span class="sev high">High</span></div>
+-        <div class="issue"><span class="inum" style="background:var(--support-sky)">2</span><div><h4>Error copy is vague</h4><p>"Upload failed" gives no reason or next step.</p></div><span class="sev med">Medium</span></div>
+-        <div class="issue"><span class="inum" style="background:var(--support-lilac)">3</span><div><h4>Progress is unclear</h4><p>Users can’t tell how many steps remain.</p></div><span class="sev low">Low</span></div>
++        <div class="issue"><span class="inum" style="background:var(--support-sun)">1</span><div><h4>No photo guidance</h4><p>People don’t know what a valid ID photo looks like.</p></div><span class="sev high">High</span></div>
++        <div class="issue"><span class="inum" style="background:var(--support-sky)">2</span><div><h4>Error message is vague</h4><p>“Upload failed” doesn’t say why or what to do next.</p></div><span class="sev med">Medium</span></div>
++        <div class="issue"><span class="inum" style="background:var(--support-lilac)">3</span><div><h4>Progress is unclear</h4><p>People can’t tell how many steps are left.</p></div><span class="sev low">Low</span></div>
+         <span class="tag">Sample audit, illustrative</span>
+       </div>
+     </div>
+diff --git a/src/partials/cta-flush.html b/src/partials/cta-flush.html
+index a25d83a..2593b15 100644
+--- a/src/partials/cta-flush.html
++++ b/src/partials/cta-flush.html
+@@ -1,8 +1,8 @@
+ <section class="cta cta-flush" id="contact" aria-labelledby="cta-title">
+   <div class="wrap"><div class="cta-box">
+     <div class="cta-copy">
+-      <h2 class="t-h1" id="cta-title">Find out where your users drop off.</h2>
+-      <p class="t-lg">Start with a 5-day onboarding audit. You'll get a clear map of what's losing users and what to fix first.</p>
++      <h2 class="t-h1" id="cta-title">Find out where your users quit.</h2>
++      <p class="t-lg">Start with a 5-day onboarding audit. You get a clear map of where people leave and what to fix first.</p>
+     </div>
+     <div class="cta-offer">
+       <h3 class="t-h3">Onboarding &amp; KYC audit</h3>
+diff --git a/src/partials/cta.html b/src/partials/cta.html
+index 49ca1c8..0d235b9 100644
+--- a/src/partials/cta.html
++++ b/src/partials/cta.html
+@@ -1,8 +1,8 @@
+ <section class="cta section" id="contact" aria-labelledby="cta-title">
+   <div class="wrap"><div class="cta-box">
+     <div class="cta-copy">
+-      <h2 class="t-h1" id="cta-title">Find out where your users drop off.</h2>
+-      <p class="t-lg">Start with a 5-day onboarding audit. You'll get a clear map of what's losing users and what to fix first.</p>
++      <h2 class="t-h1" id="cta-title">Find out where your users quit.</h2>
++      <p class="t-lg">Start with a 5-day onboarding audit. You get a clear map of where people leave and what to fix first.</p>
+     </div>
+     <div class="cta-offer">
+       <h3 class="t-h3">Onboarding &amp; KYC audit</h3>
+diff --git a/src/partials/hero.html b/src/partials/hero.html
+index 89fa390..6cf2ff4 100644
+--- a/src/partials/hero.html
++++ b/src/partials/hero.html
+@@ -1,9 +1,9 @@
+ <section class="hero" id="top-hero" aria-labelledby="hero-title">
+   <div class="wrap"><div class="hero-grid">
+     <div class="hero-copy">
+-      <p class="eyebrow"><span class="pin" aria-hidden="true">1</span><span>UX audits &amp; redesigns for B2B SaaS and fintech</span></p>
+-      <h1 class="hero-title t-display" id="hero-title">Less <span class="hl">friction</span><span class="dot">.</span><br>More customers<span class="dot">.</span></h1>
+-      <p class="hero-lede">I find where users get stuck in signup, onboarding and key flows, then redesign them so more people convert and stay.</p>
++      <p class="eyebrow"><span class="pin" aria-hidden="true">1</span><span>UX audits for SaaS and fintech teams</span></p>
++      <h1 class="hero-title t-display" id="hero-title">Fix the step<br>where <span class="hl">users quit</span><span class="dot">.</span></h1>
++      <p class="hero-lede">In 5 days you get a map of where people leave your signup, onboarding or ID check, why they leave, and a ranked list of fixes.</p>
+       <div class="hero-ctas">
+         <a class="btn btn-primary" href="/start/">Request a UX audit</a>
+         <a class="btn btn-secondary" href="#audit">See a sample audit</a>
+@@ -13,7 +13,7 @@
+         <div class="stat"><dt><span class="lg">Design experience</span><span class="sm">Designing</span></dt><dd>3 yrs</dd></div>
+         <div class="stat"><dt><span class="lg">Fintech &amp; KYC UX</span><span class="sm">Fintech UX</span></dt><dd>2+ yrs</dd></div>
+       </dl>
+-      <p class="founder-line"><span class="avatar"><img src="/assets/founder.webp" alt="Muhammad Haseeb" width="36" height="36" decoding="async"></span><span>Led by Haseeb, product designer for KYC &amp; identity verification at an AI-powered fintech.</span></p>
++      <p class="founder-line"><span class="avatar"><img src="/assets/founder.webp" alt="Muhammad Haseeb" width="36" height="36" decoding="async"></span><span>Led by Haseeb, a product designer who specializes in KYC and identity verification.</span></p>
+     </div>
+     <div class="hero-visual" role="group" aria-label="Illustrative onboarding infographic">
+       <div class="hv-inner">
+diff --git a/src/partials/industries.html b/src/partials/industries.html
+index 4bc13df..3e7ed3d 100644
+--- a/src/partials/industries.html
++++ b/src/partials/industries.html
+@@ -3,7 +3,7 @@
+     <div class="ind-copy">
+       <p class="t-label eyebrow-g">Industries</p>
+       <h2 class="t-h1" id="ind-title">Fluent in your <span class="hl">industry</span></h2>
+-      <p class="t-lg ind-sub">I design for regulated, data-heavy products, so I speak your users' language and your compliance team's.</p>
++      <p class="t-lg ind-sub">I design for regulated, data-heavy products, so I understand both your users and your compliance team.</p>
+     </div>
+     <div class="ind-arrows">
+       <button class="arrow arrow-prev" type="button" aria-label="Previous industries"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 10H4M9 5L4 10L9 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+diff --git a/src/partials/judgment.html b/src/partials/judgment.html
+new file mode 100644
+index 0000000..645398b
+--- /dev/null
++++ b/src/partials/judgment.html
+@@ -0,0 +1,11 @@
++<section class="judge section" id="why" aria-labelledby="judge-title">
++  <div class="wrap">
++    <p class="t-label eyebrow-g">Why a designer</p>
++    <h2 class="t-h1 sec-title" id="judge-title">AI can draw a screen. It can’t tell you which one is losing you customers.</h2>
++    <ol class="judge-grid">
++      <li class="judge-card"><span class="jn">01</span><h3>I start with your real flow</h3><p>I walk through your actual product, not a template. Every finding points to a specific screen.</p></li>
++      <li class="judge-card"><span class="jn">02</span><h3>I rank by impact, not taste</h3><p>You get a short list ordered by how much each issue likely costs you, so your team knows what to fix first.</p></li>
++      <li class="judge-card"><span class="jn">03</span><h3>I use AI, and I own the answer</h3><p>AI speeds up my research and first drafts. I check every finding and stand behind every decision.</p></li>
++    </ol>
++  </div>
++</section>
+diff --git a/src/partials/problem.html b/src/partials/problem.html
+index 8b4df8f..a5dcead 100644
+--- a/src/partials/problem.html
++++ b/src/partials/problem.html
+@@ -11,9 +11,9 @@
+       </div>
+     </div>
+     <ol class="pains">
+-      <li class="pain"><span class="pn">01</span><div><h3>Too many steps before value</h3><p>Long forms and unclear progress make users give up before they see why your product matters.</p></div></li>
+-      <li class="pain"><span class="pn">02</span><div><h3>KYC feels like a wall</h3><p>Identity checks add friction and doubt. Without clear guidance, users abandon at the upload screen.</p></div></li>
+-      <li class="pain"><span class="pn">03</span><div><h3>Teams can't see where users drop</h3><p>Teams guess at fixes. I find the exact screens losing users and fix those first.</p></div></li>
++      <li class="pain"><span class="pn">01</span><div><h3>Too much before the payoff</h3><p>Long forms and unclear progress make people quit before they see why your product matters.</p></div></li>
++      <li class="pain"><span class="pn">02</span><div><h3>ID checks feel like a wall</h3><p>People don't know what a good photo looks like or why you ask for it. They give up at the upload screen.</p></div></li>
++      <li class="pain"><span class="pn">03</span><div><h3>You can't see where people leave</h3><p>Without a clear picture, teams guess at fixes. I find the exact screens losing people and rank them by impact.</p></div></li>
+     </ol>
+   </div></div>
+ </section>
+diff --git a/src/partials/process.html b/src/partials/process.html
+index 910708a..13eb8ee 100644
+--- a/src/partials/process.html
++++ b/src/partials/process.html
+@@ -1,16 +1,16 @@
+ <section class="process section" id="process" aria-labelledby="process-title">
+   <div class="wrap">
+     <p class="t-label eyebrow-g">Process</p>
+-    <h2 class="t-h1 sec-title" id="process-title">How a sprint works</h2>
++    <h2 class="t-h1 sec-title" id="process-title">How the work runs</h2>
+     <ol class="timeline" data-timeline>
+       <li class="tl-step is-done"><span class="tl-node">{{icon:phone}}</span>
+-        <div class="tl-body"><span class="chip-time">Day 1</span><h3><span class="n">01</span>Discover</h3><p>A short call to understand your product, users and goals.</p><p class="yg"><span>You get</span><span class="deliv">Goals brief</span></p></div></li>
++        <div class="tl-body"><span class="chip-time">Day 1</span><h3><span class="n">01</span>Discover</h3><p>A short call about your product, your users and your goals.</p><p class="yg"><span>You get</span><span class="deliv">Goals brief</span></p></div></li>
+       <li class="tl-step"><span class="tl-node">{{icon:scan}}</span>
+-        <div class="tl-body"><span class="chip-time">Days 2–5</span><h3><span class="n">02</span>Diagnose</h3><p>I map the flow, find drop-off points and rank them by impact.</p><p class="yg"><span>You get</span><span class="deliv">Drop-off map</span></p></div></li>
++        <div class="tl-body"><span class="chip-time">Days 2–5</span><h3><span class="n">02</span>Diagnose</h3><p>I map your flow, find where people leave and rank each issue by impact.</p><p class="yg"><span>You get</span><span class="deliv">Drop-off map</span></p></div></li>
+       <li class="tl-step"><span class="tl-node">{{icon:select}}</span>
+-        <div class="tl-body"><span class="chip-time">Weeks 2–3</span><h3><span class="n">03</span>Redesign</h3><p>I design and prototype the fixes, reviewing with you each week.</p><p class="yg"><span>You get</span><span class="deliv">Prototype</span></p></div></li>
++        <div class="tl-body"><span class="chip-time">Weeks 2–3</span><h3><span class="n">03</span>Redesign</h3><p>I design and prototype the fixes, and we review them together each week.</p><p class="yg"><span>You get</span><span class="deliv">Prototype</span></p></div></li>
+       <li class="tl-step"><span class="tl-node">{{icon:pkg}}</span>
+-        <div class="tl-body"><span class="chip-time">Final week</span><h3><span class="n">04</span>Handoff</h3><p>Specs and components your developers can build right away.</p><p class="yg"><span>You get</span><span class="deliv">Dev specs</span></p></div></li>
++        <div class="tl-body"><span class="chip-time">Final week</span><h3><span class="n">04</span>Handoff</h3><p>Specs and components your developers can build from on day one.</p><p class="yg"><span>You get</span><span class="deliv">Dev specs</span></p></div></li>
+     </ol>
+   </div>
+ </section>
+diff --git a/src/partials/services.html b/src/partials/services.html
+index db9a90f..6386aa0 100644
+--- a/src/partials/services.html
++++ b/src/partials/services.html
+@@ -1,23 +1,23 @@
+ <section class="services section" id="services" aria-labelledby="services-title">
+   <div class="wrap">
+     <p class="t-label eyebrow-g">Services</p>
+-    <h2 class="t-h1 sec-title" id="services-title">From the first audit to a working product</h2>
++    <h2 class="t-h1 sec-title" id="services-title">Start with the audit. Fix what it finds.</h2>
+     <p class="start-note"><span class="pill">Start here</span><span>Most clients start with the audit, then move to a sprint.</span></p>
+     <ul class="svc-cards svc4">
+-      <li class="svc-card is-featured"><div class="svc-top"><span class="svc-icon">{{icon:search}}</span><span class="svc-step">Find</span></div><h3 class="t-h3">Onboarding &amp; KYC audit</h3><p>A clear diagnosis of where and why users drop off, with prioritized fixes you can ship.</p>
+-        <ul class="includes"><li>{{icon:check}}Flow-by-flow UX review</li><li>{{icon:check}}Drop-off map and prioritized fix list</li><li>{{icon:check}}Usability tests or discovery research, if needed</li></ul>
++      <li class="svc-card is-featured"><div class="svc-top"><span class="svc-icon">{{icon:search}}</span><span class="svc-step">Find</span></div><h3 class="t-h3">Onboarding &amp; KYC audit</h3><p>See exactly where and why people quit your signup or ID check, with ranked fixes your team can ship.</p>
++        <ul class="includes"><li>{{icon:check}}Flow-by-flow UX review</li><li>{{icon:check}}Drop-off map and ranked fix list</li><li>{{icon:check}}User tests or interviews, if you need them</li></ul>
+         <div class="price-row"><strong>Contact for pricing</strong><span>5 days</span></div>
+         <a class="svc-link" href="/services/onboarding-kyc-audit/">About the audit<span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>
+-      <li class="svc-card"><div class="svc-top"><span class="svc-icon">{{icon:pen}}</span><span class="svc-step">Fix</span></div><h3 class="t-h3">Conversion redesign sprint</h3><p>I redesign the flow that loses the most users, ready for your developers to build.</p>
+-        <ul class="includes"><li>{{icon:check}}Wireframes to high-fidelity UI</li><li>{{icon:check}}Clickable prototype</li><li>{{icon:check}}Developer handoff</li></ul>
++      <li class="svc-card"><div class="svc-top"><span class="svc-icon">{{icon:pen}}</span><span class="svc-step">Fix</span></div><h3 class="t-h3">Conversion redesign sprint</h3><p>I redesign the flow that loses the most people, and give your developers what they need to build it.</p>
++        <ul class="includes"><li>{{icon:check}}Wireframes to polished UI</li><li>{{icon:check}}Clickable prototype</li><li>{{icon:check}}Specs and components for developers</li></ul>
+         <div class="price-row"><strong>Contact for pricing</strong><span>2–3 weeks</span></div>
+         <a class="svc-link" href="/services/redesign-sprint/">About the sprint<span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>
+-      <li class="svc-card"><div class="svc-top"><span class="svc-icon">{{icon:team}}</span><span class="svc-step">Equip</span></div><h3 class="t-h3">Team coaching &amp; design system</h3><p>Your team learns to find and fix UX problems itself, with a design system that keeps screens consistent.</p>
++      <li class="svc-card"><div class="svc-top"><span class="svc-icon">{{icon:team}}</span><span class="svc-step">Equip</span></div><h3 class="t-h3">Team coaching &amp; design system</h3><p>Your team learns to spot and fix UX problems itself, with a light design system that keeps screens consistent.</p>
+         <ul class="includes"><li>{{icon:check}}Workshops on your own product</li><li>{{icon:check}}A review of how your team works</li><li>{{icon:check}}A light design system</li></ul>
+         <div class="price-row"><strong>Contact for pricing</strong><span>Scoped after a call</span></div>
+         <a class="svc-link" href="/services/team-coaching/">About team coaching<span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>
+-      <li class="svc-card"><div class="svc-top"><span class="svc-icon">{{icon:sparkle}}</span><span class="svc-step">Build</span></div><h3 class="t-h3">Product build &amp; polish</h3><p>A new product, or one built with Lovable, Cursor or v0? I design and code it, or polish it into a clean, consistent product users trust.</p>
+-        <ul class="includes"><li>{{icon:check}}MVP, front-end, back-end and DevOps</li><li>{{icon:check}}UX and UI polish for AI-built products</li><li>{{icon:check}}Consistent UI and design system</li></ul>
++      <li class="svc-card"><div class="svc-top"><span class="svc-icon">{{icon:sparkle}}</span><span class="svc-step">Build</span></div><h3 class="t-h3">Product build &amp; polish</h3><p>Building something new, or something made with Lovable, Cursor or v0? I design and code it, or polish it until it looks and works like one product.</p>
++        <ul class="includes"><li>{{icon:check}}MVP: front end, back end and deployment</li><li>{{icon:check}}UX and UI polish for AI-built products</li><li>{{icon:check}}A consistent UI and design system</li></ul>
+         <div class="price-row"><strong>Contact for pricing</strong><span>Polish: 1–2 weeks</span></div>
+         <a class="svc-link" href="/services/build-and-polish/">About build &amp; polish<span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>
+     </ul>
+@@ -26,7 +26,7 @@
+       <div class="tl-row"><span class="tl-name">UX audit</span><span class="tl-track"><i class="g" style="--w:.238"></i></span><span class="tl-val">5 days</span></div>
+       <div class="tl-row"><span class="tl-name">AI product polish</span><span class="tl-track"><i style="--w:.476"></i></span><span class="tl-val">1–2 weeks</span></div>
+       <div class="tl-row"><span class="tl-name">Redesign sprint</span><span class="tl-track"><i style="--w:1"></i></span><span class="tl-val">2–3 weeks</span></div>
+-      <p class="tl-note">Team coaching and new product builds are scoped after a short intro call. Every service: contact for pricing.</p>
++      <p class="tl-note">Team coaching and new builds are scoped after a short intro call. Every service: contact for pricing.</p>
+     </div>
+   </div>
+ </section>
+diff --git a/src/partials/testimonial.html b/src/partials/testimonial.html
+index cc711de..2143599 100644
+--- a/src/partials/testimonial.html
++++ b/src/partials/testimonial.html
+@@ -1,7 +1,7 @@
+ <section class="testi section" id="clients" aria-labelledby="testi-title">
+   <div class="wrap">
+     <p class="t-label eyebrow-g">Client feedback</p>
+-    <h2 class="t-h1" id="testi-title">What a client says about working together</h2>
++    <h2 class="t-h1" id="testi-title">What a client says</h2>
+     <div class="testi-card">
+       <figure class="tq">
+         <svg class="tq-mark" width="48" height="36" viewBox="0 0 48 36" aria-hidden="true"><path d="M0 36V19.6C0 8.4 6 1.6 17.6 0l1.6 5.6C13.6 7 11.2 10.4 11.2 14.4H19V36H0zm27.6 0V19.6C27.6 8.4 33.6 1.6 45.2 0l1.6 5.6C41.2 7 38.8 10.4 38.8 14.4h7.8V36H27.6z" fill="currentColor"/></svg>
+diff --git a/src/styles/sections.css b/src/styles/sections.css
+index cca323f..cb1465d 100644
+--- a/src/styles/sections.css
++++ b/src/styles/sections.css
+@@ -507,3 +507,13 @@ body.menu-open{overflow:hidden}
+ .svc4 .svc-card{flex:none;width:auto}
+ .svc-top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+ @media (max-width:767px){.svc-cards.svc4{grid-template-columns:1fr;padding-top:28px}}
++
++/* ===== why a designer ===== */
++.judge-grid{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
++.judge-card{display:flex;flex-direction:column;gap:10px;padding:28px;border-radius:24px;background:var(--primitive-gray-100);border:1px solid var(--primitive-gray-200)}
++.judge .t-label+.t-h1{margin-top:12px}
++.sec-title{text-wrap:balance}
++.judge-card .jn{font:700 14px/20px var(--font-head);color:var(--primitive-green-700)}
++.judge-card h3{font:700 22px/29px var(--font-head);letter-spacing:-.01em}
++.judge-card p{font:400 16px/26px var(--font-body);color:var(--primitive-slate-500)}
++@media (max-width:1023px){.judge-grid{grid-template-columns:1fr}.judge-card{padding:24px 20px}.judge-card h3{font-size:20px;line-height:26px}}
