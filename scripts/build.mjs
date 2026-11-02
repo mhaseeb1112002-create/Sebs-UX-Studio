@@ -12,6 +12,8 @@ const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/,
 const ADMIN_URL = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const ADMIN_KEY = process.env.SUPABASE_ANON_KEY || '';
 const ADMIN_ON = !!(ADMIN_URL && ADMIN_KEY); // owner login pages and the footer link exist only when both are set
+const CK_ENDPOINT = process.env.CHECKLIST_ENDPOINT || ''; // optional: where the free-checklist form posts the email
+const CK_ORIGIN = CK_ENDPOINT ? new URL(CK_ENDPOINT).origin : '';
 const OWNER_LINK = ADMIN_ON ? ' · <a href="/admin/login/" rel="nofollow">Owner log in</a>' : '';
 const read = p => fs.readFileSync(src(p), 'utf8');
 const partial = n => read(`partials/${n}.html`);
@@ -40,12 +42,12 @@ const pages = (await import('./pages.mjs')).default;
 const shell = read('partials/shell.html');
 for (const pg of pages) {
   const bodySrc = pg.body.startsWith('<<') ? read(`pages/${pg.body.slice(2, -2)}.html`) : pg.body;
-  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, ...(pg.vars || {}) });
+  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, checklistendpoint: CK_ENDPOINT, ...(pg.vars || {}) });
   const canonical = SITE + (pg.canonical || pg.route);
   let html = subst(shell, {
     title: pg.title, description: pg.description, canonical, ogimage: SITE + '/assets/og.png',
     jsonld: pg.jsonld ? `<script type="application/ld+json">${JSON.stringify(pg.jsonld)}</script>` : '',
-    pageclass: pg.pageClass || '', body,
+    pageclass: pg.pageClass || '', body, ckconnect: CK_ORIGIN ? ' ' + CK_ORIGIN : '',
   });
   if (pg.route === '/404') html = html.replace(/<link rel="canonical" href="[^"]*">\n?/, '');
   const out = path.join(dist, pg.route === '/' ? '' : pg.route, pg.route.endsWith('.html') ? '' : 'index.html');

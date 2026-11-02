@@ -69,5 +69,5 @@ export const cases = [
     title_seo: 'Discover Pakistan Tourism Website Redesign | Sebs UX Studio', desc_seo: "Redesigning Pakistan's national tourism website with clear navigation, Explore highlights and bookings that work on every device." },
 ];
 // Work-page order (Figma "Work grid") and next-project loop (Meemi → Iris → Apply One → STR → Discover → Meemi)
-export const order = ['kyc-id-upload-redesign', 'meemi-art-design-system', 'iris-tax-filing-redesign', 'apply-one-admissions-app', 'str-academy-landing-page', 'discover-pakistan-tourism-redesign'];
+export const order = ['meemi-art-design-system', 'iris-tax-filing-redesign', 'apply-one-admissions-app', 'str-academy-landing-page', 'discover-pakistan-tourism-redesign', 'kyc-id-upload-redesign'];
 export const filters = [['all', 'All', 6], ['fintech', 'Fintech', 1], ['e-commerce', 'E-commerce', 1], ['gov-tech', 'Gov-tech', 2], ['ed-tech', 'Ed-tech', 2]];

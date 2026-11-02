@@ -1,0 +1,21 @@
+<section class="checklist" id="checklist" aria-labelledby="ck-title">
+  <div class="wrap"><div class="ck-box" data-checklist>
+    <div class="ck-copy">
+      <p class="t-label eyebrow-g">Free audit checklist</p>
+      <h2 class="t-h1" id="ck-title">Audit your own onboarding in 30 minutes</h2>
+      <p class="t-lg">The same checklist I use on client audits: signup, ID upload, errors, waiting states and rejections. Enter your email and I’ll send you the PDF.</p>
+      <form class="ck-form" novalidate data-endpoint="{{checklistendpoint}}">
+        <div class="ck-row">
+          <label class="sr-only" for="ck-email">Your email</label>
+          <input id="ck-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required aria-describedby="ck-err ck-fine">
+          <button class="btn btn-inverse" type="submit">Send me the checklist</button>
+        </div>
+        <p class="ck-err" id="ck-err" role="alert" hidden>That email doesn’t look right.</p>
+        <p class="ck-err" id="ck-fail" role="alert" hidden>Something went wrong. Please try again, or email hello@sebsuxstudio.com and I’ll send it by hand.</p>
+        <p class="ck-fine" id="ck-fine">One email with the PDF. No spam, unsubscribe anytime.</p>
+      </form>
+      <div class="ck-done" role="status" tabindex="-1" hidden>{{icon:check}}<p></p></div>
+    </div>
+    <div class="ck-pdf"><img src="/assets/checklist-cover.webp" width="449" height="511" loading="lazy" decoding="async" alt="Cover of the free PDF: Onboarding and KYC UX audit checklist, 36 checks, with five example checks"></div>
+  </div></div>
+</section>

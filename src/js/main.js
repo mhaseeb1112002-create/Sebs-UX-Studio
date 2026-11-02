@@ -23,10 +23,48 @@
   /* services dropdown */
   const dd = $('.nav-dd'), ddBtn = $('.dd-toggle');
   const setDd = open => { if (!dd) return; dd.classList.toggle('is-open', open); ddBtn.setAttribute('aria-expanded', String(open)); };
-  ddBtn?.addEventListener('click', e => { e.stopPropagation(); setDd(!dd.classList.contains('is-open')); });
+  ddBtn?.addEventListener('click', e => { e.stopPropagation(); dd.classList.remove('is-suppressed'); setDd(!dd.classList.contains('is-open')); });
   document.addEventListener('click', e => { if (dd && !dd.contains(e.target)) setDd(false); });
-  addEventListener('keydown', e => { if (e.key === 'Escape' && dd?.classList.contains('is-open')) { setDd(false); ddBtn.focus(); } });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && dd && (dd.classList.contains('is-open') || dd.matches(':hover') || dd.contains(document.activeElement))) { setDd(false); dd.classList.add('is-suppressed'); if (dd.contains(document.activeElement)) ddBtn.focus(); } });
+  dd?.addEventListener('mouseleave', () => dd.classList.remove('is-suppressed'));
   dd?.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) setDd(false); });
+
+  /* fintech walkthrough mockup: scale the 460px artwork to fit narrow screens */
+  $$('.wt-art').forEach(a => {
+    const fit = () => a.style.setProperty('--wt-s', String(Math.min(1, a.clientWidth / 460)));
+    fit();
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(a); else addEventListener('resize', fit);
+  });
+
+  /* free checklist: inline email validation, then send (or mail fallback) */
+  const ck = $('[data-checklist]');
+  if (ck) {
+    const form = $('.ck-form', ck), input = $('#ck-email', ck), err = $('#ck-err', ck), fail = $('#ck-fail', ck), done = $('.ck-done', ck), fine = $('#ck-fine', ck), btn = $('button[type=submit]', ck);
+    const ok = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+    const showErr = bad => { err.hidden = !bad; input.setAttribute('aria-invalid', String(bad)); };
+    const finish = msg => { form.hidden = true; $('p', done).textContent = msg; done.hidden = false; done.focus(); };
+    input.addEventListener('input', () => { if (!err.hidden && ok(input.value)) showErr(false); fail.hidden = true; });
+    input.addEventListener('blur', () => { if (input.value.trim() && !ok(input.value)) showErr(true); });
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!ok(input.value)) { showErr(true); input.focus(); return; }
+      showErr(false); fail.hidden = true;
+      const email = input.value.trim(), endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent('Send me the audit checklist')}&body=${encodeURIComponent('Please send the free audit checklist PDF to: ' + email)}`;
+        finish('Almost done: send the email that just opened and I’ll reply with the PDF.');
+        return;
+      }
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try {
+        const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ email, source: 'audit-checklist', subscribe: 'false' }) });
+        if (!r.ok) throw new Error(String(r.status));
+        finish('Check your inbox — the checklist is on its way.');
+      } catch (_) {
+        btn.disabled = false; btn.textContent = 'Send me the checklist'; fail.hidden = false;
+      }
+    });
+  }
 
   /* mobile menu */
   const menu = $('#mobile-menu'), burger = $('.nav-burger');

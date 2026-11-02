@@ -32,6 +32,7 @@ jobs:
           # Owner login (optional). Set both repository variables to switch it on, see README.
           SUPABASE_URL: ${{ vars.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          CHECKLIST_ENDPOINT: ${{ vars.CHECKLIST_ENDPOINT }}
         run: |
           if [ -n "$CUSTOM_URL" ]; then
             export SITE_URL="$CUSTOM_URL" CNAME=1 BASE_PATH=""

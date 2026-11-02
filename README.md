@@ -67,6 +67,16 @@ If a file is missing the build falls back to a labelled placeholder, so nothing 
 Build env: `SITE_URL` (canonical/OG/sitemap/JSON-LD), `BASE_PATH` (sub-path hosting), `CNAME=1` (write CNAME file).
 Other hosts (Netlify/Vercel/Cloudflare Pages): build `npm run build`, output `dist`, env `SITE_URL`.
 
+## Free checklist email (optional)
+
+The "Free audit checklist" form on the home page (`#checklist`) validates the email in the browser and then posts it to an endpoint you choose.
+
+1. Pick a service that can receive a form POST and send an automatic reply with the PDF attached (for example a form service with an auto-responder, ConvertKit or Mailchimp form URLs, or a small serverless function that calls Resend).
+2. In the GitHub repository go to Settings, Secrets and variables, Actions, Variables, and add `CHECKLIST_ENDPOINT` with the full URL.
+3. Push to deploy. The build adds the endpoint to the form and to the page's `connect-src` rule automatically.
+
+The form sends `email`, `source=audit-checklist` and `subscribe=false` as a normal form post (no mailing-list sign-up). If `CHECKLIST_ENDPOINT` is empty, the form opens a prefilled email to hello@sebsuxstudio.com instead and tells the visitor to send it, so nothing is reported as sent when it isn't.
+
 ## Owner login (optional)
 
 An email-code login for one account (the owner). It stays off until two repository variables are set, so nothing

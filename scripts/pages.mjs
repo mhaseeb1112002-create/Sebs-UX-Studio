@@ -5,7 +5,7 @@ const faqitems = faq.map(([q, a], i) => `<div class="faq-item${i === 0 ? ' is-op
 const home = {
   route: '/',
   title: 'UX Audits & Redesigns for SaaS and Fintech | Sebs UX Studio',
-  description: 'Find where users drop off in signup, onboarding and KYC. UX audits, redesign sprints, new product builds and AI-built product polish. Request a UX audit.',
+  description: 'Find where users drop off in signup, onboarding and KYC. UX audits, redesign sprints, new product builds and AI-built product polish. Book your audit.',
   body: '<<home>>',
   vars: { home: '/', workcurrent: '', faqitems },
   jsonld: { '@context': 'https://schema.org', '@graph': [
@@ -31,7 +31,7 @@ const caseSeo = c => [{ '@context': 'https://schema.org', '@type': 'Article', he
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], ['Work', '/work/'], [c.catLabel, `/work/${c.cat}/`], [c.title, `/work/${c.slug}/`]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) }];
 const caseTpl = cases.map(c => ({ route: `/work/${c.slug}/`, title: c.title_seo, description: c.desc_seo, body: caseBody(c), vars: sub, jsonld: caseSeo(c) }));
 const nf = { route: '/404', title: 'Page not found | Sebs UX Studio', description: 'This page could not be found. Go home, browse the work or request a UX audit.', body: notFoundBody, vars: sub };
-const start = { route: '/start/', title: 'Start a Project | Sebs UX Studio', description: 'Request a UX audit, redesign or new product design. Tell me what you need and I reply by email with next steps and pricing.', body: startBody, vars: { home: '/', workcurrent: '' } };
+const start = { route: '/start/', title: 'Start a Project | Sebs UX Studio', description: 'Book your audit, a redesign or a new product design. Tell me what you need and I reply by email with next steps and pricing.', body: startBody, vars: { home: '/', workcurrent: '' } };
 const privacy = { route: '/privacy/', title: 'Privacy policy | Sebs UX Studio', description: 'What Sebs UX Studio collects, why, and how to ask for your messages to be deleted.', body: privacyBody, vars: { home: '/', workcurrent: '' } };
 const contentTpl = cpages.map(p => ({ route: p.route, title: p.title, description: p.description, body: contentBody(p), vars: { home: '/', workcurrent: '' }, jsonld: cpJsonld(p) }));
 const guidesTpl = { route: guidesIndex.route, title: guidesIndex.title, description: guidesIndex.description, body: guidesIndexBody(), vars: { home: '/', workcurrent: '' } };

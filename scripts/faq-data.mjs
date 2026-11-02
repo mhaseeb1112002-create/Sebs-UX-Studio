@@ -8,5 +8,5 @@ export default [
   ['Will our timezones work?', "Yes. I'm based in Lahore (PKT) and work with teams in Europe, the UK, the Gulf and the US. Calls are flexible: pick a time that suits you, or message me and we'll find one."],
   ['Do you sign an NDA?', 'Yes. Send yours over before we start, or I can share a simple one.'],
   ['What access do you need?', 'Usually a walkthrough of your product or staging access, plus analytics if you have them. Nothing more until the audit starts.'],
-  ['How does pricing work?', 'Contact me for pricing. I scope every project after a short intro call, so you know the price before we begin.'],
+  ['How does pricing work?', 'Every project is a fixed fee. Audits are $990–$2,500 depending on the number of flows. Book a free 20-minute call and you get a quote within 24 hours, so you know the price before we start.'],
 ];

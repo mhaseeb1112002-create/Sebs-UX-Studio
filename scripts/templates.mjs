@@ -72,7 +72,7 @@ export const notFoundBody = `{{> nav}}
   <p class="t-label eyebrow-g">404</p>
   <h1 class="work-title t-display">This page took a wrong <span class="hl">turn</span></h1>
   <p class="t-lg work-sub">The page you're looking for isn't here. Go back to the start, browse my work, or request a UX audit.</p>
-  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="/start/">Request a UX audit</a></div>
+  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="/start/">Book your audit</a></div>
 </div></section>
 </main>
 {{> footer}}`;
@@ -81,13 +81,13 @@ export const startBody = `{{> nav}}
 <main id="main">
 <section class="start-wrap wrap" aria-labelledby="start-title">
   <div class="start-copy">
-    <p class="t-label eyebrow-g">Request a UX audit or project</p>
+    <p class="t-label eyebrow-g">Start a project</p>
     <h1 class="t-h1" id="start-title">Tell me what you need.</h1>
     <p class="t-lg">A UX audit, a redesign, a new product or something else. Answer a few quick questions. I read every request myself and reply by email with next steps.</p>
     <ul class="start-list">
       <li>{{icon:check}}Pricing scoped to your project</li>
       <li>{{icon:check}}Free 20-minute intro call</li>
-      <li>{{icon:check}}Reply from me, not a bot</li>
+      <li>{{icon:check}}Reply within 1 working day, from me, not a bot</li>
     </ul>
     <div class="contact-card">
       <h2>Or reach me directly</h2>
@@ -110,6 +110,7 @@ export const startBody = `{{> nav}}
           <label><input type="radio" name="service" value="Conversion redesign sprint"><span>Redesign sprint</span></label>
           <label><input type="radio" name="service" value="Product design (new product)"><span>New product design</span></label>
           <label><input type="radio" name="service" value="AI-built product polish"><span>AI product polish</span></label>
+          <label><input type="radio" name="service" value="Team coaching"><span>Team coaching</span></label>
           <label><input type="radio" name="service" value="Something else"><span>Something else</span></label>
         </div><p class="err" id="e-service">Please choose one.</p></fieldset>
       <div class="field"><label for="f-msg">Tell me about it <span class="opt">(optional)</span></label><textarea id="f-msg" name="msg" rows="3" placeholder="For example: 40% of people leave at the ID upload step. Or: we need a dashboard designed from scratch."></textarea></div>

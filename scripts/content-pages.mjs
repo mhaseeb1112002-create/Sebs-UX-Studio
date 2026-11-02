@@ -263,7 +263,7 @@ export function contentBody(p) {
   <p class="t-label eyebrow-g">${p.eyebrow}</p>
   <h1 class="work-title t-display">${p.h1}</h1>
   <p class="t-xl work-sub">${p.lede}</p>
-  <div class="cp-actions"><a class="btn btn-primary" href="/start/">Request a UX audit</a>${sec}</div>
+  <div class="cp-actions"><a class="btn btn-primary" href="/start/">Book your audit</a>${sec}</div>
   </div>
   ${p.heroImg ? `<img class="cp-hero-img" src="${p.heroImg[0]}" alt="${esc(p.heroImg[3])}" width="${p.heroImg[1]}" height="${p.heroImg[2]}" fetchpriority="high">` : ''}
 </div></section>
