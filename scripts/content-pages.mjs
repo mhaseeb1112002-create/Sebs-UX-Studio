@@ -283,7 +283,7 @@ export function guidesIndexBody() {
   <h1 class="work-title t-display">Practical guides on <span class="hl">identity verification UX</span></h1>
   <p class="t-xl work-sub">Short, specific guides for teams who lose users at signup, ID upload and the selfie step.</p>
 </div></section>
-<section class="cp-sec"><div class="wrap"><ul class="cp-cards cp-guides">${gs.map(g => `<li><a href="${g.route}"><span class="t-label eyebrow-g">${g.eyebrow}</span><h3>${g.name}</h3><p>${g.description}</p><span class="cc-link"><span>Read the guide</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></span></a></li>`).join('')}</ul></div></section>
+<section class="cp-sec cp-last"><div class="wrap"><ul class="cp-cards cp-guides">${gs.map(g => `<li><a href="${g.route}"><span class="t-label eyebrow-g">${g.eyebrow}</span><h3>${g.name}</h3><p>${g.description}</p><span class="cc-link"><span>Read the guide</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></span></a></li>`).join('')}</ul></div></section>
 {{> cta-flush}}
 </main>
 {{> footer}}`;
