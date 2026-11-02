@@ -106,3 +106,19 @@
   .cp-cards[data-n="5"] li,.cp-steps[data-n="5"] li{grid-column:span 2}
   .cp-cards[data-n="5"] li:nth-child(n+4),.cp-steps[data-n="5"] li:nth-child(n+4){grid-column:span 3}
 }
+
+/* ===== Footer brand block: logo, one clear line, location and a next step ===== */
+.footer{padding-top:64px}
+.footer .footer-top{gap:48px;align-items:flex-start}
+.footer .f-brand{gap:16px;max-width:440px;align-items:flex-start}
+.footer .f-tag{text-wrap:balance;margin:0;font:600 18px/28px var(--font-head);letter-spacing:-.01em;color:var(--primitive-ink-900)}
+.footer .f-loc{margin:-8px 0 0;font:400 15px/24px var(--font-body);color:var(--primitive-slate-500)}
+.footer .f-cta{margin-top:8px}
+.footer .f-cols{padding-top:4px}
+@media (max-width:767px){
+  .footer{padding-top:48px}
+  .footer .footer-top{gap:40px}
+  .footer .f-brand{max-width:none}
+  .footer .f-tag{font-size:17px;line-height:26px}
+  .footer .f-cta{width:100%}
+}
