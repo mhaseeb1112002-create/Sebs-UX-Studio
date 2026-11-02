@@ -1,7 +1,15 @@
 /* ===== Service pages and guides ===== */
 .cp-head{padding-block:72px 32px}
 .cp-actions{display:flex;gap:12px;flex-wrap:wrap;padding-top:8px}
-.crumbs .back{font:600 15px/1 var(--font-body);color:var(--primitive-slate-500)}
+.crumbs .back{display:inline-flex;align-items:center;gap:8px;font:600 15px/20px var(--font-body);color:var(--primitive-green-700);padding-block:4px}
+.crumbs .back .back-arr{display:inline-flex;transform:scaleX(-1)}
+.crumbs .back .ic-arrow{margin:0;transition:transform 200ms var(--ease-out)}
+.crumbs .back:hover .ic-arrow{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.crumbs .back:hover .ic-arrow{transform:none}}
+/* Highlight that survives line wraps: one yellow band per line, not one slanted bar under the last line */
+.cp-head .work-title .hl{display:inline;position:static;padding-inline:.06em;margin-inline:-.06em;background:linear-gradient(transparent 58%,var(--support-sun) 58%,var(--support-sun) 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cp-head .work-title .hl::before{content:none}
+.cp-head .work-title{text-wrap:balance}
 .cp-sec{padding-top:56px}
 .cp-last{padding-bottom:72px}
 .cp-h2{font:700 32px/40px var(--font-head);letter-spacing:-.02em;margin-bottom:20px;max-width:760px}
