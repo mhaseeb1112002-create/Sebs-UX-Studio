@@ -2,7 +2,32 @@
 
 Status: **proposed, nothing applied to the site.** Last updated 2 Nov 2026.
 
-Related files: `docs/home-copy-v1.md` (proposed copy), `docs/home-copy-v1.patch` (code change), `docs/evidence-sheet.md` and `.csv` (researched claims).
+Related files: `docs/home-copy-v2.md` (proposed copy), `docs/home-copy-v2.patch` (code change), `docs/evidence-sheet.md` and `.csv` (researched claims).
+
+## 0. Direction (updated): lead with mistakes, not services
+
+Competitors mostly say the same thing: UX, UI, research, design systems. A visitor sees the same list on every site. The home page now leads with **the specific mistakes teams make**, then shows the sample audit as proof, then the services as the fix.
+
+**The 8 mistakes (home page)**
+
+| # | Area | Mistake | Evidence strength |
+|---|---|---|---|
+| 1 | Fintech | Asking for an ID photo with no guidance (and hiding the matching rules) | Forum and review anecdotes |
+| 2 | Fintech | Rejecting with "something went wrong" | Forum posts, Ombudsman cases (anecdotes) |
+| 3 | Fintech | Leaving no way out of a retry loop | Community and review anecdotes |
+| 4 | SaaS | Mistaking setup for value | Userpilot (vendor), founder threads |
+| 5 | SaaS | One onboarding for everyone, then silence | Userpilot, ProductLed (vendors) |
+| 6 | SaaS | Asking for too much before showing value | Userpilot (vendor) |
+| 7 | B2B | A website that tells a different story from sales | Gartner 2025: 69% (the only number on the page) |
+| 8 | Any | Blaming the page when the problem is who arrives | Founder threads, vendor guides |
+
+**How to use the mistakes beyond the site**
+- One LinkedIn post per mistake (3 a week, mostly teardowns of public flows).
+- Outreach openers name the mistake seen in the prospect's own flow, using public screens only.
+- Add one new mistake a month from real audits.
+- Test mistake-led copy against the current copy and a problem-first opener. Nothing found shows it converts better, so treat it as a test.
+
+**Page order (proposed):** Hero, Mistakes, Why a designer, Sample audit, Services, Industries, Client feedback, About, Process, FAQ, Closing call. Nav gains a "Mistakes" link.
 
 ## 1. Positioning
 

@@ -17,7 +17,7 @@ Playwright is only needed for `audit` / `interact` (`require('playwright')` must
 `docs/` holds working notes that are not part of the built site:
 
 - `positioning-and-plan.md`: positioning, audit findings, 30-day plan, claims rules and open decisions.
-- `home-copy-v1.md` and `home-copy-v1.patch`: proposed home page copy and the code change for it (not applied).
+- `home-copy-v2.md` and `home-copy-v2.patch`: proposed mistake-led home page copy and the code change for it (not applied).
 - `evidence-sheet.md` and `.csv`: researched claims with source, reliability and how to use each.
 
 ## Pages / routes (from the Figma "Developer handoff" sheet)
