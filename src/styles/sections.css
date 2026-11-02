@@ -131,7 +131,7 @@ body.menu-open{overflow:hidden}
 .ind-header{max-width:none;padding-inline:var(--pad-x)}
 .ind-copy{display:flex;flex-direction:column;gap:14px}
 .ind-copy .hl{position:relative;display:inline-block}
-.ind-copy h2{height:52px}
+.ind-copy h2{min-height:52px}
 .ind-sub{max-width:620px;color:var(--primitive-slate-500)}
 .ind-arrows{display:flex;gap:12px}
 .arrow{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:26px;border:1.5px solid var(--primitive-ink-900);transition:background-color var(--motion-fast),opacity var(--motion-fast)}
@@ -152,14 +152,14 @@ body.menu-open{overflow:hidden}
 /* ===== Problem (8:10) ===== */
 .problem .wrap{}
 .problem-box{display:flex;gap:80px;align-items:flex-start;padding:88px 80px;border-radius:32px;background:var(--primitive-ink-900);color:#fff}
-.problem-left{flex:0 0 470px;display:flex;flex-direction:column;gap:36px}
+.problem-left{flex:0 0 470px;min-width:0;display:flex;flex-direction:column;gap:36px}
 .problem-left h2{color:#fff}
 .leak{display:flex;flex-direction:column;gap:12px;padding:22px 24px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--primitive-ink-700)}
 .leak-head{display:flex;justify-content:space-between;font:600 11px/14px var(--font-body);letter-spacing:.08em;color:var(--primitive-slate-300)}
 .leak-head .il{font-weight:400;letter-spacing:0;line-height:1.5}
 .leak-row{display:flex;align-items:center;gap:12px}
 .ln{flex:none;width:92px;font:500 13px/20px var(--font-body);color:#fff}
-.lt{position:relative;flex:0 0 220px;min-width:0;height:22px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
+.lt{position:relative;flex:0 0 190px;min-width:0;height:22px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
 .lt i{position:absolute;inset:0;border-radius:6px;background:var(--primitive-green-400);transform:scaleX(var(--w,1));transform-origin:left;transition:transform 700ms var(--ease-out)}
 .is-hot .lt i{background:var(--support-sun)}
 .leak-row b{font:600 12px/18px var(--font-body);color:var(--primitive-slate-300);white-space:pre}
@@ -403,7 +403,7 @@ body.menu-open{overflow:hidden}
   .industries{padding:16px 0 64px;gap:28px}
   .ind-header{padding-inline:20px}
   .ind-header-in{gap:16px}
-  .ind-copy h2{height:35px}
+  .ind-copy h2{min-height:35px}
   .swipe-hint{margin:-12px 0 0;font:500 14px/20px var(--font-body);padding-inline:20px;color:var(--primitive-slate-500)}
   .ind-carousel{padding-inline:20px;scroll-padding-inline:20px}
   .ind-track{gap:14px}
@@ -507,3 +507,17 @@ body.menu-open{overflow:hidden}
 .svc4 .svc-card{flex:none;width:auto}
 .svc-top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
 @media (max-width:767px){.svc-cards.svc4{grid-template-columns:1fr;padding-top:28px}}
+
+/* ===== mistakes (Figma 249:1835) ===== */
+.mistakes .t-label+.t-h1{margin-top:14px}
+.m-intro{margin-top:14px;max-width:640px;color:var(--primitive-slate-500)}
+.m-grid{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.m-card{display:flex;flex-direction:column;gap:12px;padding:28px;border-radius:var(--radius-lg);background:var(--primitive-gray-100);border:1px solid var(--primitive-gray-200)}
+.m-tag{align-self:flex-start;font:600 12px/16px var(--font-body);letter-spacing:.04em;padding:4px 10px;border-radius:var(--radius-full);background:var(--primitive-green-100);color:var(--primitive-ink-900)}
+.m-card h3{font:700 22px/29px var(--font-head);letter-spacing:-.01em;color:var(--primitive-ink-900)}
+.m-card p{font:400 16px/26px var(--font-body);color:var(--primitive-slate-500)}
+.m-card p span{display:block;font:600 12px/16px var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--primitive-ink-900);margin-bottom:2px}
+.m-card .m-fix span{color:var(--primitive-green-700)}
+.m-cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:40px}
+.m-cta span{font:400 16px/26px var(--font-body);color:var(--primitive-slate-500)}
+@media (max-width:1023px){.m-grid{grid-template-columns:1fr;gap:16px;margin-top:40px}.m-card{padding:24px 20px}.m-card h3{font-size:20px;line-height:26px}}

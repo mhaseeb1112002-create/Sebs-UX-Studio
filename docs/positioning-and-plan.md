@@ -1,8 +1,8 @@
 # Positioning and plan (working document)
 
-Status: **proposed, nothing applied to the site.** Last updated 2 Nov 2026.
+Status: the mistake-led home page is live (copy from the Figma file). Services pages, case studies, footer and Process are not updated yet. Last updated 2 Nov 2026.
 
-Related files: `docs/home-copy-v2.md` (proposed copy), `docs/home-copy-v2.patch` (code change), `docs/evidence-sheet.md` and `.csv` (researched claims).
+Related files: `docs/home-copy-v2.md` (earlier copy proposal, history), `docs/evidence-sheet.md` and `.csv` (researched claims).
 
 ## 0. Direction (updated): lead with mistakes, not services
 

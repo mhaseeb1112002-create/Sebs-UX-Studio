@@ -1,6 +1,6 @@
-# Home page copy v2: mistake-led (proposed, not applied)
+# Home page copy v2: mistake-led (history)
 
-Status: **proposed**. Nothing here is live. The code change is `docs/home-copy-v2.patch`; from the repo root run `git apply docs/home-copy-v2.patch` once the copy is approved. It replaces the earlier service-led v1.
+Status: **superseded.** The home page shipped from the Figma file (frame "Landing — Desktop 1440"), which refined this copy. This file is kept as history. The live copy is in `src/partials/` and `scripts/faq-data.mjs`.
 
 Rendered preview: https://claude.ai/artifact/54rjNZaws55rM51hQdWdtb (private)
 

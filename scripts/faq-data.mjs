@@ -1,7 +1,7 @@
 // FAQ copy. Q1 + its answer come from the Figma "FAQ item / Open" frame; the remaining answers are not
 // designed in Figma and are drafted from facts stated elsewhere in the file (pricing, process, booking hours).
 export default [
-  ['Who do you work with?', 'Seed to Series A B2B SaaS and fintech teams, especially those without an in-house designer.'],
+  ['Who do you work with?', 'Mostly fintech and B2B SaaS teams, Seed to Series A. I also work with gov-tech, ed-tech, e-commerce and AI products: anywhere people fill in forms, upload documents or need to trust an automated decision.'],
   ['What do I get from an audit?', 'A flow-by-flow UX review, a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days. Contact me for pricing.'],
   ['Do you design the product too?', 'Yes. I design products end to end, from the first flow to the final UI, and I can build them in code too. I also fix existing ones. If you have developers, they get specs and components they can build right away. For AI-built products (Lovable, Cursor, v0), I clean up the UX and UI of what already exists.'],
   ['How do you use AI in your process?', 'AI tools speed up research synthesis and first drafts. Every finding, decision and design is reviewed and owned by me.'],
