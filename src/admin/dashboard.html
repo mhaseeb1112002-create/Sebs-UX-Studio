@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' {{connect}}; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Overview | Sebs Admin</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="adm adm-app" data-guard>
+<div class="adm-shell" id="app" hidden>
+  <aside class="adm-side" aria-label="Admin">
+    <p class="adm-brand">Sebs <span>Admin</span></p>
+    <nav>
+      <a href="/admin/" aria-current="page">Overview</a>
+    </nav>
+    <div class="adm-user">
+      <p class="adm-user-mail" id="who"></p>
+      <button type="button" class="adm-link adm-link-light" id="logout">Log out</button>
+    </div>
+  </aside>
+  <main class="adm-main" id="main">
+    <header class="adm-top">
+      <div><h1 class="adm-h1">Overview</h1><p class="adm-sub" id="stamp">sebsuxstudio.com</p></div>
+      <a class="btn btn-secondary" href="/" target="_blank" rel="noopener">View site</a>
+    </header>
+    <section class="adm-panel" aria-labelledby="h-att">
+      <h2 id="h-att" class="adm-h2">Needs your attention</h2>
+      <p class="adm-empty">Nothing yet. When the audit request form is connected, new leads that need a reply appear here first.</p>
+    </section>
+    <section class="adm-panel" aria-labelledby="h-res">
+      <h2 id="h-res" class="adm-h2">Results</h2>
+      <p class="adm-empty">No numbers yet. Visitors, audit requests and calls booked need an analytics source and a stored form. They are not connected, so nothing is shown rather than made-up figures.</p>
+    </section>
+    <section class="adm-panel adm-dark" aria-labelledby="h-set">
+      <h2 id="h-set" class="adm-h2">Setup</h2>
+      <ul class="adm-list">
+        <li class="done"><span aria-hidden="true">&check;</span> Owner login works</li>
+        <li><span aria-hidden="true"></span> Connect the audit request form</li>
+        <li><span aria-hidden="true"></span> Connect analytics</li>
+      </ul>
+    </section>
+  </main>
+</div>
+<p class="adm-loading" id="loading" role="status">Checking your sign-in&hellip;</p>
+<script src="/admin/admin.js" defer></script>
+</body>
+</html>

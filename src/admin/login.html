@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' {{connect}}; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Log in | Sebs Admin</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="adm adm-auth">
+<a class="adm-back" href="/">&larr; Back to sebsuxstudio.com</a>
+<main class="adm-card" id="main">
+  <img class="adm-logo" src="/assets/logo-wordmark-ink.svg" alt="Sebs UX Studio" width="120" height="38">
+
+  <section id="step-email" aria-labelledby="t-email">
+    <h1 id="t-email" class="adm-h1">Log in to Sebs Admin</h1>
+    <p class="adm-sub">Enter your email. We will send you a sign-in code, so there is no password to remember.</p>
+    <div class="adm-alert" id="err-email" role="alert" hidden><span class="adm-alert-ic" aria-hidden="true">!</span><p></p></div>
+    <form id="f-email" novalidate>
+      <div class="adm-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="username" inputmode="email" autocapitalize="off" spellcheck="false" required>
+      </div>
+      <label class="adm-check" for="remember">
+        <input id="remember" type="checkbox">
+        <span><strong>Keep me signed in on this device</strong><small>Use only on your own device. You stay signed in until you log out.</small></span>
+      </label>
+      <button class="btn btn-primary adm-full" type="submit" id="send">Email me a sign-in code</button>
+    </form>
+    <p class="adm-note">This login is for the studio owner only.</p>
+  </section>
+
+  <section id="step-code" aria-labelledby="t-code" hidden>
+    <h1 id="t-code" class="adm-h1" tabindex="-1">Check your email</h1>
+    <p class="adm-sub">If <strong id="sent-to"></strong> can log in, we sent a code. Enter it below. It can take a minute to arrive, and it may be in spam.</p>
+    <div class="adm-alert" id="err-code" role="alert" hidden><span class="adm-alert-ic" aria-hidden="true">!</span><p></p></div>
+    <form id="f-code" novalidate>
+      <div class="adm-field">
+        <label for="code">Sign-in code</label>
+        <input id="code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]*" maxlength="10" required>
+      </div>
+      <button class="btn btn-primary adm-full" type="submit" id="verify">Log in</button>
+    </form>
+    <p class="adm-links"><button type="button" class="adm-link" id="resend">Send a new code</button><span aria-hidden="true">·</span><button type="button" class="adm-link" id="change">Use a different email</button></p>
+  </section>
+</main>
+<script src="/admin/admin.js" defer></script>
+</body>
+</html>

@@ -9,6 +9,10 @@ fs.mkdirSync(dist, { recursive: true });
 const BASE = (process.env.BASE_PATH || '').replace(/\/$/, ''); // '' for a domain root, '/repo' for github.io/repo
 const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/, '');
 
+const ADMIN_URL = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
+const ADMIN_KEY = process.env.SUPABASE_ANON_KEY || '';
+const ADMIN_ON = !!(ADMIN_URL && ADMIN_KEY); // owner login pages and the footer link exist only when both are set
+const OWNER_LINK = ADMIN_ON ? ' · <a href="/admin/login/" rel="nofollow">Owner log in</a>' : '';
 const read = p => fs.readFileSync(src(p), 'utf8');
 const partial = n => read(`partials/${n}.html`);
 const include = html => html.replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, n) => include(partial(n)));
@@ -36,7 +40,7 @@ const pages = (await import('./pages.mjs')).default;
 const shell = read('partials/shell.html');
 for (const pg of pages) {
   const bodySrc = pg.body.startsWith('<<') ? read(`pages/${pg.body.slice(2, -2)}.html`) : pg.body;
-  const body = subst(include(bodySrc), pg.vars || {});
+  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, ...(pg.vars || {}) });
   const canonical = SITE + (pg.canonical || pg.route);
   let html = subst(shell, {
     title: pg.title, description: pg.description, canonical, ogimage: SITE + '/assets/og.png',
@@ -58,6 +62,18 @@ fs.copyFileSync(src('assets/favicon.ico'), path.join(dist, 'favicon.ico'));
 const css = ['tokens', 'base', 'components', 'sections', 'work', 'proof', 'intake', 'content'].map(n => fs.existsSync(src(`styles/${n}.css`)) ? read(`styles/${n}.css`) : '').join('\n');
 fs.writeFileSync(path.join(dist, 'styles.css'), BASE ? css.replace(/url\((['"]?)\/(?!\/)/g, `url($1${BASE}/`) : css);
 fs.writeFileSync(path.join(dist, 'main.js'), read('js/main.js').replace("const BASE = '';", `const BASE = ${JSON.stringify(BASE)};`));
+// owner login pages (only when SUPABASE_URL and SUPABASE_ANON_KEY are set)
+if (ADMIN_ON) {
+  const fix = html => BASE ? html.replace(/\b(href|src)="\/(?!\/)/g, `$1="${BASE}/`) : html;
+  const connect = new URL(ADMIN_URL).origin;
+  const adm = path.join(dist, 'admin');
+  fs.mkdirSync(path.join(adm, 'login'), { recursive: true });
+  const page = f => fix(read(`admin/${f}`).replace('{{connect}}', connect));
+  fs.writeFileSync(path.join(adm, 'login', 'index.html'), page('login.html'));
+  fs.writeFileSync(path.join(adm, 'index.html'), page('dashboard.html'));
+  fs.writeFileSync(path.join(adm, 'admin.css'), read('admin/admin.css'));
+  fs.writeFileSync(path.join(adm, 'admin.js'), read('admin/admin.js').replace('__ADMIN_CONFIG__', JSON.stringify({ url: ADMIN_URL, key: ADMIN_KEY })));
+}
 // cache-busting: version the css/js URLs so browsers never pair a new page with an old stylesheet
 import('node:crypto').then(({ createHash }) => {
   const h = f => createHash('sha1').update(fs.readFileSync(path.join(dist, f))).digest('hex').slice(0, 8);
@@ -73,6 +89,6 @@ import('node:crypto').then(({ createHash }) => {
 if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).host + '\n');
 fs.mkdirSync(path.join(dist, '.well-known'), { recursive: true });
 fs.writeFileSync(path.join(dist, '.well-known', 'security.txt'), `Contact: mailto:hello@sebsuxstudio.com\nExpires: 2027-11-01T00:00:00.000Z\nPreferred-Languages: en\nCanonical: ${SITE}/.well-known/security.txt\n`);
-fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
+fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n${ADMIN_ON ? 'Disallow: /admin/\n' : ''}Sitemap: ${SITE}/sitemap.xml\n`);
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404' && !p.canonical).map(p => `  <url><loc>${SITE}${p.route}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log('built', pages.length, 'pages');

@@ -58,3 +58,23 @@ If a file is missing the build falls back to a labelled placeholder, so nothing 
 
 Build env: `SITE_URL` (canonical/OG/sitemap/JSON-LD), `BASE_PATH` (sub-path hosting), `CNAME=1` (write CNAME file).
 Other hosts (Netlify/Vercel/Cloudflare Pages): build `npm run build`, output `dist`, env `SITE_URL`.
+
+## Owner login (optional)
+
+An email-code login for one account (the owner). It stays off until two repository variables are set, so nothing
+changes on the live site and the footer "Owner log in" link does not appear before then. Pages: `/admin/login/` and `/admin/`.
+The dashboard is a shell with no data yet.
+
+Setup with Supabase (free plan):
+
+1. Create a project at supabase.com.
+2. Authentication, Sign In / Providers: keep Email on and turn **off** "Allow new users to sign up".
+3. Authentication, Users: **Add user** with your email only (create it with a random password you will not use).
+4. Authentication, Email Templates, Magic Link: put `{{ .Token }}` in the message, for example `Your Sebs Admin sign-in code: {{ .Token }}`.
+5. Authentication, URL Configuration: set Site URL to `https://sebsuxstudio.com`.
+6. Project Settings, API: copy the **Project URL** and the **anon public** key. Never use the `service_role` key.
+7. GitHub, Settings, Secrets and variables, Actions, **Variables**: add `SUPABASE_URL` and `SUPABASE_ANON_KEY`, then re-run the deploy workflow.
+8. For daily use add your own SMTP sender in Supabase (Authentication, SMTP). The built-in sender is rate limited and meant for testing.
+
+The login page only sends codes to existing accounts and answers the same way for any email. The browser pages are not
+a security boundary: any stored data must be protected with row level security in Supabase.
