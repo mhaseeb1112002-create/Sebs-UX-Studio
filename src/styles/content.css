@@ -69,7 +69,9 @@
 .svc-card.is-featured .svc-link{color:#fff}
 .svc-link .arr{display:inline-flex}
 @media (max-width:767px){
-  .cp-head{padding-block:12px 24px}.cp-head .cp-crumbbar+.wrap{margin-top:20px}
+  .cp-head{padding-block:12px 24px}
+  .cp-head .cp-hero-copy{align-items:center;text-align:center}
+  .cp-actions{justify-content:center}.cp-head .cp-crumbbar+.wrap{margin-top:20px}
   .cp-sec{padding-top:40px}
   .cp-last{padding-bottom:48px}
   .cp-h2{font-size:26px;line-height:32px}
