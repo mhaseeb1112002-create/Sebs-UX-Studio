@@ -257,9 +257,9 @@ export function contentBody(p) {
   const sec = p.secondary ? `<a class="btn btn-secondary" href="${p.secondary[1]}">${p.secondary[0]}</a>` : '';
   return `{{> nav}}
 <main id="main">
-<section class="work-head cp-head"><div class="wrap${p.heroImg ? ' cp-hero' : ''}">
+<section class="work-head cp-head"><div class="wrap cp-crumbbar"><nav class="crumb-path" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="${p.crumb[1]}">${p.crumb[0]}</a></li><li><span aria-current="page">${p.name}</span></li></ol></nav></div>
+<div class="wrap${p.heroImg ? ' cp-hero' : ''}">
   <div class="cp-hero-copy">
-  <nav class="crumb-path" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="${p.crumb[1]}">${p.crumb[0]}</a></li><li><span aria-current="page">${p.name}</span></li></ol></nav>
   <p class="t-label eyebrow-g">${p.eyebrow}</p>
   <h1 class="work-title t-display">${p.h1}</h1>
   <p class="t-xl work-sub">${p.lede}</p>
