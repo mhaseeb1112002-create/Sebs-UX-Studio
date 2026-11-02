@@ -1,11 +1,20 @@
 /* ===== Service pages and guides ===== */
 .cp-head{padding-block:72px 32px}
 .cp-actions{display:flex;gap:12px;flex-wrap:wrap;padding-top:8px}
-.crumbs .back{display:inline-flex;align-items:center;gap:8px;font:600 15px/20px var(--font-body);color:var(--primitive-green-700);padding-block:4px}
-.crumbs .back .back-arr{display:inline-flex;transform:scaleX(-1)}
-.crumbs .back .ic-arrow{margin:0;transition:transform 200ms var(--ease-out)}
-.crumbs .back:hover .ic-arrow{transform:translateX(3px)}
-@media (prefers-reduced-motion:reduce){.crumbs .back:hover .ic-arrow{transform:none}}
+.crumbs .back{font:600 15px/1 var(--font-body);color:var(--primitive-slate-500)}
+/* Breadcrumb: hierarchy path, current page last and not a link. On phones only the parent shows, as a back link. */
+.crumb-path ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;font:500 15px/20px var(--font-body)}
+.crumb-path li{display:inline-flex;align-items:center;gap:10px;min-width:0}
+.crumb-path li+li::before{content:"";flex:none;width:6px;height:6px;border-top:1.5px solid var(--primitive-slate-300);border-right:1.5px solid var(--primitive-slate-300);transform:rotate(45deg)}
+.crumb-path a{display:inline-block;padding-block:8px;color:var(--primitive-green-700);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.crumb-path a:hover{text-decoration-thickness:2px}
+.crumb-path [aria-current]{color:var(--primitive-slate-500);font-weight:600}
+@media (max-width:767px){
+  .crumb-path li:not(:nth-last-child(2)){display:none}
+  .crumb-path li+li::before{content:none}
+  .crumb-path li:nth-last-child(2) a{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-weight:600}
+  .crumb-path li:nth-last-child(2) a::before{content:"";width:8px;height:8px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-left:4px}
+}
 /* Highlight that survives line wraps: one yellow band per line, not one slanted bar under the last line */
 .cp-head .work-title .hl{display:inline;position:static;padding-inline:.06em;margin-inline:-.06em;background:linear-gradient(transparent 58%,var(--support-sun) 58%,var(--support-sun) 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .cp-head .work-title .hl::before{content:none}

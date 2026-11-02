@@ -259,7 +259,7 @@ export function contentBody(p) {
 <main id="main">
 <section class="work-head cp-head"><div class="wrap${p.heroImg ? ' cp-hero' : ''}">
   <div class="cp-hero-copy">
-  <nav class="crumbs" aria-label="Breadcrumb"><a class="back" href="${p.crumb[1]}"><span class="back-arr" aria-hidden="true">{{icon:arrow}}</span><span>${p.crumb[0]}</span></a></nav>
+  <nav class="crumb-path" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="${p.crumb[1]}">${p.crumb[0]}</a></li><li><span aria-current="page">${p.name}</span></li></ol></nav>
   <p class="t-label eyebrow-g">${p.eyebrow}</p>
   <h1 class="work-title t-display">${p.h1}</h1>
   <p class="t-xl work-sub">${p.lede}</p>
