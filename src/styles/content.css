@@ -122,3 +122,8 @@
   .footer .f-tag{font-size:17px;line-height:26px}
   .footer .f-cta{width:100%}
 }
+
+/* Tap targets: 44px hit areas for small text links, and keyboard focus for scrolling tables */
+.svc-link{display:inline-flex;align-items:center;min-height:44px}
+.offer-link{padding-block:12px;margin-block:-6px}
+.cp-tbl:focus-visible{outline:3px solid var(--primitive-green-400);outline-offset:2px}

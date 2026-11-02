@@ -26,6 +26,7 @@ export function workBody(active) {
 </div></section>
 <section class="work-list" aria-label="Projects"><div class="wrap">
   <div class="tabs filters" role="tablist" aria-label="Filter by industry">${tabs}</div>
+  <h2 class="sr-only">Case studies</h2>
   <ul class="work-grid">
 ${cards}
   </ul>
@@ -41,7 +42,7 @@ export function caseBody(c) {
   return `{{> nav}}
 <main id="main">
 <section class="case-hero"><div class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a class="back" href="/work/">← Work</a><span aria-hidden="true">/</span><a href="/work/${c.cat}/" aria-current="page">${c.catLabel}</a></nav>
+  <div class="cp-crumbbar"><nav class="crumb-path" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/work/">Work</a></li><li><a href="/work/${c.cat}/">${c.catLabel}</a></li><li><span aria-current="page">${esc(c.title)}</span></li></ol></nav></div>
   <p class="case-tag">${esc(c.tag)}</p>
   <h1 class="case-title t-display">${esc(c.title)}</h1>
   <p class="t-xl case-summary">${esc(c.summary)}</p>
@@ -119,6 +120,7 @@ export const startBody = `{{> nav}}
       <span class="ok">{{icon:check}}</span>
       <h2>Almost done: send the email</h2>
       <p>Your email app should have opened with your answers filled in. Just press send. If nothing opened, write to <a href="mailto:hello@sebsuxstudio.com"><strong>hello@sebsuxstudio.com</strong></a> and I'll pick it up from there.</p>
+      <div class="done-copy"><label for="done-text">Your request, in case no email app opened</label><textarea id="done-text" readonly rows="6"></textarea><button type="button" class="btn btn-secondary" id="done-copy">Copy my request</button><p class="form-fine" id="done-copied" role="status"></p></div>
       <a class="btn btn-secondary" href="/work/">See my work while you wait</a>
     </div>
   </div>

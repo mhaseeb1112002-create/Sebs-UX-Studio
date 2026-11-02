@@ -244,7 +244,7 @@ function block(b, idx) {
     case 'steps': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ol class="cp-steps" data-n="${b.items.length}">${b.items.map(([t, x], n) => `<li><span class="sn">0${n + 1}</span><h3>${t}</h3><p>${x}</p></li>`).join('')}</ol></div></section>`;
     case 'figure': return `<section class="cp-sec cp-fig"><div class="wrap"><figure><img src="${b.src}" alt="${esc(b.alt)}" width="${b.w}" height="${b.h}" loading="lazy"><figcaption>${b.caption}</figcaption></figure></div></section>`;
     case 'cause': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose cp-cause"><h2 class="cp-h2"><span class="cn">${b.n}</span>${b.title}</h2><p>${b.text}</p><p class="cp-fix"><b>Fix:</b> ${b.fix}</p>${b.nng ? `<p class="cp-nng"><b>Principle:</b> ${b.nng}</p>` : ''}</div></div></section>`;
-    case 'table': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><div class="cp-tbl"><table><thead><tr>${b.head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${b.note ? `<p>${b.note}</p>` : ''}</div></div></section>`;
+    case 'table': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><div class="cp-tbl" tabindex="0" role="region" aria-label="${b.title.replace(/<[^>]*>/g, '')} (scrolls sideways on small screens)"><table><thead><tr>${b.head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${b.note ? `<p>${b.note}</p>` : ''}</div></div></section>`;
     case 'faq': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">Questions</h2><div class="cp-faq">${b.items.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div></div></section>`;
     case 'links': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><ul class="cp-links">${b.items.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}{{icon:ext}}<span class="sr-only"> (opens in a new tab)</span></a></li>`).join('')}</ul></div></div></section>`;
     case 'partial': return `{{> ${b.name}}}`;
@@ -283,7 +283,7 @@ export function guidesIndexBody() {
   <h1 class="work-title t-display">Practical guides on <span class="hl">identity verification UX</span></h1>
   <p class="t-xl work-sub">Short, specific guides for teams who lose users at signup, ID upload and the selfie step.</p>
 </div></section>
-<section class="cp-sec cp-last"><div class="wrap"><ul class="cp-cards cp-guides">${gs.map(g => `<li><a href="${g.route}"><span class="t-label eyebrow-g">${g.eyebrow}</span><h3>${g.name}</h3><p>${g.description}</p><span class="cc-link"><span>Read the guide</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></span></a></li>`).join('')}</ul></div></section>
+<section class="cp-sec cp-last"><div class="wrap"><h2 class="sr-only">All guides</h2><ul class="cp-cards cp-guides">${gs.map(g => `<li><a href="${g.route}"><span class="t-label eyebrow-g">${g.eyebrow}</span><h3>${g.name}</h3><p>${g.description}</p><span class="cc-link"><span>Read the guide</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></span></a></li>`).join('')}</ul></div></section>
 {{> cta-flush}}
 </main>
 {{> footer}}`;

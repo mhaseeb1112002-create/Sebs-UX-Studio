@@ -56,3 +56,8 @@ fieldset.field{border:0;padding:0;margin-inline:0;min-width:0}
 .f-legal a{text-decoration:underline;text-underline-offset:3px}
 
 .legal{padding-block:16px 120px}
+
+.done-copy{display:grid;gap:10px;margin:20px 0}
+.done-copy label{font:600 14px/20px var(--font-body)}
+.done-copy textarea{font:400 14px/22px var(--font-body);padding:12px 14px;border:1.5px solid var(--primitive-slate-500);border-radius:8px;background:#fff;color:var(--primitive-ink-900);width:100%;box-sizing:border-box;resize:vertical}
+.done-copy .btn{justify-self:start}

@@ -213,6 +213,9 @@
       const d = Object.fromEntries(new FormData(intake));
       const body = `Name: ${d.name}\nEmail: ${d.email}\nProduct / site: ${d.site}\nService: ${d.service}\n\nDetails:\n${d.msg || '-'}`;
       card.classList.add('is-done'); $('.form-done', card).focus();
+      const dt = $('#done-text', card); if (dt) dt.value = `To: hello@sebsuxstudio.com\nSubject: ${d.service} request: ${d.site}\n\n${body}`;
+      const dc = $('#done-copy', card);
+      if (dc && !dc.dataset.bound) { dc.dataset.bound = '1'; dc.addEventListener('click', () => { const say = t => { $('#done-copied', card).textContent = t; }; try { navigator.clipboard.writeText(dt.value).then(() => say('Copied. Paste it into an email to hello@sebsuxstudio.com.'), () => { dt.select(); say('Press Ctrl+C or Cmd+C to copy.'); }); } catch (e) { dt.select(); say('Press Ctrl+C or Cmd+C to copy.'); } }); }
       location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent(d.service + ' request: ' + d.site)}&body=${encodeURIComponent(body)}`;
     });
   }
