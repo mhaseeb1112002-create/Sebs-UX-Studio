@@ -599,7 +599,7 @@ body.menu-open{overflow:hidden}
 .ck-done p{margin:0;font:600 17px/26px var(--font-body)}
 .ck-done .ic{flex:none;margin-top:3px;color:var(--primitive-green-700)}
 .ck-pdf{display:flex;justify-content:center}
-.ck-pdf img{width:380px;max-width:100%;height:auto;border-radius:20px}
+.ck-pdf img{width:340px;max-width:100%;height:auto;border-radius:20px;transform:rotate(-3deg);box-shadow:0 24px 50px -8px rgba(8,20,15,.28)}
 @media (max-width:1023px){.ck-box{grid-template-columns:1fr;padding:48px 40px}}
 @media (max-width:767px){
   .checklist{padding-top:40px}
@@ -607,6 +607,14 @@ body.menu-open{overflow:hidden}
   .ck-row{flex-direction:column}
   .ck-row input{max-width:none;flex:none;width:100%}
   .ck-row .btn{width:100%}
-  .ck-pdf img{width:304px}
+  .ck-pdf img{width:280px}
 }
 @media (max-width:767px){.avatar{width:44px;height:44px;border-radius:22px}.hero-assure{text-align:center}}
+.ck-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ck-opt{display:flex;align-items:center;gap:10px;margin-top:14px;font:400 15px/22px var(--font-body);color:var(--primitive-ink-900);cursor:pointer;min-height:44px}
+.ck-opt input{width:20px;height:20px;accent-color:var(--primitive-ink-900)}
+.ck-fine{margin-top:6px}
+.ck-err a{color:inherit}
+.ck-dl{display:inline-block;margin-top:6px;font:600 15px/24px var(--font-body);color:var(--primitive-green-700);text-underline-offset:3px;padding-block:10px;margin-block:-6px}
+.ck-done>div{min-width:0}
+@media (max-width:767px){.ck-row input,.ck-row .btn{min-height:48px}}

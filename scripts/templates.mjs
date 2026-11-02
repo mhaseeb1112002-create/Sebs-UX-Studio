@@ -144,6 +144,8 @@ export const privacyBody = `{{> nav}}
   <p>To reply to you about your request. I do not sell your details or add you to a mailing list.</p>
   <h2>How the request form works</h2>
   <p>When you press "Send request", your email app opens with your answers filled in. Nothing is sent until you press send in your email app. This website does not store your answers.</p>
+  <h2>The free checklist</h2>
+  <p>Emails from the checklist form are used only to send you the checklist and, if you tick the optional box, one UX mistake a month. You can unsubscribe at any time.</p>
   <h2>Cookies and tracking</h2>
   <p>This website does not use cookies or analytics. It is hosted on GitHub Pages, which may keep basic server logs such as your IP address, as any web host does.</p>
   <h2>Other services</h2>

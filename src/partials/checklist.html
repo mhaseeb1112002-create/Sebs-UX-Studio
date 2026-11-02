@@ -6,16 +6,18 @@
       <p class="t-lg">The same checklist I use on client audits: signup, ID upload, errors, waiting states and rejections. Enter your email and I’ll send you the PDF.</p>
       <form class="ck-form" novalidate data-endpoint="{{checklistendpoint}}">
         <div class="ck-row">
-          <label class="sr-only" for="ck-email">Your email</label>
+          <label class="sr-only" for="ck-email">Work email</label>
           <input id="ck-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required aria-describedby="ck-err ck-fine">
           <button class="btn btn-inverse" type="submit">Send me the checklist</button>
         </div>
+        <div class="ck-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="company_url" tabindex="-1" autocomplete="off"></label></div>
         <p class="ck-err" id="ck-err" role="alert" hidden>That email doesn’t look right.</p>
-        <p class="ck-err" id="ck-fail" role="alert" hidden>Something went wrong. Please try again, or email hello@sebsuxstudio.com and I’ll send it by hand.</p>
+        <p class="ck-err" id="ck-fail" role="alert" hidden>Something went wrong on our side. Try again, or email <a href="mailto:hello@sebsuxstudio.com">hello@sebsuxstudio.com</a>.</p>
+        <label class="ck-opt"><input type="checkbox" name="subscribe" id="ck-sub"><span>Send me one UX mistake a month</span></label>
         <p class="ck-fine" id="ck-fine">One email with the PDF. No spam, unsubscribe anytime.</p>
       </form>
-      <div class="ck-done" role="status" tabindex="-1" hidden>{{icon:check}}<p></p></div>
+      <div class="ck-done" role="status" tabindex="-1" hidden>{{icon:check}}<div><p></p><a class="ck-dl" href="/downloads/onboarding-kyc-ux-audit-checklist.pdf" target="_blank" rel="noopener" data-track="checklist_download">Or download it now<span aria-hidden="true"> →</span></a></div></div>
     </div>
-    <div class="ck-pdf"><img src="/assets/checklist-cover.webp" width="449" height="511" loading="lazy" decoding="async" alt="Cover of the free PDF: Onboarding and KYC UX audit checklist, 36 checks, with five example checks"></div>
+    <div class="ck-pdf"><img src="/assets/checklist-cover.webp" width="760" height="1075" loading="lazy" decoding="async" alt="Cover of the Onboarding &amp; KYC UX audit checklist"></div>
   </div></div>
 </section>
