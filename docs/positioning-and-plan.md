@@ -12,7 +12,7 @@ Competitors mostly say the same thing: UX, UI, research, design systems. A visit
 
 | # | Area | Mistake | Evidence strength |
 |---|---|---|---|
-| 1 | Fintech | Asking for an ID photo with no guidance (and hiding the matching rules) | Forum and review anecdotes |
+| 1 | Fintech | Asking for a document with no example (and hiding the matching rules) | Forum and review anecdotes |
 | 2 | Fintech | Rejecting with "something went wrong" | Forum posts, Ombudsman cases (anecdotes) |
 | 3 | Fintech | Leaving no way out of a retry loop | Community and review anecdotes |
 | 4 | SaaS | Mistaking setup for value | Userpilot (vendor), founder threads |
