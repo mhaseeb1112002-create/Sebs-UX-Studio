@@ -3,18 +3,18 @@
     <div class="ck-copy">
       <p class="t-label eyebrow-g">Free audit checklist</p>
       <h2 class="t-h1" id="ck-title">Audit your own onboarding in 30 minutes</h2>
-      <p class="t-lg">The same checklist I use on client audits: signup, ID upload, errors, waiting states and rejections. Enter your email and I’ll send you the PDF.</p>
+      <p class="t-lg">The same checklist I use on client audits: signup, ID upload, errors, waiting states and rejections. Enter your email to download the PDF.</p>
       <form class="ck-form" novalidate data-endpoint="{{checklistendpoint}}">
         <div class="ck-row">
           <label class="sr-only" for="ck-email">Work email</label>
           <input id="ck-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" required aria-describedby="ck-err ck-fine">
-          <button class="btn btn-inverse" type="submit"><span class="ck-spin" aria-hidden="true"></span><span class="ck-bt">Send me the checklist</span></button>
+          <button class="btn btn-inverse" type="submit"><span class="ck-spin" aria-hidden="true"></span><span class="ck-bt">Get the checklist</span></button>
         </div>
         <div class="ck-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="company_url" tabindex="-1" autocomplete="off"></label></div>
         <p class="ck-err" id="ck-err" role="alert" hidden>Enter an email like name@company.com</p>
         <p class="ck-err" id="ck-fail" role="alert" hidden>Couldn’t send right now. You can still <a href="/assets/Sebs-Onboarding-KYC-UX-Audit-Checklist.pdf" download data-track="checklist_download">download the checklist</a>.</p>
         <label class="ck-opt"><input type="checkbox" name="subscribe" id="ck-sub"><span>Also send me one UX mistake a month (optional)</span></label>
-        <p class="ck-fine" id="ck-fine">Free PDF, 6 pages. No spam. Unsubscribe anytime.</p>
+        <p class="ck-fine" id="ck-fine">Free PDF, 6 pages. One field, no spam. Unsubscribe anytime.</p>
       </form>
       <div class="ck-done" role="status" hidden>{{icon:check}}<div><h3 class="ck-done-t" tabindex="-1">Your checklist is ready</h3><a class="btn btn-inverse ck-dlb" href="/assets/Sebs-Onboarding-KYC-UX-Audit-Checklist.pdf" download data-track="checklist_download">Download the checklist (PDF)</a><p class="ck-done-n"></p></div></div>
     </div>

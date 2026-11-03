@@ -81,8 +81,9 @@ export const startBody = `{{> nav}}
 <main id="main">
 <section class="start-wrap wrap" aria-labelledby="start-title">
   <div class="start-copy">
-    <p class="t-label eyebrow-g">Start a project</p>
+    <p class="t-label eyebrow-g">Book your audit</p>
     <h1 class="t-h1" id="start-title">Tell me what you need.</h1>
+    <p class="start-time">2 minutes. I’ll reply within 24 hours with a time for your free call.</p>
     <p class="t-lg">A UX audit, a redesign, a new product or something else. Answer a few quick questions. I read every request myself and reply by email with next steps.</p>
     <ul class="start-list">
       <li>{{icon:check}}Pricing scoped to your project</li>

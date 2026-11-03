@@ -83,6 +83,7 @@
   document.addEventListener('click', e => {
     const a = e.target.closest('a'); if (!a) return;
     if (a.dataset.ba) track('book_audit_click', { location: a.dataset.ba });
+    if (a.dataset.sc) track('select_content', { content_type: 'checklist', location: a.dataset.sc });
     if (a.dataset.track === 'checklist_download') track('checklist_download');
     if ((a.getAttribute('href') || '').startsWith('mailto:hello@')) track('email_click');
   });
@@ -114,10 +115,21 @@
         track('generate_lead', { form: 'checklist', subscribe: sub.checked });
         finish(sent());
       } catch (_) {
-        btn.disabled = false; btn.classList.remove('is-busy'); btxt.textContent = 'Send me the checklist'; fail.hidden = false;
+        btn.disabled = false; btn.classList.remove('is-busy'); btxt.textContent = 'Get the checklist'; fail.hidden = false;
       }
     });
   }
+
+  /* hero "Get the free checklist": smooth scroll, then put the cursor in the email field */
+  $$('[data-ck-focus]').forEach(a => a.addEventListener('click', e => {
+    const t = $(a.getAttribute('href')); if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    try { history.replaceState(null, '', a.getAttribute('href')); } catch (_) {}
+    const f = $('#ck-email'); let done = false;
+    const go = () => { if (done) return; done = true; if (f && !f.closest('[hidden]')) f.focus({ preventScroll: true }); };
+    if ('onscrollend' in window && !reduce) { addEventListener('scrollend', go, { once: true }); setTimeout(go, 1200); } else setTimeout(go, reduce ? 0 : 700);
+  }));
 
   /* mobile menu */
   const menu = $('#mobile-menu'), burger = $('.nav-burger');

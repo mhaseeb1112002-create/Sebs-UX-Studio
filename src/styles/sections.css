@@ -647,3 +647,5 @@ body.has-cc{padding-bottom:var(--cc-h,0px)}
   .cc:not(.cc-pop){position:static;transform:none;width:auto;border-width:0 0 1px;border-radius:0;box-shadow:none}
   .cc-need .cc[hidden]:not(.cc-pop){display:flex}
 }
+
+.start-time{margin:14px 0 0;font:600 17px/26px var(--font-body);color:var(--primitive-ink-900)}
