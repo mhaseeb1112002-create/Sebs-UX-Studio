@@ -75,7 +75,9 @@ The "Free audit checklist" form on the home page (`#checklist`) validates the em
 2. In the GitHub repository go to Settings, Secrets and variables, Actions, Variables, and add `CHECKLIST_ENDPOINT` with the full URL.
 3. Push to deploy. The build adds the endpoint to the form and to the page's `connect-src` rule automatically.
 
-The form sends `email`, `source=audit-checklist` and `subscribe=false` as a normal form post (no mailing-list sign-up). If `CHECKLIST_ENDPOINT` is empty, the form opens a prefilled email to hello@sebsuxstudio.com instead and tells the visitor to send it, so nothing is reported as sent when it isn't.
+The form posts `email`, `subscribe` (true or false), `source=checklist` and `tag=checklist-pdf` as a normal form post. With Kit (free plan), create a form with an incentive email that links to `https://sebsuxstudio.com/assets/Sebs-Onboarding-KYC-UX-Audit-Checklist.pdf` and use its form URL as `CHECKLIST_ENDPOINT` (Kit's own form field is `email_address`, so use a small relay or Kit's embed form action if it rejects `email`).
+
+On success the visitor gets the PDF straight away. If the endpoint is empty or fails, the form shows "Couldn't send right now" with the download link, so nobody is left without the PDF.
 
 ## Owner login (optional)
 

@@ -36,42 +36,40 @@
     if ('ResizeObserver' in window) new ResizeObserver(fit).observe(a); else addEventListener('resize', fit);
   });
 
-  /* free checklist: validation, honeypot, throttle, send (or mail fallback), analytics hooks */
+  /* free checklist: validation, honeypot, throttle, send , analytics hooks */
   const track = name => { try { window.plausible?.(name); window.gtag?.('event', name); window.dataLayer?.push({ event: name }); } catch (_) {} };
   const ck = $('[data-checklist]');
   if (ck) {
-    const form = $('.ck-form', ck), input = $('#ck-email', ck), err = $('#ck-err', ck), fail = $('#ck-fail', ck), done = $('.ck-done', ck), btn = $('button[type=submit]', ck), sub = $('#ck-sub', ck), hp = $('[name=company_url]', ck);
+    const form = $('.ck-form', ck), input = $('#ck-email', ck), err = $('#ck-err', ck), fail = $('#ck-fail', ck), done = $('.ck-done', ck), btn = $('button[type=submit]', ck), btxt = $('.ck-bt', btn), sub = $('#ck-sub', ck), hp = $('[name=company_url]', ck);
     const ok = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
     const showErr = bad => { err.hidden = !bad; input.setAttribute('aria-invalid', String(bad)); };
-    const finish = msg => { form.hidden = true; $('p', done).textContent = msg; done.hidden = false; done.focus(); };
+    const note = $('.ck-done-n', done), title = $('.ck-done-t', done);
+    const finish = msg => { form.hidden = true; note.textContent = msg || ''; note.hidden = !msg; done.hidden = false; title.focus(); };
     if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { track('checklist_view'); io.disconnect(); } }, { threshold: .4 }); io.observe(ck); }
-    $('[data-track]', ck)?.addEventListener('click', e => track(e.currentTarget.dataset.track));
+    $$('[data-track]', ck).forEach(a => a.addEventListener('click', () => track(a.dataset.track)));
     input.addEventListener('input', () => { if (!err.hidden && ok(input.value)) showErr(false); fail.hidden = true; });
     input.addEventListener('blur', () => { if (input.value.trim() && !ok(input.value)) showErr(true); });
+    const sent = email => `We’ve also sent a copy to ${email}. Check spam if you don’t see it.`;
+    const again = email => `Already sent to ${email}. Download it again below.`;
     form.addEventListener('submit', async e => {
       e.preventDefault();
       if (!ok(input.value)) { showErr(true); input.focus(); return; }
       showErr(false); fail.hidden = true;
       const email = input.value.trim(), endpoint = form.dataset.endpoint;
       track('checklist_submit');
-      if (hp.value) { finish('Check your inbox — the checklist is on its way.'); return; } /* bots: pretend success, send nothing */
-      let last = 0; try { last = +localStorage.getItem('ckLast') || 0; } catch (_) {}
-      if (Date.now() - last < 60000) { fail.hidden = false; return; }
-      if (!endpoint) {
-        try { localStorage.setItem('ckLast', String(Date.now())); } catch (_) {}
-        location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent('Send me the audit checklist')}&body=${encodeURIComponent('Please send the free audit checklist PDF to: ' + email)}`;
-        finish('Almost done: send the email that just opened and I’ll reply with the PDF.');
-        return;
-      }
-      btn.disabled = true; btn.textContent = 'Sending…';
+      if (hp.value) { finish(endpoint ? sent(email) : ''); return; } /* bots: pretend success, send nothing */
+      let last = 0, lastEmail = ''; try { last = +localStorage.getItem('ckLast') || 0; lastEmail = localStorage.getItem('ckEmail') || ''; } catch (_) {}
+      if (lastEmail === email.toLowerCase() && Date.now() - last < 600000) { finish(again(email)); return; } /* repeat submit: no error, no second email */
+      if (!endpoint) { track('checklist_success'); finish(''); return; } /* no email service connected yet: give the PDF, claim no email */
+      btn.disabled = true; btn.classList.add('is-busy'); btxt.textContent = 'Sending…';
       try {
-        const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ email, source: 'audit-checklist', tag: 'checklist-lead', subscribe: String(sub.checked) }) });
+        const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ email, subscribe: String(sub.checked), source: 'checklist', tag: 'checklist-pdf' }) });
         if (!r.ok) throw new Error(String(r.status));
-        try { localStorage.setItem('ckLast', String(Date.now())); } catch (_) {}
+        try { localStorage.setItem('ckLast', String(Date.now())); localStorage.setItem('ckEmail', email.toLowerCase()); } catch (_) {}
         track('checklist_success');
-        finish('Check your inbox — the checklist is on its way.');
+        finish(sent(email));
       } catch (_) {
-        btn.disabled = false; btn.textContent = 'Send me the checklist'; fail.hidden = false;
+        btn.disabled = false; btn.classList.remove('is-busy'); btxt.textContent = 'Send me the checklist'; fail.hidden = false;
       }
     });
   }
