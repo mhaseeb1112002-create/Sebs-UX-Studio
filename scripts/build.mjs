@@ -14,6 +14,9 @@ const ADMIN_KEY = process.env.SUPABASE_ANON_KEY || '';
 const ADMIN_ON = !!(ADMIN_URL && ADMIN_KEY); // owner login pages and the footer link exist only when both are set
 const CK_ENDPOINT = process.env.CHECKLIST_ENDPOINT || ''; // optional: where the free-checklist form posts the email
 const CK_ORIGIN = CK_ENDPOINT ? new URL(CK_ENDPOINT).origin : '';
+const GA_RAW = (process.env.GA_ID || '').trim(); // optional: GA4 measurement ID, loaded only after the visitor accepts analytics cookies
+const GA_ID = /^G-[A-Z0-9]{4,20}$/.test(GA_RAW) ? GA_RAW : '';
+const GA_ON = !!GA_ID;
 const OWNER_LINK = ADMIN_ON ? ' · <a href="/admin/login/" rel="nofollow">Owner log in</a>' : '';
 const read = p => fs.readFileSync(src(p), 'utf8');
 const partial = n => read(`partials/${n}.html`);
@@ -38,13 +41,21 @@ export const icons = {
 };
 const subst = (html, vars) => html.replace(/\{\{icon:(\w+)\}\}/g, (_, n) => icons[n] ?? '').replace(/\{\{(\w+)\}\}/g, (m, k) => vars[k] ?? m);
 
+const COOKIE_OFF = 'This website does not use cookies or analytics. It is hosted on GitHub Pages, which may keep basic server logs such as your IP address, as any web host does.';
+const COOKIE_ON = 'This website uses Google Analytics 4 to count which pages are visited, but only if you press Accept on the cookie banner. Until then no analytics script is loaded and no analytics cookies are set. If you accept, Google sets cookies named _ga and _ga_ followed by an ID, and receives page views, your approximate location and device details. I turn off advertising features and do not send names or email addresses. Your choice is saved in your browser. You can change it at any time with "Cookie settings" in the footer; declining removes the cookies. The site is hosted on GitHub Pages, which may keep basic server logs such as your IP address, as any web host does.';
+if (GA_ON) fs.writeFileSync(path.join(dist, 'cc-init.js'), "try{if(!localStorage.getItem('sebs-consent'))document.documentElement.classList.add('cc-need')}catch(e){document.documentElement.classList.add('cc-need')}\n"); // tiny sync script: reserves the banner's space on phones so nothing jumps
 const pages = (await import('./pages.mjs')).default;
 const shell = read('partials/shell.html');
 for (const pg of pages) {
   const bodySrc = pg.body.startsWith('<<') ? read(`pages/${pg.body.slice(2, -2)}.html`) : pg.body;
-  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, checklistendpoint: CK_ENDPOINT, ...(pg.vars || {}) });
+  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, checklistendpoint: CK_ENDPOINT, cookielink: GA_ON ? ' · <button type="button" class="f-link" data-cc-open>Cookie settings</button>' : '', cookienote: GA_ON ? COOKIE_ON : COOKIE_OFF, ...(pg.vars || {}) });
   const canonical = SITE + (pg.canonical || pg.route);
   let html = subst(shell, {
+    gainit: GA_ON ? '<script src="/cc-init.js"></script>\n' : '',
+    gascript: GA_ON ? ' https://www.googletagmanager.com' : '',
+    gaimg: GA_ON ? ' https://*.google-analytics.com https://*.googletagmanager.com' : '',
+    gaconnect: GA_ON ? ' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com' : '',
+    consent: GA_ON ? subst(partial('consent'), { gaid: GA_ID }) : '',
     title: pg.title, description: pg.description, canonical, ogimage: SITE + '/assets/og.png',
     jsonld: pg.jsonld ? `<script type="application/ld+json">${JSON.stringify(pg.jsonld)}</script>` : '',
     pageclass: pg.pageClass || '', body, ckconnect: CK_ORIGIN ? ' ' + CK_ORIGIN : '',

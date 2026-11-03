@@ -37,7 +37,55 @@
   });
 
   /* free checklist: validation, honeypot, throttle, send , analytics hooks */
-  const track = name => { try { window.plausible?.(name); window.gtag?.('event', name); window.dataLayer?.push({ event: name }); } catch (_) {} };
+  /* analytics: GA4 behind Consent Mode v2. The tag is not loaded at all until the visitor accepts. */
+  const cc = $('#cc'), GA = cc?.dataset.ga || '';
+  let gaOn = false;
+  const CK = 'sebs-consent';
+  const getChoice = () => { try { return localStorage.getItem(CK); } catch (_) { return null; } };
+  const setChoice = v => { try { localStorage.setItem(CK, v); } catch (_) {} };
+  if (GA) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+  }
+  const startGA = () => {
+    if (!GA || gaOn) return;
+    gaOn = true;
+    gtag('consent', 'update', { analytics_storage: 'granted' }); /* ads stay denied */
+    const sc = document.createElement('script'); sc.async = true; sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA; document.head.appendChild(sc);
+    gtag('js', new Date());
+    gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false, transport_type: 'beacon' });
+  };
+  const stopGA = () => {
+    if (!GA) return;
+    const was = gaOn; gaOn = false;
+    if (was) gtag('consent', 'update', { analytics_storage: 'denied' });
+    document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => n === '_ga' || n.startsWith('_ga_')).forEach(n => { document.cookie = n + '=; Max-Age=0; path=/'; document.cookie = n + '=; Max-Age=0; path=/; domain=' + location.hostname; document.cookie = n + '=; Max-Age=0; path=/; domain=.' + location.hostname.replace(/^www\./, ''); });
+  };
+  const track = (name, params) => { if (gaOn) { try { gtag('event', name, params || {}); } catch (_) {} } }; /* never any personal data in params */
+  if (cc) {
+    const fixed = () => getComputedStyle(cc).position === 'fixed';
+    const pad = () => { document.body.classList.toggle('has-cc', !cc.hidden && fixed()); document.body.style.setProperty('--cc-h', cc.offsetHeight + 'px'); };
+    const hideBanner = () => { cc.hidden = true; cc.classList.remove('cc-pop'); document.documentElement.classList.remove('cc-need'); pad(); };
+    const showBanner = pop => { cc.classList.toggle('cc-pop', !!pop); cc.hidden = false; pad(); if (pop) $('button', cc).focus(); };
+    let opener = null;
+    $$('[data-cc]', cc).forEach(b => b.addEventListener('click', () => {
+      const v = b.dataset.cc; setChoice(v);
+      if (v === 'granted') startGA(); else stopGA();
+      hideBanner(); if (opener) { opener.focus(); opener = null; }
+    }));
+    document.addEventListener('click', e => { const o = e.target.closest('[data-cc-open]'); if (o) { opener = o; showBanner(true); } });
+    addEventListener('resize', () => { if (!cc.hidden) pad(); });
+    const c = getChoice();
+    if (c === 'granted') startGA(); else if (c !== 'denied') showBanner(false);
+  }
+  /* events: generate_lead and checklist_download are called where they happen; these are delegated clicks */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a'); if (!a) return;
+    if (a.dataset.ba) track('book_audit_click', { location: a.dataset.ba });
+    if (a.dataset.track === 'checklist_download') track('checklist_download');
+    if ((a.getAttribute('href') || '').startsWith('mailto:hello@')) track('email_click');
+  });
   const ck = $('[data-checklist]');
   if (ck) {
     const form = $('.ck-form', ck), input = $('#ck-email', ck), err = $('#ck-err', ck), fail = $('#ck-fail', ck), done = $('.ck-done', ck), btn = $('button[type=submit]', ck), btxt = $('.ck-bt', btn), sub = $('#ck-sub', ck), hp = $('[name=company_url]', ck);
@@ -45,8 +93,6 @@
     const showErr = bad => { err.hidden = !bad; input.setAttribute('aria-invalid', String(bad)); };
     const note = $('.ck-done-n', done), title = $('.ck-done-t', done);
     const finish = msg => { form.hidden = true; note.textContent = msg || ''; note.hidden = !msg; done.hidden = false; title.focus(); };
-    if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { track('checklist_view'); io.disconnect(); } }, { threshold: .4 }); io.observe(ck); }
-    $$('[data-track]', ck).forEach(a => a.addEventListener('click', () => track(a.dataset.track)));
     input.addEventListener('input', () => { if (!err.hidden && ok(input.value)) showErr(false); fail.hidden = true; });
     input.addEventListener('blur', () => { if (input.value.trim() && !ok(input.value)) showErr(true); });
     const sent = () => 'Thanks, you’re on the list.';
@@ -56,17 +102,16 @@
       if (!ok(input.value)) { showErr(true); input.focus(); return; }
       showErr(false); fail.hidden = true;
       const email = input.value.trim(), endpoint = form.dataset.endpoint;
-      track('checklist_submit');
       if (hp.value) { finish(endpoint ? sent() : ''); return; } /* bots: pretend success, send nothing */
       let last = 0, lastEmail = ''; try { last = +localStorage.getItem('ckLast') || 0; lastEmail = localStorage.getItem('ckEmail') || ''; } catch (_) {}
       if (lastEmail === email.toLowerCase() && Date.now() - last < 600000) { finish(again(email)); return; } /* repeat submit: no error, no second email */
-      if (!endpoint) { track('checklist_success'); finish(''); return; } /* no email service connected yet: give the PDF, claim no email */
+      if (!endpoint) { finish(''); return; } /* no email service connected yet: give the PDF, claim no email */
       btn.disabled = true; btn.classList.add('is-busy'); btxt.textContent = 'Sending…';
       try {
         const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ email, subscribe: String(sub.checked), source: 'checklist', tag: 'checklist-pdf' }) });
         if (!r.ok) throw new Error(String(r.status));
         try { localStorage.setItem('ckLast', String(Date.now())); localStorage.setItem('ckEmail', email.toLowerCase()); } catch (_) {}
-        track('checklist_success');
+        track('generate_lead', { form: 'checklist', subscribe: sub.checked });
         finish(sent());
       } catch (_) {
         btn.disabled = false; btn.classList.remove('is-busy'); btxt.textContent = 'Send me the checklist'; fail.hidden = false;

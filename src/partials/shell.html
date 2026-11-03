@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'{{ckconnect}}; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'{{gascript}}; style-src 'self' 'unsafe-inline'; img-src 'self' data:{{gaimg}}; font-src 'self'; connect-src 'self'{{ckconnect}}{{gaconnect}}; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{title}}</title>
@@ -15,11 +15,12 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{{title}}"><meta name="twitter:description" content="{{description}}"><meta name="twitter:image" content="{{ogimage}}">
 <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css">
+{{gainit}}<link rel="stylesheet" href="/styles.css">
 {{jsonld}}
 </head>
 <body class="{{pageclass}}">
 <a class="skip" href="#main">Skip to content</a>
+{{consent}}
 {{body}}
 <script src="/main.js" defer></script>
 </body>

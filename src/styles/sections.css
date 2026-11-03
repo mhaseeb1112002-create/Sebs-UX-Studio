@@ -629,3 +629,21 @@ body.menu-open{overflow:hidden}
 .btn.is-busy .ck-spin{display:inline-block;vertical-align:-3px}
 @keyframes ckspin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.ck-spin{animation-duration:2s}.ck-opt input::after{transition:none}}
+
+/* cookie consent banner */
+.f-link{background:none;border:0;padding:12px 0;margin:-12px 0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cc{position:fixed;z-index:70;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(720px,calc(100% - 24px));display:flex;align-items:center;gap:20px;justify-content:space-between;padding:14px 16px 14px 20px;background:#fff;border:1px solid var(--primitive-gray-200);border-radius:16px;box-shadow:0 16px 40px rgba(18,21,20,.18)}
+.cc[hidden]{display:none}
+.cc-t{margin:0;font:400 15px/22px var(--font-body);color:var(--primitive-ink-900);outline:none}
+.cc-t a{color:inherit;text-underline-offset:3px}
+.cc-b{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:none}
+.cc-btn{min-width:104px;min-height:44px;padding:0 18px;border:1.5px solid var(--primitive-ink-900);border-radius:var(--radius-md);background:#fff;color:var(--primitive-ink-900);font:600 15px/22px var(--font-body);cursor:pointer}
+.cc-btn:hover{background:var(--primitive-green-100)}
+.cc-btn:focus-visible,.cc-t a:focus-visible,.f-link:focus-visible{outline:2px solid var(--primitive-ink-900);outline-offset:3px}
+body.has-cc{padding-bottom:var(--cc-h,0px)}
+@media (max-width:600px){
+  .cc{flex-direction:column;align-items:stretch;gap:10px;padding:12px 14px;bottom:max(8px,env(safe-area-inset-bottom))}.cc-t{font-size:14px;line-height:20px}.cc-b{width:100%}.cc-btn{min-width:0;min-height:44px}
+  /* on phones the banner sits in the page flow above the header, so it never covers a button; "Cookie settings" reopens it as a bottom popup */
+  .cc:not(.cc-pop){position:static;transform:none;width:auto;border-width:0 0 1px;border-radius:0;box-shadow:none}
+  .cc-need .cc[hidden]:not(.cc-pop){display:flex}
+}

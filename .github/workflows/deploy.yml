@@ -33,6 +33,7 @@ jobs:
           SUPABASE_URL: ${{ vars.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
           CHECKLIST_ENDPOINT: ${{ vars.CHECKLIST_ENDPOINT || 'https://formspree.io/f/mqppgndj' }}
+          GA_ID: ${{ vars.GA_ID || 'G-FVF8TRDVEZ' }}
         run: |
           if [ -n "$CUSTOM_URL" ]; then
             export SITE_URL="$CUSTOM_URL" CNAME=1 BASE_PATH=""

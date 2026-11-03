@@ -79,6 +79,15 @@ The form posts `email`, `subscribe` (true or false), `source=checklist` and `tag
 
 On success the visitor gets the PDF straight away. If the endpoint is empty or fails, the form shows "Couldn't send right now" with the download link, so nobody is left without the PDF.
 
+## Analytics (GA4, consent first)
+
+`GA_ID` (default `G-FVF8TRDVEZ` in `.github/workflows/deploy.yml`, overridable with the repository variable `GA_ID`) switches on Google Analytics 4 and the cookie banner. Leave the ID out and there is no banner and no analytics.
+
+- Consent Mode v2: all four signals start as denied. The Google tag is not loaded at all until the visitor presses Accept (so Decline means no hits). The choice is stored in `localStorage` (`sebs-consent`) and can be changed with "Cookie settings" in the footer; declining removes the `_ga` cookies.
+- Events: `generate_lead` (`form=checklist`, `subscribe`), `book_audit_click` (`location`: hero, nav, services, cta, footer, plus audit and mistakes), `checklist_download`, `email_click`. No personal data is sent.
+- Mark `generate_lead` and `book_audit_click` as Key events in GA4.
+- The build adds the Google hosts to the page's Content Security Policy only when `GA_ID` is set.
+
 ## Owner login (optional)
 
 An email-code login for one account (the owner). It stays off until two repository variables are set, so nothing
