@@ -49,15 +49,15 @@
     $$('[data-track]', ck).forEach(a => a.addEventListener('click', () => track(a.dataset.track)));
     input.addEventListener('input', () => { if (!err.hidden && ok(input.value)) showErr(false); fail.hidden = true; });
     input.addEventListener('blur', () => { if (input.value.trim() && !ok(input.value)) showErr(true); });
-    const sent = email => `We’ve also sent a copy to ${email}. Check spam if you don’t see it.`;
-    const again = email => `Already sent to ${email}. Download it again below.`;
+    const sent = () => 'Thanks, you’re on the list.';
+    const again = email => `You’re already on the list, ${email}. Download it again below.`;
     form.addEventListener('submit', async e => {
       e.preventDefault();
       if (!ok(input.value)) { showErr(true); input.focus(); return; }
       showErr(false); fail.hidden = true;
       const email = input.value.trim(), endpoint = form.dataset.endpoint;
       track('checklist_submit');
-      if (hp.value) { finish(endpoint ? sent(email) : ''); return; } /* bots: pretend success, send nothing */
+      if (hp.value) { finish(endpoint ? sent() : ''); return; } /* bots: pretend success, send nothing */
       let last = 0, lastEmail = ''; try { last = +localStorage.getItem('ckLast') || 0; lastEmail = localStorage.getItem('ckEmail') || ''; } catch (_) {}
       if (lastEmail === email.toLowerCase() && Date.now() - last < 600000) { finish(again(email)); return; } /* repeat submit: no error, no second email */
       if (!endpoint) { track('checklist_success'); finish(''); return; } /* no email service connected yet: give the PDF, claim no email */
@@ -67,7 +67,7 @@
         if (!r.ok) throw new Error(String(r.status));
         try { localStorage.setItem('ckLast', String(Date.now())); localStorage.setItem('ckEmail', email.toLowerCase()); } catch (_) {}
         track('checklist_success');
-        finish(sent(email));
+        finish(sent());
       } catch (_) {
         btn.disabled = false; btn.classList.remove('is-busy'); btxt.textContent = 'Send me the checklist'; fail.hidden = false;
       }
