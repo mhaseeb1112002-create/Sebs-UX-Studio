@@ -88,7 +88,7 @@ export const startBody = `{{> nav}}
     <ul class="start-list">
       <li>{{icon:check}}Pricing scoped to your project</li>
       <li>{{icon:check}}Free 20-minute intro call</li>
-      <li>{{icon:check}}Reply within 1 working day, from me, not a bot</li>
+      <li>{{icon:check}}Reply within 24 hours, from me, not a bot</li>
     </ul>
     <div class="contact-card">
       <h2>Or reach me directly</h2>
@@ -99,7 +99,7 @@ export const startBody = `{{> nav}}
     </div>
   </div>
   <div class="form-card" id="intake-card">
-    <form id="intake" novalidate>
+    <form id="intake" novalidate data-endpoint="{{startendpoint}}">
       <h2>Start your request</h2>
       <p class="req-note">Fields marked * are required.</p>
       <div class="field"><label for="f-name">Your name *</label><input id="f-name" name="name" type="text" autocomplete="name" required><p class="err" id="e-name">Please enter your name.</p></div>
@@ -115,14 +115,13 @@ export const startBody = `{{> nav}}
           <label><input type="radio" name="service" value="Something else"><span>Something else</span></label>
         </div><p class="err" id="e-service">Please choose one.</p></fieldset>
       <div class="field"><label for="f-msg">Tell me about it <span class="opt">(optional)</span></label><textarea id="f-msg" name="msg" rows="3" placeholder="For example: 40% of people leave at the ID upload step. Or: we need a dashboard designed from scratch."></textarea></div>
-      <button class="btn btn-primary" type="submit">Send request</button>
+      <p class="form-err" id="intake-fail" role="alert" hidden>Couldn’t send. Email me at <a href="mailto:hello@sebsuxstudio.com">hello@sebsuxstudio.com</a> or <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ32INOt4NQ-jlcI16lQGxmhzbZtDGwv-fZxmy0i0vkRTPTd_fSq0ubC-Y2jnK8IqYn7hVKk2KGv" target="_blank" rel="noopener">pick a call time</a>.</p>
+      <button class="btn btn-primary" type="submit"><span class="ck-spin" aria-hidden="true"></span><span class="ck-bt">Send request</span></button>
       <p class="form-fine">Your details are only used to reply to you.</p>
     </form>
     <div class="form-done" role="status" aria-live="polite" tabindex="-1">
       <span class="ok">{{icon:check}}</span>
-      <h2>Almost done: send the email</h2>
-      <p>Your email app should have opened with your answers filled in. Just press send. If nothing opened, write to <a href="mailto:hello@sebsuxstudio.com"><strong>hello@sebsuxstudio.com</strong></a> and I'll pick it up from there.</p>
-      <div class="done-copy"><label for="done-text">Your request, in case no email app opened</label><textarea id="done-text" readonly rows="6"></textarea><button type="button" class="btn btn-secondary" id="done-copy">Copy my request</button><p class="form-fine" id="done-copied" role="status"></p></div>
+      <h2 id="done-msg"></h2>
       <a class="btn btn-secondary" href="/work/">See my work while you wait</a>
     </div>
   </div>
@@ -142,11 +141,11 @@ export const privacyBody = `{{> nav}}
   <h2>What I collect</h2>
   <p>Only what you send me: your name, work email, product or website, the service you need and any notes. You send it through the request form or by email, WhatsApp or LinkedIn.</p>
   <h2>How I use it</h2>
-  <p>To reply to you about your request. I do not sell your details or add you to a mailing list.</p>
+  <p>To reply to you about your request. I do not sell your details. I only add you to a mailing list if you tick the optional box on the checklist form.</p>
   <h2>How the request form works</h2>
-  <p>When you press "Send request", your email app opens with your answers filled in. Nothing is sent until you press send in your email app. This website does not store your answers.</p>
+  <p>When you press Send request, your answers are sent to me through Formspree, which stores them so I can reply.</p>
   <h2>The free checklist</h2>
-  <p>Emails from the checklist form are used only to send you the checklist and, if you tick the optional box, one onboarding mistake and its fix every week. You can unsubscribe at any time.</p>
+  <p>Your email is stored with Formspree. If you tick the optional box, I’ll email you one onboarding mistake and its fix every week. Unsubscribe anytime.</p>
   <h2 id="cookies">Cookies and tracking</h2>
   <p>{{cookienote}}</p>
   <h2>Other services</h2>

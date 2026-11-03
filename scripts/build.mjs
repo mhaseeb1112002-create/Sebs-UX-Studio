@@ -13,7 +13,9 @@ const ADMIN_URL = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const ADMIN_KEY = process.env.SUPABASE_ANON_KEY || '';
 const ADMIN_ON = !!(ADMIN_URL && ADMIN_KEY); // owner login pages and the footer link exist only when both are set
 const CK_ENDPOINT = process.env.CHECKLIST_ENDPOINT || ''; // optional: where the free-checklist form posts the email
-const CK_ORIGIN = CK_ENDPOINT ? new URL(CK_ENDPOINT).origin : '';
+const ST_ENDPOINT = process.env.START_ENDPOINT || ''; // optional: where the /start/ request form posts
+const origins = [...new Set([CK_ENDPOINT, ST_ENDPOINT].filter(Boolean).map(u => new URL(u).origin))];
+const CK_ORIGIN = origins.join(' ');
 const GA_RAW = (process.env.GA_ID || '').trim(); // optional: GA4 measurement ID, loaded only after the visitor accepts analytics cookies
 const GA_ID = /^G-[A-Z0-9]{4,20}$/.test(GA_RAW) ? GA_RAW : '';
 const GA_ON = !!GA_ID;
@@ -48,7 +50,7 @@ const pages = (await import('./pages.mjs')).default;
 const shell = read('partials/shell.html');
 for (const pg of pages) {
   const bodySrc = pg.body.startsWith('<<') ? read(`pages/${pg.body.slice(2, -2)}.html`) : pg.body;
-  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, checklistendpoint: CK_ENDPOINT, cookielink: GA_ON ? ' · <button type="button" class="f-link" data-cc-open>Cookie settings</button>' : '', cookienote: GA_ON ? COOKIE_ON : COOKIE_OFF, ...(pg.vars || {}) });
+  const body = subst(include(bodySrc), { ownerlogin: OWNER_LINK, checklistendpoint: CK_ENDPOINT, startendpoint: ST_ENDPOINT, cookielink: GA_ON ? ' · <button type="button" class="f-link" data-cc-open>Cookie settings</button>' : '', cookienote: GA_ON ? COOKIE_ON : COOKIE_OFF, ...(pg.vars || {}) });
   const canonical = SITE + (pg.canonical || pg.route);
   let html = subst(shell, {
     gainit: GA_ON ? '<script src="/cc-init.js"></script>\n' : '',

@@ -290,7 +290,7 @@
   }));
 
 
-  /* short intake form: validate inline, then hand the answers to the visitor's email app */
+  /* short intake form: validate inline, then post to the request endpoint */
   const intake = $('#intake');
   if (intake) {
     const card = $('#intake-card');
@@ -309,17 +309,24 @@
     };
     Object.keys(val).filter(k => k !== 'service').forEach(k => intake.elements[k].addEventListener('blur', () => { if (intake.elements[k].value) check(k); }));
     intake.querySelectorAll('input[name=service]').forEach(r => r.addEventListener('change', () => check('service')));
-    intake.addEventListener('submit', e => {
+    const fail = $('#intake-fail'), sbtn = $('button[type=submit]', intake), sbt = $('.ck-bt', sbtn);
+    intake.addEventListener('submit', async e => {
       e.preventDefault();
+      fail.hidden = true;
       const bad = Object.keys(val).filter(k => !check(k));
       if (bad.length) { const f = bad[0] === 'service' ? intake.querySelector('input[name=service]') : intake.elements[bad[0]]; f.focus(); return; }
-      const d = Object.fromEntries(new FormData(intake));
-      const body = `Name: ${d.name}\nEmail: ${d.email}\nProduct / site: ${d.site}\nService: ${d.service}\n\nDetails:\n${d.msg || '-'}`;
-      card.classList.add('is-done'); $('.form-done', card).focus();
-      const dt = $('#done-text', card); if (dt) dt.value = `To: hello@sebsuxstudio.com\nSubject: ${d.service} request: ${d.site}\n\n${body}`;
-      const dc = $('#done-copy', card);
-      if (dc && !dc.dataset.bound) { dc.dataset.bound = '1'; dc.addEventListener('click', () => { const say = t => { $('#done-copied', card).textContent = t; }; try { navigator.clipboard.writeText(dt.value).then(() => say('Copied. Paste it into an email to hello@sebsuxstudio.com.'), () => { dt.select(); say('Press Ctrl+C or Cmd+C to copy.'); }); } catch (e) { dt.select(); say('Press Ctrl+C or Cmd+C to copy.'); } }); }
-      location.href = `mailto:hello@sebsuxstudio.com?subject=${encodeURIComponent(d.service + ' request: ' + d.site)}&body=${encodeURIComponent(body)}`;
+      const d = Object.fromEntries(new FormData(intake)), endpoint = intake.dataset.endpoint;
+      sbtn.disabled = true; sbtn.classList.add('is-busy'); sbt.textContent = 'Sending…';
+      try {
+        if (!endpoint) throw new Error('no endpoint');
+        const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ name: d.name.trim(), email: d.email.trim(), product: d.site.trim(), service: d.service, notes: (d.msg || '').trim() }) });
+        if (!r.ok) throw new Error(String(r.status));
+        track('generate_lead', { form: 'start', service: d.service }); /* service is a menu choice, never personal data */
+        $('#done-msg', card).textContent = `Got it, ${d.name.trim()}. I’ll reply within 24 hours with a time for your free 20-minute call.`;
+        card.classList.add('is-done'); $('.form-done', card).focus();
+      } catch (_) {
+        sbtn.disabled = false; sbtn.classList.remove('is-busy'); sbt.textContent = 'Send request'; fail.hidden = false;
+      }
     });
   }
 

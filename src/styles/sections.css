@@ -643,9 +643,15 @@ body.menu-open{overflow:hidden}
 body.has-cc{padding-bottom:var(--cc-h,0px)}
 @media (max-width:600px){
   .cc{flex-direction:column;align-items:stretch;gap:10px;padding:12px 14px;bottom:max(8px,env(safe-area-inset-bottom))}.cc-t{font-size:14px;line-height:20px}.cc-b{width:100%}.cc-btn{min-width:0;min-height:44px}
-  /* on phones the banner sits in the page flow above the header, so it never covers a button; "Cookie settings" reopens it as a bottom popup */
-  .cc:not(.cc-pop){position:static;transform:none;width:auto;border-width:0 0 1px;border-radius:0;box-shadow:none}
-  .cc-need .cc[hidden]:not(.cc-pop){display:flex}
 }
 
 .start-time{margin:14px 0 0;font:600 17px/26px var(--font-body);color:var(--primitive-ink-900)}
+
+.form-err{margin:4px 0 14px;font:500 14px/20px var(--font-body);color:#b42318}.form-err[hidden]{display:none}.form-err a{color:inherit;text-underline-offset:3px}
+#intake .btn.is-busy .ck-spin{display:inline-block;vertical-align:-3px}
+
+/* the banner sits in the page flow above the header (a slim bar), so it never covers the hero line, the stats or a button; "Cookie settings" reopens it as a bottom popup */
+.cc:not(.cc-pop){position:static;transform:none;width:auto;border-width:0 0 1px;border-radius:0;box-shadow:none;justify-content:center;padding:10px 24px}
+.cc-need .cc[hidden]:not(.cc-pop){display:flex}
+@media (max-width:600px){.cc:not(.cc-pop){padding:12px 14px;justify-content:flex-start}}
+.ck-fine{color:var(--primitive-ink-700)}

@@ -127,3 +127,7 @@
 .svc-link{display:inline-flex;align-items:center;min-height:44px}
 .offer-link{padding-block:12px;margin-block:-6px}
 .cp-tbl:focus-visible{outline:3px solid var(--primitive-green-400);outline-offset:2px}
+
+.cp-price{margin:14px 0 0;font:700 20px/28px var(--font-body);color:var(--primitive-ink-900)}
+.cp-note{margin:0;padding:20px 24px;border-radius:var(--radius-md);background:var(--primitive-green-100);font:600 18px/28px var(--font-body);color:var(--primitive-ink-900)}
+.cp-note a{color:var(--primitive-green-700);text-underline-offset:3px}

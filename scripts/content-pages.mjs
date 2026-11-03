@@ -1,9 +1,11 @@
 // Service pages and guides. Voice: first person, plain words, specific. Only claims already on the site, or general UX practice.
 const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/, '');
 const FAQ = {
-  price: ['How does pricing work?', 'Contact me for pricing. I scope every project after a short intro call, so you know the price before we begin.'],
+  priceAudit: ['How does pricing work?', 'Fixed fee: $990–$2,500, depending on how many flows. You get an exact quote within 24 hours of our call.'],
+  priceSprint: ['How does pricing work?', 'Fixed fee: $3,000–$8,000, depending on scope. Exact quote within 24 hours of our call.'],
+  priceBuild: ['How does pricing work?', 'Polish is $1,500–$4,000 (1–2 weeks). New products are priced after a short call.'],
   access: ['What access do you need?', 'Usually a walkthrough of your product or staging access, plus analytics if you have them. Nothing more until the audit starts.'],
-  audit: ['What do I get from an audit?', 'A flow-by-flow UX review, a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days. Contact me for pricing.'],
+  audit: ['What do I get from an audit?', 'A flow-by-flow UX review, a drop-off map, a prioritized fix list and a 30-minute walkthrough call. It takes about 5 days and costs $990–$2,500.'],
   design: ['Do you design the product too?', 'Yes. I design products end to end, from the first flow to the final UI, and I can build them in code too. I also fix existing ones. If you have developers, they get specs and components they can build right away. For AI-built products (Lovable, Cursor, v0), I clean up the UX and UI of what already exists.'],
   who: ['Who do you work with?', 'Seed to Series A B2B SaaS and fintech teams, especially those without an in-house designer.'],
   nda: ['Do you sign an NDA?', 'Yes. Send yours over before we start, or I can share a simple one.'],
@@ -42,7 +44,7 @@ export const pages = [
         ['End of week · Walkthrough', 'You get the drop-off map and the prioritized fix list, and we go through them together on a 30-minute call.'],
       ] },
       { type: 'prose', title: 'Who it is for', html: '<p>Seed to Series A B2B SaaS and fintech teams, especially those without an in-house designer. It also suits identity and KYC products, digital banks and lenders, and AI products where users must trust an automated decision.</p>' },
-      { type: 'faq', items: [FAQ.audit, FAQ.checks, FAQ.sdk, FAQ.price, FAQ.access, FAQ.nda] },
+      { type: 'faq', items: [FAQ.audit, FAQ.checks, FAQ.sdk, FAQ.priceAudit, FAQ.access, FAQ.nda] },
     ],
     related: [['Conversion redesign sprint', '/services/redesign-sprint/'], ['Team coaching & design system', '/services/team-coaching/'], ['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/']],
   },
@@ -53,6 +55,7 @@ export const pages = [
     eyebrow: 'Conversion redesign sprint',
     h1: 'Redesign the step that <span class="hl">loses the most users</span>',
     lede: 'Once you know where users leave, I redesign that flow and hand your developers specs and components they can build right away. A sprint takes 2 to 3 weeks.',
+    priceline: '$3,000–$8,000 · 2–3 weeks',
     secondary: ['See a concept project', '/work/kyc-id-upload-redesign/'],
     heroImg: [wk('kyc-id-upload-redesign-screen-2.webp'), 1176, 840, 'A redesigned guided ID scan screen and selfie screen'],
     blocks: [
@@ -67,7 +70,7 @@ export const pages = [
         ['Handoff', 'Specs and components your developers can build right away, in the final week.'],
       ] },
       { type: 'prose', title: 'Start with the audit', html: '<p>Most clients start with the audit, then move to a sprint. The audit shows which flow loses the most users, so the sprint goes where it counts.</p>' },
-      { type: 'faq', items: [FAQ.price, FAQ.design, FAQ.checks, FAQ.access] },
+      { type: 'faq', items: [FAQ.priceSprint, FAQ.design, FAQ.checks, FAQ.access] },
     ],
     related: [['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Product build & polish', '/services/build-and-polish/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/']],
   },
@@ -95,8 +98,8 @@ export const pages = [
       { type: 'prose', title: 'Why AI-built products feel off', html: '<p>AI tools usually generate each screen on its own, without a shared design system. So buttons, spacing and wording change from screen to screen, and the small states that make a product feel finished are missing.</p><p>Polishing fixes the system as well as the screen. Once the components and styles are consistent, new screens come out consistent too.</p>' },
       { type: 'figure', src: gd('ai-built-polish-before-after.webp'), w: 2400, h: 1100, alt: 'An AI-built dashboard with mismatched fonts, corners and buttons, next to the same dashboard made consistent and clear', caption: 'Example screens: a dashboard before and after polish.' },
       { type: 'list', title: 'What you get in a polish', items: ['UX cleanup of key flows', 'Consistent UI and components', 'A lightweight design system'] },
-      { type: 'prose', title: 'How long it takes', html: '<p>A polish takes about 1 to 2 weeks. A new product depends on scope, so I price it after a short intro call. Contact me for pricing.</p>' },
-      { type: 'faq', items: [FAQ.design, FAQ.price, FAQ.ai, FAQ.nda] },
+      { type: 'prose', title: 'How long it takes', html: '<p>A polish takes about 1 to 2 weeks. A new product depends on scope, so I price it after a short intro call.</p>' },
+      { type: 'faq', items: [FAQ.design, FAQ.priceBuild, FAQ.ai, FAQ.nda] },
     ],
     related: [['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Conversion redesign sprint', '/services/redesign-sprint/'], ['Meemi Art: pattern store & design system', '/work/meemi-art-design-system/']],
   },
@@ -187,6 +190,7 @@ export const pages = [
       { type: 'check', title: 'When it fails', nng: 'Help users recognize, diagnose and recover from errors: make the message easy to notice, write it in plain language, name the specific problem, do not blame the user and keep what they typed.', items: ['Say what went wrong in plain words', 'Say how to fix it, and show an example', 'Put the message next to what failed, and do not rely on color alone', 'Let users retry without starting over', 'After two failed tries, offer another way: another document, an upload or a person', 'Keep raw error codes out of the user\'s view and log them for your team'] },
       { type: 'check', title: 'Selfie and liveness', nng: 'User control and flexibility: ask for as little as you need and leave people another route.', items: ['Ask for as few actions as your risk model allows', 'Explain each action in one line before the camera starts', 'Show a face outline and a live hint such as "Look straight ahead"', 'Test the prompts with glasses, head coverings and low light', 'Offer another way for people who cannot do an action'] },
       { type: 'check', title: 'Accessibility', nng: 'Face checks reject people with disabilities more often, and a passport fallback fails people whose hands shake. Do not leave anyone without a route.', items: ['Test with people who have disabilities, not only with your own team', 'Offer another route if a face check or a steady hand is required', 'Pair every status color with an icon and words', 'Keep text readable on small phones and in bright light'] },
+      { type: 'note', html: 'Want all 36 checks? <a href="/#checklist">Get the free checklist (PDF)</a>' },
     ],
     related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
   },
@@ -247,6 +251,7 @@ function block(b, idx) {
     case 'table': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><div class="cp-tbl" tabindex="0" role="region" aria-label="${b.title.replace(/<[^>]*>/g, '')} (scrolls sideways on small screens)"><table><thead><tr>${b.head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${b.note ? `<p>${b.note}</p>` : ''}</div></div></section>`;
     case 'faq': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">Questions</h2><div class="cp-faq">${b.items.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div></div></section>`;
     case 'links': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><ul class="cp-links">${b.items.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}{{icon:ext}}<span class="sr-only"> (opens in a new tab)</span></a></li>`).join('')}</ul></div></div></section>`;
+    case 'note': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><p class="cp-note">${b.html}</p></div></div></section>`;
     case 'partial': return `{{> ${b.name}}}`;
     default: return '';
   }
@@ -263,6 +268,7 @@ export function contentBody(p) {
   <p class="t-label eyebrow-g">${p.eyebrow}</p>
   <h1 class="work-title t-display">${p.h1}</h1>
   <p class="t-xl work-sub">${p.lede}</p>
+  ${p.priceline ? `<p class="cp-price">${p.priceline}</p>` : ''}
   <div class="cp-actions"><a class="btn btn-primary" href="/start/" data-ba="services">Book your audit</a>${sec}</div>
   </div>
   ${p.heroImg ? `<img class="cp-hero-img" src="${p.heroImg[0]}" alt="${esc(p.heroImg[3])}" width="${p.heroImg[1]}" height="${p.heroImg[2]}" fetchpriority="high">` : ''}
