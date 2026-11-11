@@ -82,7 +82,7 @@
   /* events: generate_lead and checklist_download are called where they happen; these are delegated clicks */
   document.addEventListener('click', e => {
     const a = e.target.closest('a'); if (!a) return;
-    if (a.dataset.ba) track('book_audit_click', { location: a.dataset.ba });
+    if (a.dataset.ba) track('book_audit_click', { button_location: a.dataset.ba });
     if (a.dataset.sc) track('select_content', { content_type: 'checklist', location: a.dataset.sc });
     if (a.dataset.track === 'checklist_download') track('checklist_download');
     if ((a.getAttribute('href') || '').startsWith('mailto:hello@')) track('email_click');
@@ -112,7 +112,7 @@
         const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ email, subscribe: String(sub.checked), source: 'checklist', tag: 'checklist-pdf' }) });
         if (!r.ok) throw new Error(String(r.status));
         try { localStorage.setItem('ckLast', String(Date.now())); localStorage.setItem('ckEmail', email.toLowerCase()); } catch (_) {}
-        track('generate_lead', { form: 'checklist', subscribe: sub.checked });
+        track('generate_lead', { form_name: 'checklist', subscribe: sub.checked });
         finish(sent());
       } catch (_) {
         btn.disabled = false; btn.classList.remove('is-busy'); btxt.textContent = 'Get the checklist'; fail.hidden = false;
@@ -321,7 +321,7 @@
         if (!endpoint) throw new Error('no endpoint');
         const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new URLSearchParams({ name: d.name.trim(), email: d.email.trim(), product: d.site.trim(), service: d.service, notes: (d.msg || '').trim() }) });
         if (!r.ok) throw new Error(String(r.status));
-        track('generate_lead', { form: 'start', service: d.service }); /* service is a menu choice, never personal data */
+        track('generate_lead', { form_name: 'project_request', service: d.service }); /* service is a menu choice, never personal data */
         $('#done-msg', card).textContent = `Got it, ${d.name.trim()}. I’ll reply within 24 hours with a time for your free 20-minute call.`;
         card.classList.add('is-done'); $('.form-done', card).focus();
       } catch (_) {

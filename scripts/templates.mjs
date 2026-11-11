@@ -72,7 +72,7 @@ export const notFoundBody = `{{> nav}}
   <p class="t-label eyebrow-g">404</p>
   <h1 class="work-title t-display">This page took a wrong <span class="hl">turn</span></h1>
   <p class="t-lg work-sub">The page you're looking for isn't here. Go back to the start, browse my work, or request a UX audit.</p>
-  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="/start/">Book your audit</a></div>
+  <div class="nf-actions"><a class="btn btn-secondary" href="/">Home</a><a class="btn btn-secondary" href="/work/">Work</a><a class="btn btn-primary" href="/start/" data-ba="404">Book your audit</a></div>
 </div></section>
 </main>
 {{> footer}}`;
