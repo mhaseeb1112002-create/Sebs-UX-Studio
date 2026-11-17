@@ -19,7 +19,7 @@ const wk = f => `/assets/work/${f}`, gd = f => `/assets/guides/${f}`;
 export const pages = [
   /* ---------------------------------------------------------------- services */
   {
-    route: '/services/onboarding-kyc-audit/', kind: 'service', crumb: ['Services', '/#services'], name: 'Onboarding & KYC audit',
+    route: '/services/onboarding-kyc-audit/', kind: 'service', crumb: ['Services', '/services/'], name: 'Onboarding & KYC audit',
     title: 'Fintech & KYC Onboarding UX Audit | Sebs UX Studio',
     description: 'Find the exact screen where users leave your signup or ID verification flow. Drop-off map, prioritized fixes and a walkthrough call in 5 days.',
     eyebrow: 'Onboarding & KYC audit',
@@ -49,7 +49,7 @@ export const pages = [
     related: [['Conversion redesign sprint', '/services/redesign-sprint/'], ['Team coaching & design system', '/services/team-coaching/'], ['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/']],
   },
   {
-    route: '/services/redesign-sprint/', kind: 'service', crumb: ['Services', '/#services'], name: 'Conversion redesign sprint',
+    route: '/services/redesign-sprint/', kind: 'service', crumb: ['Services', '/services/'], name: 'Conversion redesign sprint',
     title: 'Onboarding Redesign Sprint for Fintech | Sebs UX Studio',
     description: 'I redesign the signup or KYC step that loses the most users, then give your developers specs and components they can build right away. 2–3 weeks.',
     eyebrow: 'Conversion redesign sprint',
@@ -75,7 +75,7 @@ export const pages = [
     related: [['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Product build & polish', '/services/build-and-polish/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/']],
   },
   {
-    route: '/services/build-and-polish/', kind: 'service', crumb: ['Services', '/#services'], name: 'Product build & polish',
+    route: '/services/build-and-polish/', kind: 'service', crumb: ['Services', '/services/'], name: 'Product build & polish',
     title: 'Product Build & AI-Built App Polish | Sebs UX Studio',
     description: 'A new product, or one built with Lovable, Cursor or v0? I design and code it, or polish it into a clean, consistent product users trust.',
     eyebrow: 'Product build & polish',
@@ -104,7 +104,7 @@ export const pages = [
     related: [['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Conversion redesign sprint', '/services/redesign-sprint/'], ['Meemi Art: pattern store & design system', '/work/meemi-art-design-system/']],
   },
   {
-    route: '/services/team-coaching/', kind: 'service', crumb: ['Services', '/#services'], name: 'Team coaching & design system',
+    route: '/services/team-coaching/', kind: 'service', crumb: ['Services', '/services/'], name: 'Team coaching & design system',
     title: 'Team UX Coaching & Design System | Sebs UX Studio',
     description: 'Workshops on your own product, a review of how your team handles UX, and a light design system. For product teams that have no design team yet.',
     eyebrow: 'Team coaching & design system',
@@ -170,7 +170,7 @@ export const pages = [
       ] },
       { type: 'prose', title: 'Fewer drop-offs, same controls', html: '<p>Reducing friction must not weaken your checks. Some steps have to stay. Ask your compliance team which ones before you change a flow, then make those steps as clear as they can be.</p>' },
     ],
-    related: [['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['How to explain an AI rejection to users', '/guides/explain-ai-rejections/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
+    related: [['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['How to explain an AI rejection to users', '/guides/explain-ai-rejections/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['Don\'t A/B test your sign-up yet', '/guides/ab-test-sign-up/']],
   },
   {
     route: '/guides/id-upload-ux-checklist/', kind: 'guide', crumb: ['Guides', '/guides/'], name: 'ID upload UX checklist',
@@ -192,7 +192,7 @@ export const pages = [
       { type: 'check', title: 'Accessibility', nng: 'Face checks reject people with disabilities more often, and a passport fallback fails people whose hands shake. Do not leave anyone without a route.', items: ['Test with people who have disabilities, not only with your own team', 'Offer another route if a face check or a steady hand is required', 'Pair every status color with an icon and words', 'Keep text readable on small phones and in bright light'] },
       { type: 'note', html: 'Want all 36 checks? <a href="/#checklist">Get the free checklist (PDF)</a>' },
     ],
-    related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
+    related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['KYC ID upload: audit and redesign (concept)', '/work/kyc-id-upload-redesign/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['How to write error messages: what happened + what to do now', '/guides/error-messages/']],
   },
   {
     route: '/guides/explain-ai-rejections/', kind: 'guide', crumb: ['Guides', '/guides/'], name: 'How to explain an AI rejection to users',
@@ -225,7 +225,7 @@ export const pages = [
       ], note: 'The same rules as any error message: plain language, a specific problem, no blame and a way to fix it.' },
       { type: 'prose', title: 'What you may not be able to say', html: '<p>Some reasons cannot be shown, for example when saying them would help a fraudster. In that case, use a general reason such as "We could not verify your details", and still give a next step and a way to reach a person.</p><p>Ask your compliance or legal team which rules about automated decisions apply where you operate. Some rules expect an explanation or a human review. This guide is design advice, not legal advice.</p>' },
     ],
-    related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
+    related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/'], ['AI should feel accountable, not magical', '/guides/accountability-check/']],
   },
   {
     route: '/guides/drop-off-method/', kind: 'guide', slug: 'drop-off-method', crumb: ['Guides', '/guides/'], name: 'The Drop-off Method: find it, prove it, fix it',
@@ -323,7 +323,7 @@ export const pages = [
         ['Google PAIR, Errors + Graceful Failure', 'https://pair.withgoogle.com/chapter/errors-failing/'],
       ] },
     ],
-    related: [['How to write error messages: what happened + what to do now', '/guides/error-messages/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/']],
+    related: [['How to write error messages: what happened + what to do now', '/guides/error-messages/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/'], ['How to explain an AI rejection to users', '/guides/explain-ai-rejections/']],
   },
   {
     route: '/guides/signup-flows-worth-copying/', kind: 'guide', slug: 'signup-flows-worth-copying', crumb: ['Guides', '/guides/'], name: '10 sign-up flows worth copying',
@@ -468,7 +468,7 @@ export function guidesIndexBody() {
 
 export function jsonld(p) {
   const url = SITE + p.route;
-  const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], [p.crumb[0], p.crumb[0] === 'Guides' ? '/guides/' : '/#services'], [p.name, p.route]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) };
+  const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], [p.crumb[0], p.crumb[1]], [p.name, p.route]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) };
   const main = p.kind === 'service'
     ? { '@context': 'https://schema.org', '@type': 'Service', name: p.name, description: p.description, url, provider: { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE }, areaServed: 'Worldwide' }
     : p.published ? { '@context': 'https://schema.org', '@type': 'Article', headline: p.name, description: p.description, url, mainEntityOfPage: url, image: SITE + p.heroImg[0], datePublished: p.published, author: { '@type': 'Person', name: 'Muhammad Haseeb' }, publisher: { '@type': 'Organization', name: 'Sebs UX Studio', url: SITE } }
