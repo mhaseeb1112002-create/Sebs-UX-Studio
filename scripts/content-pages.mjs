@@ -1,5 +1,3 @@
-import fs from 'node:fs';
-import { parseFrontMatter, renderSections } from './md.mjs';
 // Service pages and guides. Voice: first person, plain words, specific. Only claims already on the site, or general UX practice.
 const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/, '');
 const FAQ = {
@@ -229,28 +227,177 @@ export const pages = [
     ],
     related: [['Why users drop off at ID verification', '/guides/kyc-drop-off-ux/'], ['ID upload UX checklist', '/guides/id-upload-ux-checklist/'], ['Onboarding & KYC audit', '/services/onboarding-kyc-audit/']],
   },
+  {
+    route: '/guides/drop-off-method/', kind: 'guide', slug: 'drop-off-method', crumb: ['Guides', '/guides/'], name: 'The Drop-off Method: find it, prove it, fix it',
+    title: 'The Drop-off Method: How to Fix the Step Where Users Quit | Sebs UX Studio',
+    description: 'A 3-step method for fixing sign-up and onboarding drop-off: find the step, prove why people leave, fix that step first. How every Sebs UX audit works.',
+    eyebrow: 'Guide · Method',
+    h1: 'The Drop-off Method: find it, prove it, fix it',
+    heroImg: ['/assets/guides/drop-off-method.webp', 900, 1125, 'The Drop-off Method: 01 Find the step, 02 Prove the why, 03 Fix that step first.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>Most teams guess where their sign-up loses people. Then they redesign the screens they dislike most.</p><p>Sign-ups don't move, because people were quitting somewhere else.</p><p>The Drop-off Method is how I avoid that. It has three steps, always in this order.</p>` },
+      { type: 'prose', title: '01 Find the step', html: `<p>Map every step of the flow, from the first click to the first useful moment. Then count how many people reach each step.</p><div class="cp-tbl cp-tbl-fit" tabindex="0" role="region" aria-label="01 Find the step (scrolls sideways on small screens)"><table><thead><tr><th>Step</th><th>People who reach it (example)</th></tr></thead><tbody><tr><td>Sign up</td><td>1,000</td></tr><tr><td>Verify email</td><td>820</td></tr><tr><td>Company details</td><td>410</td></tr><tr><td>Connect bank</td><td>370</td></tr><tr><td>First payment</td><td>300</td></tr></tbody></table></div><p><em>Example numbers, not client data.</em></p><p>Here the biggest drop is between "Verify email" and "Company details": half the people leave. That is the step to work on. Everything else waits.</p><p>You can do this yourself in about 10 minutes with any analytics tool that shows a funnel.</p>` },
+      { type: 'prose', title: '02 Prove the why', html: `<p>A funnel tells you <strong>where</strong> people leave. It doesn't tell you <strong>why</strong>.</p><p>To find the why, I use whatever the product has:</p><ul><li><strong>Analytics</strong> for patterns: device, traffic source, time spent on the step.</li><li><strong>Session recordings</strong> to watch real attempts.</li><li><strong>5 real people</strong> trying the flow while thinking out loud.</li></ul><p>Five people is enough to see the biggest problems. It isn't a statistic. It's a way to stop guessing.</p>` },
+      { type: 'prose', title: '03 Fix that step first', html: `<p>Design the fix for that one step, and agree how to measure it <strong>before</strong> anyone builds it. For example: "More than 60% of people who reach Company details finish it."</p><p>Then ship, measure, and move to the next biggest drop.</p>` },
+      { type: 'prose', title: 'Why the order matters', html: `<p>Most redesigns start at step 3. They fix screens without knowing whether those screens were the problem.</p><p>The steps are simple. The order is the point.</p>` },
+      { type: 'prose', title: 'Use it on your own sign-up', html: `<ol><li>Open your sign-up funnel in analytics.</li><li>Write down how many people reach each step.</li><li>Circle the biggest drop.</li><li>Watch 5 people try that step.</li><li>Fix what you saw, and decide how you'll measure it.</li></ol><p>Every audit I run follows these three steps. If you'd like me to run it on your product, <a href="/start/" data-ba="guide_body">book an audit</a> or ask for a free 5-minute teardown.</p>` },
+    ],
+    related: [['Don\'t A/B test your sign-up yet', '/guides/ab-test-sign-up/'], ['10 sign-up flows worth copying', '/guides/signup-flows-worth-copying/'], ['Cut fields, not steps', '/guides/cut-fields-not-steps/']],
+  },
+  {
+    route: '/guides/ab-test-sign-up/', kind: 'guide', slug: 'ab-test-sign-up', crumb: ['Guides', '/guides/'], name: 'Don\'t A/B test your sign-up yet',
+    title: 'Should You A/B Test Your Sign-up? Not Yet | Sebs UX Studio',
+    description: 'At 2% conversion, proving a 15% lift needs about 36,700 visitors per version. Watch 5 people first to learn why users quit, then test.',
+    eyebrow: 'Guide · Testing',
+    h1: 'Don\'t A/B test your sign-up yet',
+    heroImg: ['/assets/guides/ab-test-sign-up.webp', 900, 1125, '36,700 visitors per version to trust a 15% lift at 2% conversion, versus 5 people to see where they get stuck.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>Your sign-up converts 2% of visitors. You've redesigned a screen and want to A/B test it.</p><p>Before you do, check how many visitors you'll need.</p>` },
+      { type: 'prose', title: 'The number most early teams don\'t have', html: `<p>To trust a 15% lift on a 2% conversion rate (2% → 2.3%), a standard test needs about <strong>36,700 visitors per version</strong>. That's roughly 73,000 visitors for one test.</p><p><em>How I got this: a two-sided sample-size calculation at 95% confidence and 80% power.</em></p><div class="cp-tbl cp-tbl-fit" tabindex="0" role="region" aria-label="The number most early teams don't have (scrolls sideways on small screens)"><table><thead><tr><th>Your conversion</th><th>Lift you want to detect</th><th>Visitors per version</th></tr></thead><tbody><tr><td>2%</td><td>15%</td><td>~36,700</td></tr><tr><td>2%</td><td>10%</td><td>~80,700</td></tr><tr><td>5%</td><td>15%</td><td>~14,200</td></tr></tbody></table></div><p>Most early SaaS and fintech teams wait months to reach that. Many stop the test early, and early results are often wrong.</p>` },
+      { type: 'prose', title: 'A test tells you who won, not why', html: `<p>Even when the test finishes, you learn which version won. You don't learn why people were quitting. So the next idea is another guess.</p>` },
+      { type: 'prose', title: 'Watch 5 people first', html: `<p>Before you test, watch 5 people try your sign-up while they think out loud. In one afternoon you'll see where they hesitate, what they misread, and where they give up.</p><p>Five people won't measure a problem. They'll show you which problem to work on, so the change you finally test is the right one.</p>` },
+      { type: 'prose', title: 'When A/B testing makes sense', html: `<ul><li>You have enough traffic for the lift you care about (use the table above).</li><li>You already know <strong>why</strong> people quit at that step.</li><li>You're choosing between two good options, not looking for the problem.</li></ul>` },
+      { type: 'prose', title: 'The order that works', html: `<ol><li><strong>Find the step</strong> with the biggest drop in your funnel.</li><li><strong>Watch 5 people</strong> go through it.</li><li><strong>Fix</strong> what you saw.</li><li><strong>Then test</strong>, if your traffic allows it.</li></ol><p>This is step 2 of the <a href="/guides/drop-off-method/">Drop-off Method</a>: prove the why before you change anything.</p><p>Want an outside look at your sign-up? <a href="/start/" data-ba="guide_body">Book an audit</a>.</p>` },
+      { type: 'links', title: 'Sources', items: [
+        ['Nielsen Norman Group, Why You Only Need to Test with 5 Users', 'https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/'],
+      ] },
+    ],
+    related: [['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/'], ['Cut fields, not steps', '/guides/cut-fields-not-steps/']],
+  },
+  {
+    route: '/guides/cut-fields-not-steps/', kind: 'guide', slug: 'cut-fields-not-steps', crumb: ['Guides', '/guides/'], name: 'Cut fields, not steps',
+    title: 'Shorter Sign-up Forms: Cut Fields, Not Steps | Sebs UX Studio',
+    description: 'Merging screens doesn\'t make a sign-up shorter. Baymard\'s research shows the number of fields matters more than the number of steps. What to cut first.',
+    eyebrow: 'Guide · Forms',
+    h1: 'Cut fields, not steps',
+    heroImg: ['/assets/guides/cut-fields-not-steps.webp', 900, 1125, 'Cut fields, not steps: fewer fields matter more than fewer screens.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>When a sign-up feels long, the usual fix is to merge screens. Fourteen fields on five screens become fourteen fields on two.</p><p>It looks shorter. It isn't.</p>` },
+      { type: 'prose', title: 'Fields matter more than steps', html: `<p>Baymard Institute studies checkout forms at scale. Their research found that the number of form fields affects completion more than the number of steps. The average checkout they reviewed had <strong>11.3 fields</strong>, while most could work with about <strong>8</strong>.</p><p>Sign-up works the same way. Every field is something people have to read, think about and type. Squeezing them onto fewer screens makes each screen heavier.</p>` },
+      { type: 'prose', title: 'What to cut first', html: `<p><strong>1. Split name fields.</strong> In Baymard's testing, 42% of users typed their full name into a "First name" field. One "Full name" field avoids the problem.</p><p><strong>2. Optional fields shown by default.</strong> "Address line 2", "Company website", "How did you hear about us?" Hide them behind a link, or remove them.</p><p><strong>3. Anything you can prefill.</strong> Country from location, company from email domain, time zone from the browser.</p><p><strong>4. Anything you can ask later.</strong> Role, team size and phone number are rarely needed before someone sees value. Ask when the answer changes what they see.</p>` },
+      { type: 'prose', title: 'A quick test for every field', html: `<p>For each field in your sign-up, write when you actually need it:</p><ul><li><strong>Now</strong>: you can't create the account without it.</li><li><strong>Later</strong>: you need it, but not before the first win.</li><li><strong>Never</strong>: nobody uses it.</li></ul><p>Keep "Now". Move "Later" to after the first useful screen. Delete "Never".</p>` },
+      { type: 'prose', title: 'When more steps are fine', html: `<p>Splitting a long form into short, clear steps can help, as long as each step has a few fields and people can see how many steps are left. Steps aren't the enemy. Unneeded fields are.</p><p>Want me to count the fields in your sign-up and tell you what to cut? <a href="/start/" data-ba="guide_body">Book an audit</a>.</p>` },
+      { type: 'links', title: 'Sources', items: [
+        ['Baymard Institute, checkout form fields research', 'https://baymard.com/blog/checkout-flow-average-form-fields'],
+      ] },
+    ],
+    related: [['10 sign-up flows worth copying', '/guides/signup-flows-worth-copying/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/']],
+  },
+  {
+    route: '/guides/error-messages/', kind: 'guide', slug: 'error-messages', crumb: ['Guides', '/guides/'], name: 'How to write error messages: what happened + what to do now',
+    title: 'How to Write Error Messages Users Understand | Sebs UX Studio',
+    description: 'Funny error messages fail people at their worst moment. Use one formula: what happened, plus what to do now. Examples you can copy.',
+    eyebrow: 'Guide · Writing',
+    h1: 'How to write error messages: what happened + what to do now',
+    heroImg: ['/assets/guides/error-messages.webp', 900, 1125, 'A funny error message next to a clear one that says what happened and offers a next step.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>It's 11pm. Someone has spent 20 minutes on a form. They press Save and see:</p><blockquote><p>"Oops! Our hamsters fell off the wheel."</p></blockquote><p>Is their work gone? They don't know. That's the problem.</p>` },
+      { type: 'prose', title: 'Why jokes fail in errors', html: `<p>When something breaks, people are already annoyed. A joke doesn't help them fix it. Google's technical writing guide advises against humorous error messages, and Nielsen Norman Group notes that jokes go stale fast when people see the same error again and again.</p><p>Save the personality for your 404 page or an empty state.</p>` },
+      { type: 'prose', title: 'The formula', html: `<p>Every error message needs two things:</p><p><strong>What happened + what to do now.</strong></p><div class="cp-tbl cp-tbl-fit" tabindex="0" role="region" aria-label="The formula (scrolls sideways on small screens)"><table><thead><tr><th>Instead of</th><th>Write</th></tr></thead><tbody><tr><td>Something went wrong.</td><td>We couldn't save your changes. Your connection dropped. Your work is still here. Try saving again.</td></tr><tr><td>Invalid input.</td><td>Enter a date in this format: DD/MM/YYYY.</td></tr><tr><td>Upload failed.</td><td>This file is over 10 MB. Upload a smaller file, or a photo instead of a scan.</td></tr><tr><td>Verification failed.</td><td>We couldn't read your ID. Try again in brighter light, with all four corners showing.</td></tr></tbody></table></div>` },
+      { type: 'prose', title: 'Four rules', html: `<ol><li><strong>Say what happened in plain words.</strong> No codes on their own, no "invalid".</li><li><strong>Give one next step.</strong> A button that does it is better than a sentence that explains it.</li><li><strong>Keep what they entered.</strong> Never clear a form because one field was wrong.</li><li><strong>Never blame the user.</strong> "We couldn't read your ID", not "You uploaded a bad photo".</li></ol>` },
+      { type: 'prose', title: 'Where errors cost the most', html: `<p>In sign-up and ID checks, an unclear error is often the moment people leave. They try once more, see the same message, and close the tab. You only see it as a drop in your funnel.</p><p>If your developers write the error messages, give them the formula. It fits in one line of your design system.</p><p>Want me to review the error messages in your sign-up? <a href="/start/" data-ba="guide_body">Book an audit</a>.</p>` },
+      { type: 'links', title: 'Sources', items: [
+        ['Google Technical Writing, Error messages: set the right tone', 'https://developers.google.com/tech-writing/error-messages/set-tone'],
+        ['Nielsen Norman Group, Error-Message Guidelines', 'https://www.nngroup.com/articles/error-message-guidelines/'],
+      ] },
+    ],
+    related: [['AI should feel accountable, not magical', '/guides/accountability-check/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/']],
+  },
+  {
+    route: '/guides/accountability-check/', kind: 'guide', slug: 'accountability-check', crumb: ['Guides', '/guides/'], name: 'AI should feel accountable, not magical',
+    title: 'How to Design AI Features Users Trust: The Accountability Check | Sebs UX Studio',
+    description: 'AI features should feel accountable, not magical. Check every AI result for 4 things: why, how sure, a fix, and an undo.',
+    eyebrow: 'Guide · AI',
+    h1: 'AI should feel accountable, not magical',
+    heroImg: ['/assets/guides/accountability-check.webp', 900, 1125, 'A magical AI message with no reason next to an accountable one that explains itself and offers a review.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>Your AI feature says "Done! Everything's sorted." Your user has no idea what it did, or whether it's right.</p><p>That's where trust breaks. Not when the AI gets something wrong, but when it's wrong and gives people no way to tell.</p>` },
+      { type: 'prose', title: 'One test before an AI feature ships', html: `<p><strong>Can the user tell when it's wrong?</strong></p><p>Most can't. The feature presents its answer with confidence, and people have to take it on faith. Nielsen Norman Group has written about the same risk: when AI presents outputs confidently, people may trust them more than they should.</p>` },
+      { type: 'prose', title: 'The Accountability Check', html: `<p>I check every AI result for four things.</p><p><strong>1. Why.</strong> Show what the answer is based on. "Based on how you sorted similar expenses last month."</p><p><strong>2. How sure.</strong> Say it in plain words, not a percentage. "12 sorted. 2 need a check." Google's People + AI Guidebook warns that numeric confidence can mislead people who don't read probabilities well.</p><p><strong>3. A fix.</strong> One tap to correct the result. Corrections also tell the system what it got wrong.</p><p><strong>4. An undo.</strong> A clear way back to doing it yourself. When an AI fails, the easiest path is often to let the person take over.</p>` },
+      { type: 'prose', title: 'Magical vs accountable', html: `<div class="cp-tbl cp-tbl-fit" tabindex="0" role="region" aria-label="Magical vs accountable (scrolls sideways on small screens)"><table><thead><tr><th>Magical</th><th>Accountable</th></tr></thead><tbody><tr><td>"Done! Everything's sorted."</td><td>"12 sorted. 2 need a check."</td></tr><tr><td>No reason given</td><td>"Based on how you sorted them last month."</td></tr><tr><td>One button: "Looks great"</td><td>"Review the 2", plus Undo</td></tr></tbody></table></div><p><em>Illustrative example, not a real product.</em></p>` },
+      { type: 'prose', title: 'Don\'t explain everything', html: `<p>Explain what changes the decision, not every detail. Long explanations get skipped, and so does the disclaimer at the bottom. Put the reason next to the result, where people already look.</p>` },
+      { type: 'prose', title: 'Why it matters for growth', html: `<p>An accurate AI feature is still wrong some of the time. If people can't spot those times, one bad result costs you their trust in all the others. Magic gets a demo. Accountability gets a second use.</p><p>Building an AI feature? <a href="/start/" data-ba="guide_body">Book an audit</a> and I'll run the Accountability Check on it.</p>` },
+      { type: 'links', title: 'Sources', items: [
+        ['Google PAIR, People + AI Guidebook, Explainability + Trust', 'https://pair.withgoogle.com/chapter/explainability-trust/'],
+        ['Google PAIR, Errors + Graceful Failure', 'https://pair.withgoogle.com/chapter/errors-failing/'],
+        ['Nielsen Norman Group, Explainable AI in Chat Interfaces (Dec 2025)', 'https://www.nngroup.com/articles/explainable-ai/'],
+      ] },
+    ],
+    related: [['How to write error messages: what happened + what to do now', '/guides/error-messages/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/']],
+  },
+  {
+    route: '/guides/signup-flows-worth-copying/', kind: 'guide', slug: 'signup-flows-worth-copying', crumb: ['Guides', '/guides/'], name: '10 sign-up flows worth copying',
+    title: '10 Sign-up Flows Worth Copying (and the Fix for Yours) | Sebs UX Studio',
+    description: 'Duolingo, Calendly, Stripe, Wise, Monzo, Slack, Notion, Airtable, Figma and Loom: what each sign-up gets right, and the fix you can apply to your product.',
+    eyebrow: 'Guide · Examples',
+    h1: '10 sign-up flows worth copying',
+    heroImg: ['/assets/guides/10-signup-flows.webp', 900, 1126, 'Cover: 10 sign-up flows worth copying, plus the fix for yours.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>A new user opens your sign-up. Before they see one useful screen, you ask for their company size, phone number and role.</p><p>Most of them never reach your product. Not because it's bad, but because you asked too early.</p><p>The first check in every sign-up audit I run:</p><ol><li>List every field and step before the first useful screen.</li><li>Next to each one, write when you actually need it.</li><li>Move everything marked "later" to after the first win.</li></ol><p>The products below already work this way. Each gets one thing right, and each gives you one fix.</p>` },
+      { type: 'prose', title: '1. Duolingo: value before the account', html: `<p>You finish a first lesson before it asks you to make an account.<br><strong>Fix:</strong> show value first. Ask for the account after the first win.</p>` },
+      { type: 'prose', title: '2. Calendly: one field to start', html: `<p>Just an email, or one tap with Google, which also connects your calendar.<br><strong>Fix:</strong> cut sign-up to one field. Ask the rest later, when it's needed.</p>` },
+      { type: 'prose', title: '3. Stripe: use it before you verify', html: `<p>You can test everything in a sandbox. Business checks come only when you go live.<br><strong>Fix:</strong> delay heavy checks until the moment they're actually needed.</p>` },
+      { type: 'prose', title: '4. Wise: says why it asks', html: `<p>"We may need to ask for proof of this address." No surprise later.<br><strong>Fix:</strong> under every sensitive field, add one line on why you need it.</p>` },
+      { type: 'prose', title: '5. Monzo: explains ID checks plainly', html: `<p>The video selfie is to check it's really you, and used for nothing else.<br><strong>Fix:</strong> say what you'll do with personal data, and what you won't.</p>` },
+      { type: 'prose', title: '6. Slack: no password to forget', html: `<p>You can sign in with a code sent to your email.<br><strong>Fix:</strong> offer passwordless or Google sign-in. Fewer resets, fewer drop-offs.</p>` },
+      { type: 'prose', title: '7. Notion: one question, then it adapts', html: `<p>It asks what you'll use it for and sets up the workspace to match.<br><strong>Fix:</strong> ask one question at sign-up, and use the answer on the first screen.</p>` },
+      { type: 'prose', title: '8. Airtable: no blank first screen', html: `<p>Describe what you need and it builds a starting base with your fields.<br><strong>Fix:</strong> never land new users on an empty page. Give them a starting point.</p>` },
+      { type: 'prose', title: '9. Figma: the example is already there', html: `<p>"Figma Basics" files are waiting in your workspace on first login.<br><strong>Fix:</strong> teach with a real example file, not a product tour.</p>` },
+      { type: 'prose', title: '10. Loom: value in minutes', html: `<p>Built so you start recording in minutes and share in a few clicks.<br><strong>Fix:</strong> time your sign-up to first value. Cut every step that isn't needed.</p>` },
+      { type: 'prose', title: 'Which one first?', html: `<p>Start with the fix that matches your biggest drop. If people leave before the first screen, start with Duolingo and Calendly. If they leave at ID checks, start with Wise and Monzo. If they sign up and never come back, start with Notion, Airtable and Figma.</p><p>Not sure where your biggest drop is? <a href="/start/" data-ba="guide_body">Book an audit</a> or ask for a free 5-minute teardown.</p><p><em>Flows reviewed in November 2026. Products change their sign-ups often.</em></p>` },
+      { type: 'links', title: 'Sources', items: [
+        ['Stripe, activate your account', 'https://docs.stripe.com/get-started/account/activate'],
+        ['Slack Help Center, sign in with a confirmation code', 'https://slack.com/help/articles/212681477'],
+        ['Monzo, why we ask for a video', 'https://monzo.com/help/opening-an-account/why-we-ask-for-a-video-when-you-open-a-monzo-account'],
+        ['Supademo, Figma onboarding', 'https://supademo.com/content/plg-onboarding-gallery/figma'],
+        ['Atlassian, getting started in Loom', 'https://www.atlassian.com/software/loom/resources/guides/steps-to-get-started-in-loom'],
+      ] },
+    ],
+    related: [['Cut fields, not steps', '/guides/cut-fields-not-steps/'], ['Calendly gets onboarding right. Except one wall.', '/guides/calendly-onboarding-teardown/'], ['Wise gets sign-up right. Then the progress bar vanishes.', '/guides/wise-signup-teardown/']],
+  },
+  {
+    route: '/guides/calendly-onboarding-teardown/', kind: 'guide', slug: 'calendly-onboarding-teardown', crumb: ['Guides', '/guides/'], name: 'Calendly gets onboarding right. Except one wall.',
+    title: 'Calendly Onboarding Teardown: What Works and the One Wall | Sebs UX Studio',
+    description: 'A screen-by-screen review of Calendly\'s sign-up: one field to start, smart defaults, a ready meeting link, and the email step that sends new users out of the product.',
+    eyebrow: 'Teardown',
+    h1: 'Calendly gets onboarding right. Except one wall.',
+    heroImg: ['/assets/guides/calendly-teardown.webp', 900, 1126, 'Cover: Calendly gets onboarding right. Except one wall.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>I reviewed Calendly's sign-up screen by screen, from the first click to a link you can share. It takes 9 steps to reach the dashboard.</p><div class="cp-tbl cp-tbl-fit" tabindex="0" role="region" aria-label="Table (scrolls sideways on small screens)"><table><thead><tr><th>Step</th><th>Screen</th></tr></thead><tbody><tr><td>1</td><td>Email</td></tr><tr><td>2</td><td>Name + password</td></tr><tr><td>3</td><td>Check inbox</td></tr><tr><td>4</td><td>Log in again</td></tr><tr><td>5</td><td>Scheduling URL</td></tr><tr><td>6</td><td>Connect calendar</td></tr><tr><td>7</td><td>Available hours</td></tr><tr><td>8</td><td>Role</td></tr><tr><td>9</td><td>Dashboard (first value)</td></tr></tbody></table></div><p>Most of it is excellent. Two steps are not.</p>` },
+      { type: 'prose', title: 'What works', html: `<p><strong>One field to start.</strong> Email is the only field. Type a Gmail address and Calendly offers Google sign-up, which also connects your calendar.</p><p><strong>Smart defaults you can skip.</strong> Available hours are pre-filled (9 to 5, Monday to Friday), and most setup screens offer "Set up later".</p><p><strong>Something ready on arrival.</strong> A 30-minute meeting type already exists on the dashboard, with Copy link and Share. You have something useful in seconds. (One small miss: the checklist still asks you to "Create an event type".)</p>` },
+      { type: 'prose', title: 'The wall: steps 3 and 4', html: `<p>Right after you set a password, you leave the product to confirm your email in your inbox, then come back and log in again.</p><p>That's two steps outside the product before any value. Each one is a place to give up: the email lands late, goes to spam, or the person gets distracted in their inbox.</p>` },
+      { type: 'prose', title: 'The fix', html: `<p>Send the confirmation link, but let people keep going. Show a quiet notice like "We sent a link to jane@company.com. Confirm it anytime today." and confirm the email in the background.</p><p>People reach their first meeting link first. The check still happens, just not as a wall.</p>` },
+      { type: 'prose', title: 'What to take from it', html: `<ol><li>One field to start, and offer Google sign-up.</li><li>Pre-fill setup, and let people skip it.</li><li>Give them something ready to use.</li><li>Verify email in the background, not as a wall.</li></ol><p><em>Flow reviewed in November 2026 from a recorded sign-up; Calendly may have changed it since. The fix is a concept, not Calendly's design.</em></p><p>Want the same teardown for your sign-up? <a href="/start/" data-ba="guide_body">Ask for a free 5-minute teardown</a>.</p>` },
+    ],
+    related: [['10 sign-up flows worth copying', '/guides/signup-flows-worth-copying/'], ['Wise gets sign-up right. Then the progress bar vanishes.', '/guides/wise-signup-teardown/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/']],
+  },
+  {
+    route: '/guides/wise-signup-teardown/', kind: 'guide', slug: 'wise-signup-teardown', crumb: ['Guides', '/guides/'], name: 'Wise gets sign-up right. Then the progress bar vanishes.',
+    title: 'Wise Sign-up Teardown: Where the Progress Bar Goes | Sebs UX Studio',
+    description: 'Wise\'s personal sign-up gets a lot right: one field, clear reasons for sensitive questions, a useful home. Then the progress bar disappears for 5 screens.',
+    eyebrow: 'Teardown',
+    h1: 'Wise gets sign-up right. Then the progress bar vanishes.',
+    heroImg: ['/assets/guides/wise-teardown.webp', 900, 1126, 'Cover: Wise gets sign-up right. Then the progress bar vanishes.'],
+    published: '2026-11-17', baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [
+      { type: 'prose', html: `<p>A long sign-up isn't what loses people. Not knowing how long it is does.</p><p>Fintech sign-ups have to be long: identity, address and occupation checks are required. So the question isn't how to remove steps. It's how to keep people moving through them. Here is how I'd judge Wise's personal sign-up on the web.</p>` },
+      { type: 'prose', title: '1. Count what a new user sees', html: `<ul><li>First screen: "First, enter your email address", with Google, Facebook and Apple sign-up.</li><li>"Check your email", then "Email confirmed".</li><li>Account type, with a progress bar: Account type · Country · 2FA · Password.</li><li>Then the bar disappears, and 5 more screens follow: your details (country, legal name, date of birth), your address (search, manual entry, confirm) and your occupation.</li></ul>` },
+      { type: 'prose', title: '2. Keep what already works', html: `<p><strong>One field to start</strong>, or one tap with Google or Apple.</p><p><strong>It says why it asks.</strong> On the address screen: "We may need to ask for proof of this address." People know what's coming, so it doesn't feel like a surprise later.</p><p><strong>Home gives you a next step.</strong> "Welcome to Wise" offers three clear actions: add a currency, spend and withdraw abroad, or get account details to get paid.</p>` },
+      { type: 'prose', title: '3. Find where people lose their place', html: `<p>When the progress bar vanishes, nobody can answer the question every new user has: how much longer? The last 5 screens feel longer than they are, and that's where people put it off "for later".</p>` },
+      { type: 'prose', title: '4. Fix that moment, and only that', html: `<p>Keep the progress bar to the end, and show the time left:</p><blockquote><p>Step 2 of 4 · About 2 minutes left</p></blockquote><p>The regulatory steps stay exactly as they are. People just know where they are.</p>` },
+      { type: 'prose', title: 'Why this matters', html: `<p>That's the difference between a redesign and an audit. You keep what converts and fix the step that doesn't.</p><p><em>Flow reviewed in November 2026 from a recorded web sign-up; Wise may have changed it since. The fix is a concept, not Wise's design.</em></p><p>Want this for your sign-up? <a href="/start/" data-ba="guide_body">Ask for a free 5-minute teardown</a>.</p>` },
+    ],
+    related: [['Calendly gets onboarding right. Except one wall.', '/guides/calendly-onboarding-teardown/'], ['10 sign-up flows worth copying', '/guides/signup-flows-worth-copying/'], ['The Drop-off Method: find it, prove it, fix it', '/guides/drop-off-method/']],
+  },
 ];
 
-
-/* ---------------------------------------------------------------- guides written in Markdown (src/guides-md) */
-const MD_DIR = new URL('../src/guides-md/', import.meta.url);
-const EYEBROW = { 'drop-off-method': 'Guide · Method', 'ab-test-sign-up': 'Guide · Testing', 'cut-fields-not-steps': 'Guide · Forms', 'error-messages': 'Guide · Writing', 'accountability-check': 'Guide · AI', 'signup-flows-worth-copying': 'Guide · Examples', 'calendly-onboarding-teardown': 'Teardown', 'wise-signup-teardown': 'Teardown' };
-const webpSize = f => { try { const b = fs.readFileSync(f); if (b.toString('ascii', 12, 16) === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff]; } catch (_) {} return [900, 1125]; };
-const mdFiles = fs.existsSync(MD_DIR) ? fs.readdirSync(MD_DIR).filter(f => f.endsWith('.md')).sort() : [];
-const mdGuides = mdFiles.map(f => { const { meta, body } = parseFrontMatter(fs.readFileSync(new URL(f, MD_DIR), 'utf8')); return { meta, sections: renderSections(body) }; });
-const mdByslug = Object.fromEntries(mdGuides.map(g => [g.meta.slug, g.meta]));
-for (const { meta: m, sections } of mdGuides) {
-  const img = `/assets/guides/${m.hero_image.split('/').pop().replace(/\.png$/, '.webp')}`;
-  const [w, h] = webpSize(new URL('../src' + img, import.meta.url));
-  const src = (m.sources || []).map(x => { const i = x.lastIndexOf(': http'); return [esc(x.slice(0, i)), x.slice(i + 2)]; });
-  pages.push({
-    route: `/guides/${m.slug}/`, kind: 'guide', slug: m.slug, md: true, crumb: ['Guides', '/guides/'], name: esc(m.h1),
-    title: esc(m.title), description: esc(m.meta_description), eyebrow: EYEBROW[m.slug] || 'Guide', h1: esc(m.h1), lede: '',
-    heroImg: [img, w, h, m.hero_alt], published: m.published, baLoc: 'guide', relatedLabel: 'Related guides',
-    blocks: [...sections.map(s => ({ type: 'md', h2: s.h2 ? esc(s.h2) : '', html: s.html })), ...(src.length ? [{ type: 'sources', items: src }] : [])],
-    related: (m.related || []).map(r => [esc(mdByslug[r]?.h1 || r), `/guides/${r}/`]),
-  });
-}
 
 export const guidesIndex = {
   route: '/guides/', kind: 'index',
@@ -270,7 +417,7 @@ const ext = u => /^https?:/.test(u);
 function block(b, idx) {
   switch (b.type) {
     case 'cards': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ul class="cp-cards" data-n="${b.items.length}">${b.items.map(([t, x]) => `<li><h3>${t}</h3><p>${x}</p></li>`).join('')}</ul></div></section>`;
-    case 'prose': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2>${b.html}</div></div></section>`;
+    case 'prose': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose${b.title ? '' : ' cp-noh'}">${b.title ? `<h2 class="cp-h2">${b.title}</h2>` : ''}${b.html}</div></div></section>`;
     case 'list': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><ul class="cp-list">${b.items.map(i => `<li>{{icon:check}}<span>${i}</span></li>`).join('')}</ul></div></div></section>`;
     case 'check': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2>${b.nng ? `<p class="cp-nng"><b>Principle:</b> ${b.nng}</p>` : ''}<ul class="cp-check">${b.items.map(i => `<li><span class="box" aria-hidden="true"></span><span>${i}</span></li>`).join('')}</ul></div></div></section>`;
     case 'steps': return `<section class="cp-sec"><div class="wrap"><h2 class="cp-h2">${b.title}</h2><ol class="cp-steps" data-n="${b.items.length}">${b.items.map(([t, x], n) => `<li><span class="sn">0${n + 1}</span><h3>${t}</h3><p>${x}</p></li>`).join('')}</ol></div></section>`;
@@ -280,8 +427,6 @@ function block(b, idx) {
     case 'faq': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">Questions</h2><div class="cp-faq">${b.items.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div></div></section>`;
     case 'links': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><ul class="cp-links">${b.items.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}{{icon:ext}}<span class="sr-only"> (opens in a new tab)</span></a></li>`).join('')}</ul></div></div></section>`;
     case 'note': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><p class="cp-note">${b.html}</p></div></div></section>`;
-    case 'md': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose">${b.h2 ? `<h2 class="cp-h2">${b.h2}</h2>` : ''}${b.html}</div></div></section>`;
-    case 'sources': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">Sources</h2><ul class="cp-links">${b.items.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}{{icon:ext}}</a></li>`).join('')}</ul></div></div></section>`;
     case 'partial': return `{{> ${b.name}}}`;
     default: return '';
   }
@@ -331,7 +476,7 @@ export function jsonld(p) {
   const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], [p.crumb[0], p.crumb[0] === 'Guides' ? '/guides/' : '/#services'], [p.name, p.route]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) };
   const main = p.kind === 'service'
     ? { '@context': 'https://schema.org', '@type': 'Service', name: p.name, description: p.description, url, provider: { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE }, areaServed: 'Worldwide' }
-    : p.md ? { '@context': 'https://schema.org', '@type': 'Article', headline: p.name, description: p.description, url, mainEntityOfPage: url, image: SITE + p.heroImg[0], datePublished: p.published, author: { '@type': 'Person', name: 'Muhammad Haseeb' }, publisher: { '@type': 'Organization', name: 'Sebs UX Studio', url: SITE } }
+    : p.published ? { '@context': 'https://schema.org', '@type': 'Article', headline: p.name, description: p.description, url, mainEntityOfPage: url, image: SITE + p.heroImg[0], datePublished: p.published, author: { '@type': 'Person', name: 'Muhammad Haseeb' }, publisher: { '@type': 'Organization', name: 'Sebs UX Studio', url: SITE } }
     : { '@context': 'https://schema.org', '@type': 'Article', headline: p.name, description: p.description, url, datePublished: '2026-11-01', author: { '@type': 'Person', name: 'Muhammad Haseeb' }, publisher: { '@type': 'Organization', name: 'Sebs UX Studio', url: SITE } };
   return [main, crumbs];
 }
