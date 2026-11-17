@@ -18,7 +18,7 @@ const home = {
 };
 import { cases, filters, order } from './cases-data.mjs';
 import { workBody, caseBody, notFoundBody, startBody, privacyBody } from './templates.mjs';
-import { pages as cpages, guidesIndex, contentBody, guidesIndexBody, jsonld as cpJsonld } from './content-pages.mjs';
+import { pages as cpages, guidesIndex, servicesIndex, servicesIndexBody, contentBody, guidesIndexBody, jsonld as cpJsonld } from './content-pages.mjs';
 const sub = { home: '/', workcurrent: 'aria-current="page"' };
 const work = [];
 for (const [k, label] of filters) {
@@ -33,6 +33,8 @@ const caseTpl = cases.map(c => ({ route: `/work/${c.slug}/`, title: c.title_seo,
 const nf = { route: '/404', title: 'Page not found | Sebs UX Studio', description: 'This page could not be found. Go home, browse the work or request a UX audit.', body: notFoundBody, vars: sub };
 const start = { route: '/start/', title: 'Start a Project | Sebs UX Studio', description: 'Book your audit, a redesign or a new product design. Tell me what you need and I reply by email with next steps and pricing.', body: startBody, vars: { home: '/', workcurrent: '' } };
 const privacy = { route: '/privacy/', title: 'Privacy policy | Sebs UX Studio', description: 'What Sebs UX Studio collects, why, and how to ask for your messages to be deleted.', body: privacyBody, vars: { home: '/', workcurrent: '' } };
-const contentTpl = cpages.map(p => ({ route: p.route, title: p.title, description: p.description, body: contentBody(p), vars: { home: '/', workcurrent: '' }, jsonld: cpJsonld(p) }));
-const guidesTpl = { route: guidesIndex.route, title: guidesIndex.title, description: guidesIndex.description, body: guidesIndexBody(), vars: { home: '/', workcurrent: '' } };
-export default [home, ...work, ...caseTpl, ...contentTpl, guidesTpl, start, privacy, nf];
+const newest = cpages.map(p => p.published).filter(Boolean).sort().at(-1);
+const contentTpl = cpages.map(p => ({ route: p.route, title: p.title, description: p.description, body: contentBody(p), vars: { home: '/', workcurrent: '' }, jsonld: cpJsonld(p), ...(p.md ? { og: { src: p.heroImg[0], w: p.heroImg[1], h: p.heroImg[2], alt: p.heroImg[3] }, lastmod: p.published } : {}) }));
+const guidesTpl = { route: guidesIndex.route, title: guidesIndex.title, description: guidesIndex.description, body: guidesIndexBody(), vars: { home: '/', workcurrent: '' }, lastmod: newest };
+const servicesTpl = { route: servicesIndex.route, title: servicesIndex.title, description: servicesIndex.description, body: servicesIndexBody(), vars: { home: '/', workcurrent: '' }, lastmod: newest };
+export default [home, ...work, ...caseTpl, ...contentTpl, servicesTpl, guidesTpl, start, privacy, nf];

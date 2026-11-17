@@ -1,5 +1,6 @@
 // Static site builder: partials + page configs -> dist/
 import fs from 'node:fs';
+import { execSync } from 'node:child_process';
 import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const src = p => path.join(root, 'src', p);
@@ -19,6 +20,8 @@ const CK_ORIGIN = origins.join(' ');
 const GA_RAW = (process.env.GA_ID || '').trim(); // optional: GA4 measurement ID, loaded only after the visitor accepts analytics cookies
 const GA_ID = /^G-[A-Z0-9]{4,20}$/.test(GA_RAW) ? GA_RAW : '';
 const GA_ON = !!GA_ID;
+let SITE_DATE = new Date().toISOString().slice(0, 10); // lastmod for pages without their own date: the date of the latest commit
+try { SITE_DATE = execSync('git log -1 --format=%cs', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || SITE_DATE; } catch (_) {}
 const OWNER_LINK = ADMIN_ON ? ' · <a href="/admin/login/" rel="nofollow">Owner log in</a>' : '';
 const read = p => fs.readFileSync(src(p), 'utf8');
 const partial = n => read(`partials/${n}.html`);
@@ -58,7 +61,9 @@ for (const pg of pages) {
     gaimg: GA_ON ? ' https://*.google-analytics.com https://*.googletagmanager.com' : '',
     gaconnect: GA_ON ? ' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com' : '',
     consent: GA_ON ? subst(partial('consent'), { gaid: GA_ID }) : '',
-    title: pg.title, description: pg.description, canonical, ogimage: SITE + '/assets/og.png',
+    title: pg.title, description: pg.description, canonical, ogimage: SITE + (pg.og ? pg.og.src : '/assets/og.png'),
+    ogtype: pg.og ? 'article' : 'website',
+    ogdims: pg.og ? `<meta property="og:image:width" content="${pg.og.w}"><meta property="og:image:height" content="${pg.og.h}"><meta property="og:image:alt" content="${String(pg.og.alt).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}">` : '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Sebs UX Studio: find where users drop off, then fix it">',
     jsonld: pg.jsonld ? `<script type="application/ld+json">${JSON.stringify(pg.jsonld)}</script>` : '',
     pageclass: pg.pageClass || '', body, ckconnect: CK_ORIGIN ? ' ' + CK_ORIGIN : '',
   });
@@ -105,5 +110,5 @@ if (process.env.CNAME) fs.writeFileSync(path.join(dist, 'CNAME'), new URL(SITE).
 fs.mkdirSync(path.join(dist, '.well-known'), { recursive: true });
 fs.writeFileSync(path.join(dist, '.well-known', 'security.txt'), `Contact: mailto:hello@sebsuxstudio.com\nExpires: 2027-11-01T00:00:00.000Z\nPreferred-Languages: en\nCanonical: ${SITE}/.well-known/security.txt\n`);
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /assets/Sebs-Onboarding-KYC-UX-Audit-Checklist.pdf\n${ADMIN_ON ? 'Disallow: /admin/\n' : ''}Sitemap: ${SITE}/sitemap.xml\n`);
-fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404' && !p.canonical).map(p => `  <url><loc>${SITE}${p.route}</loc></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter(p => p.route !== '/404' && !p.canonical).map(p => `  <url><loc>${SITE}${p.route}</loc><lastmod>${p.lastmod || SITE_DATE}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 console.log('built', pages.length, 'pages');

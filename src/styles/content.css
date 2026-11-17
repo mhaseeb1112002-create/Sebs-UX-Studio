@@ -131,3 +131,15 @@
 .cp-price{margin:14px 0 0;font:700 20px/28px var(--font-body);color:var(--primitive-ink-900)}
 .cp-note{margin:0;padding:20px 24px;border-radius:var(--radius-md);background:var(--primitive-green-100);font:600 18px/28px var(--font-body);color:var(--primitive-ink-900)}
 .cp-note a{color:var(--primitive-green-700);text-underline-offset:3px}
+
+/* markdown guides */
+.cp-prose ul,.cp-prose ol{margin:12px 0 0;padding-left:22px;list-style:revert;font:400 17px/28px var(--font-body);color:var(--primitive-slate-500)}
+.cp-prose li{margin-top:6px}
+.cp-prose strong{color:var(--primitive-ink-900);font-weight:700}
+.cp-prose blockquote{margin:16px 0 0;padding:14px 20px;border-left:4px solid var(--primitive-green-400);border-radius:0 var(--radius-md) var(--radius-md) 0;background:var(--primitive-gray-100)}
+.cp-prose blockquote p{margin:0;color:var(--primitive-ink-900)}
+.cp-prose .cp-tbl{margin-top:14px}
+.cp-prose em{font-style:italic}
+.cp-prose ul{list-style:disc}.cp-prose ol{list-style:decimal}
+.cp-prose .cp-tbl table{min-width:0}
+.cp-prose .cp-tbl th,.cp-prose .cp-tbl td{padding:12px 14px}

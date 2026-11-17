@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import { parseFrontMatter, renderSections } from './md.mjs';
 // Service pages and guides. Voice: first person, plain words, specific. Only claims already on the site, or general UX practice.
 const SITE = (process.env.SITE_URL || 'https://sebsuxstudio.com').replace(/\/$/, '');
 const FAQ = {
@@ -139,7 +141,7 @@ export const pages = [
     lede: 'Published estimates say between 25% and 60% of people leave during identity verification, depending on the market and the checks involved. Most of them did not decide against verifying. One screen confused them.',
     secondary: ['Get an audit of your flow', '/services/onboarding-kyc-audit/'],
     blocks: [
-      { type: 'prose', title: 'Where people leave', html: `<p>A few steps lose most people: taking the ID photo, the selfie or liveness check, and waiting for the result. Your own funnel shows which step is yours.</p><p>Analytics tells you where. It does not tell you why. The causes below explain most of the why, and each one maps to a usability principle.</p>` },
+      { type: 'prose', title: 'Where people leave', html: `<p>A few steps lose most people: taking the ID photo, the selfie or liveness check, and waiting for the result. Your own funnel shows which step is yours. The <a href="/guides/drop-off-method/">Drop-off Method</a> shows how to find it.</p><p>Analytics tells you where. It does not tell you why. The causes below explain most of the why, and each one maps to a usability principle.</p>` },
       { type: 'table', title: 'What the research says', head: ['Finding', 'Figure', 'Source'], rows: [
         ['Digital bank accounts abandoned before completion', 'Up to 60%', 'UserTesting research (year not stated)'],
         ['Abandonment at KYC, industry range', '25% to 60%+', 'Vendor FAQ'],
@@ -182,7 +184,7 @@ export const pages = [
     secondary: ['Have me run this on your flow', '/services/onboarding-kyc-audit/'],
     blocks: [
       { type: 'figure', src: wk('kyc-id-upload-redesign-screen-2.webp'), w: 1176, h: 840, alt: 'A guided ID scan screen and a selfie screen', caption: 'A guided scan screen and a selfie screen (concept).' },
-      { type: 'prose', title: 'How to use it', html: `<p>Go through your flow on a real phone, on a slow connection, in poor light. Mark every line you cannot tick.</p><p>Then rate each unticked line High, Medium or Low by how often it happens, how much it hurts and whether it lasts. The first fix is the High one nearest the step where most users leave.</p>` },
+      { type: 'prose', title: 'How to use it', html: `<p>Go through your flow on a real phone, on a slow connection, in poor light. Mark every line you cannot tick.</p><p>Then rate each unticked line High, Medium or Low by how often it happens, how much it hurts and whether it lasts. The first fix is the High one nearest the step where most users leave. Not sure which step that is? Use the <a href="/guides/drop-off-method/">Drop-off Method</a>.</p>` },
       { type: 'check', title: 'Before capture', nng: 'Visibility of system status, and match between the system and the real world: tell people what is happening, in words they know.', items: ['Say which documents you accept before the user opens the camera', 'Say why you need it, in one line', 'Say how long it takes, for example "About 2 minutes"', 'Show the step count, for example "Step 2 of 4"', 'Let users pick the document type and show a sample of a good photo', 'Ask only for the data you need, and say why you need it'] },
       { type: 'check', title: 'Permissions and handoffs', nng: 'Give a reason, ask in context, and make a refusal reversible. People are more likely to grant access when they are told why.', items: ['Explain why you need the camera before the browser asks: "[Product] would like to use your camera so that you can scan your ID."', 'Ask at the moment the user is about to take the photo, not on the first screen', 'If permission is denied, say what is missing and link to the settings so it can be turned on', 'If a third-party page or SDK opens, keep the look and wording consistent and tell users it is a trusted step'] },
       { type: 'check', title: 'During capture', nng: 'Error prevention: stop the bad photo before it happens, instead of reporting it afterwards.', items: ['Show a framing guide that matches the shape of the document', 'Give live hints about light, glare and blur', 'Capture automatically when the document is in focus, with a manual button as a backup', 'Keep the camera view large and keep text out of it', 'Offer a file upload for people who cannot use the camera'] },
@@ -229,14 +231,40 @@ export const pages = [
   },
 ];
 
+
+/* ---------------------------------------------------------------- guides written in Markdown (src/guides-md) */
+const MD_DIR = new URL('../src/guides-md/', import.meta.url);
+const EYEBROW = { 'drop-off-method': 'Guide · Method', 'ab-test-sign-up': 'Guide · Testing', 'cut-fields-not-steps': 'Guide · Forms', 'error-messages': 'Guide · Writing', 'accountability-check': 'Guide · AI', 'signup-flows-worth-copying': 'Guide · Examples', 'calendly-onboarding-teardown': 'Teardown', 'wise-signup-teardown': 'Teardown' };
+const webpSize = f => { try { const b = fs.readFileSync(f); if (b.toString('ascii', 12, 16) === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff]; } catch (_) {} return [900, 1125]; };
+const mdFiles = fs.existsSync(MD_DIR) ? fs.readdirSync(MD_DIR).filter(f => f.endsWith('.md')).sort() : [];
+const mdGuides = mdFiles.map(f => { const { meta, body } = parseFrontMatter(fs.readFileSync(new URL(f, MD_DIR), 'utf8')); return { meta, sections: renderSections(body) }; });
+const mdByslug = Object.fromEntries(mdGuides.map(g => [g.meta.slug, g.meta]));
+for (const { meta: m, sections } of mdGuides) {
+  const img = `/assets/guides/${m.hero_image.split('/').pop().replace(/\.png$/, '.webp')}`;
+  const [w, h] = webpSize(new URL('../src' + img, import.meta.url));
+  const src = (m.sources || []).map(x => { const i = x.lastIndexOf(': http'); return [esc(x.slice(0, i)), x.slice(i + 2)]; });
+  pages.push({
+    route: `/guides/${m.slug}/`, kind: 'guide', slug: m.slug, md: true, crumb: ['Guides', '/guides/'], name: esc(m.h1),
+    title: esc(m.title), description: esc(m.meta_description), eyebrow: EYEBROW[m.slug] || 'Guide', h1: esc(m.h1), lede: '',
+    heroImg: [img, w, h, m.hero_alt], published: m.published, baLoc: 'guide', relatedLabel: 'Related guides',
+    blocks: [...sections.map(s => ({ type: 'md', h2: s.h2 ? esc(s.h2) : '', html: s.html })), ...(src.length ? [{ type: 'sources', items: src }] : [])],
+    related: (m.related || []).map(r => [esc(mdByslug[r]?.h1 || r), `/guides/${r}/`]),
+  });
+}
+
 export const guidesIndex = {
   route: '/guides/', kind: 'index',
   title: 'UX Guides for KYC and Onboarding | Sebs UX Studio',
   description: 'Practical guides on identity verification UX: why users drop off, an ID upload checklist and how to explain an AI rejection.',
 };
 
+export const servicesIndex = {
+  route: '/services/', title: 'UX Services for Fintech and SaaS | Sebs UX Studio',
+  description: 'UX audits, redesign sprints, product build and polish, and team coaching for fintech and SaaS teams. Find where users leave, then fix it.',
+};
+
 /* ---------------------------------------------------------------- rendering */
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 const ext = u => /^https?:/.test(u);
 
 function block(b, idx) {
@@ -252,13 +280,15 @@ function block(b, idx) {
     case 'faq': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">Questions</h2><div class="cp-faq">${b.items.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div></div></section>`;
     case 'links': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">${b.title}</h2><ul class="cp-links">${b.items.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}{{icon:ext}}<span class="sr-only"> (opens in a new tab)</span></a></li>`).join('')}</ul></div></div></section>`;
     case 'note': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><p class="cp-note">${b.html}</p></div></div></section>`;
+    case 'md': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose">${b.h2 ? `<h2 class="cp-h2">${b.h2}</h2>` : ''}${b.html}</div></div></section>`;
+    case 'sources': return `<section class="cp-sec"><div class="wrap"><div class="cp-prose"><h2 class="cp-h2">Sources</h2><ul class="cp-links">${b.items.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${t}{{icon:ext}}</a></li>`).join('')}</ul></div></div></section>`;
     case 'partial': return `{{> ${b.name}}}`;
     default: return '';
   }
 }
 
 export function contentBody(p) {
-  const rel = p.related ? `<section class="cp-sec cp-last"><div class="wrap"><h2 class="cp-h2">Related</h2><ul class="cp-related">${p.related.map(([t, u]) => `<li><a href="${u}"><span>${t}</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>`).join('')}</ul></div></section>` : '';
+  const rel = p.related ? `<section class="cp-sec cp-last"><div class="wrap"><h2 class="cp-h2">${p.relatedLabel || 'Related'}</h2><ul class="cp-related">${p.related.map(([t, u]) => `<li><a href="${u}"><span>${t}</span><span class="arr" aria-hidden="true">{{icon:arrow}}</span></a></li>`).join('')}</ul></div></section>` : '';
   const sec = p.secondary ? `<a class="btn btn-secondary" href="${p.secondary[1]}">${p.secondary[0]}</a>` : '';
   return `{{> nav}}
 <main id="main">
@@ -267,9 +297,9 @@ export function contentBody(p) {
   <div class="cp-hero-copy">
   <p class="t-label eyebrow-g">${p.eyebrow}</p>
   <h1 class="work-title t-display">${p.h1}</h1>
-  <p class="t-xl work-sub">${p.lede}</p>
+  ${p.lede ? `<p class="t-xl work-sub">${p.lede}</p>` : ''}
   ${p.priceline ? `<p class="cp-price">${p.priceline}</p>` : ''}
-  <div class="cp-actions"><a class="btn btn-primary" href="/start/" data-ba="services">Book your audit</a>${sec}</div>
+  <div class="cp-actions"><a class="btn btn-primary" href="/start/" data-ba="${p.baLoc || 'services'}">Book your audit</a>${sec}</div>
   </div>
   ${p.heroImg ? `<img class="cp-hero-img" src="${p.heroImg[0]}" alt="${esc(p.heroImg[3])}" width="${p.heroImg[1]}" height="${p.heroImg[2]}" fetchpriority="high">` : ''}
 </div></section>
@@ -281,7 +311,8 @@ ${rel}
 }
 
 export function guidesIndexBody() {
-  const gs = pages.filter(p => p.kind === 'guide');
+  const all = pages.filter(p => p.kind === 'guide');
+  const gs = [...all.filter(g => g.slug === 'drop-off-method'), ...all.filter(g => g.slug !== 'drop-off-method')]; // the Drop-off Method first
   return `{{> nav}}
 <main id="main">
 <section class="work-head cp-head"><div class="wrap">
@@ -300,6 +331,22 @@ export function jsonld(p) {
   const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', '/'], [p.crumb[0], p.crumb[0] === 'Guides' ? '/guides/' : '/#services'], [p.name, p.route]].map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: SITE + u })) };
   const main = p.kind === 'service'
     ? { '@context': 'https://schema.org', '@type': 'Service', name: p.name, description: p.description, url, provider: { '@type': 'ProfessionalService', name: 'Sebs UX Studio', url: SITE }, areaServed: 'Worldwide' }
+    : p.md ? { '@context': 'https://schema.org', '@type': 'Article', headline: p.name, description: p.description, url, mainEntityOfPage: url, image: SITE + p.heroImg[0], datePublished: p.published, author: { '@type': 'Person', name: 'Muhammad Haseeb' }, publisher: { '@type': 'Organization', name: 'Sebs UX Studio', url: SITE } }
     : { '@context': 'https://schema.org', '@type': 'Article', headline: p.name, description: p.description, url, datePublished: '2026-11-01', author: { '@type': 'Person', name: 'Muhammad Haseeb' }, publisher: { '@type': 'Organization', name: 'Sebs UX Studio', url: SITE } };
   return [main, crumbs];
+}
+
+export function servicesIndexBody() {
+  const ss = pages.filter(p => p.kind === 'service');
+  return `{{> nav}}
+<main id="main">
+<section class="work-head cp-head"><div class="wrap">
+  <p class="t-label eyebrow-g">Services</p>
+  <h1 class="work-title t-display">Four ways to <span class="hl">work together</span></h1>
+  <p class="t-xl work-sub">From a 5-day audit to a new product build. Pick the one that fits where your team is.</p>
+</div></section>
+<section class="cp-sec cp-last"><div class="wrap"><h2 class="sr-only">All services</h2><ul class="cp-cards cp-guides">${ss.map(g => `<li><a href="${g.route}"><span class="t-label eyebrow-g">${g.eyebrow}</span><h3>${g.name}</h3><p>${g.description}</p></a></li>`).join('')}</ul></div></section>
+{{> cta-flush}}
+</main>
+{{> footer}}`;
 }
